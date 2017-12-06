@@ -11,8 +11,8 @@ export const userService = {
 };
 
 
-function login(history,email, password) {
-    var body = `email=${email  }&password=${  password}`;
+function login(history,username, password) {
+    var body = `username=${username  }&password=${  password}`;
 
     const requestOptions = {
         method: 'POST',
@@ -22,6 +22,8 @@ function login(history,email, password) {
 
     console.log("----> body: " + body);
 
+
+    console.log("API root: " + settings.API_ROOT);
 
     const url = `${settings.API_ROOT}/users/login`
     return fetch(url, requestOptions)
@@ -39,7 +41,7 @@ function login(history,email, password) {
         // ----------------------------------------------------------
         if (token_resp && token_resp.token) {
             var user = {
-                email: email,
+                username: username,
                 token: token_resp.token,
             };
 
@@ -64,7 +66,7 @@ function logout(history) {
 }
 
 function register(user) {
-    var body = `security_level=1&email=${user.email  }&password=${  user.password  }&id=${  user.id  }&name=${  user.name}`;
+    var body = `security_level=1&username=${user.username  }&password=${  user.password  }&id=${  user.id  }&name=${  user.name}`;
 
     console.log(`body: ${  body}`);
 
