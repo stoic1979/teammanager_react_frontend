@@ -1,4 +1,4 @@
-const settings = {
+export const settings = {
 
     API_ROOT: process.env.TEAMMANAGER_API_ROOT,
 
@@ -8,5 +8,3 @@ const settings = {
     WORKER: 'worker',
 
 };
-
-export default settings;

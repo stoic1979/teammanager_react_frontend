@@ -6,6 +6,14 @@ import {Loggedout} from "./Loggedout"
 
 import {connect} from 'react-redux';
 
+import {literals} from "../config"
+
+
+// -----------------------------------------------------------------------
+//
+//            HEADER COMPONENT
+// 
+// -----------------------------------------------------------------------
 export default class Header extends React.Component {
 
 
@@ -14,14 +22,17 @@ export default class Header extends React.Component {
   // ------------------------------------------------
   render() {
     const {loggedIn} = this.props;
-    console.log("Header got loggedIn: " + loggedIn);
+    //console.log("Header got defs: " + defs.WEBSITE_TITLE );
+
+    //const title = defs.WEBSITE_TITLE;
+    const title = "ABC"
 
     return (
          <div>
             <MuiThemeProvider>
               <div>
                 <AppBar
-                  title="SPEECH TEST"
+                  title={literals.WEBSITE_TITLE}
                   showMenuIconButton={true}
                   iconElementRight={loggedIn ? <Loggedin /> :  <Loggedout />}
                 />
@@ -35,7 +46,6 @@ export default class Header extends React.Component {
 
 
 function mapStateToProps(state) {
-  //const {alert,user,loggedIn} = state;
   console.log("--- header got state: " + JSON.stringify(state));
 
   return state.authentication;
