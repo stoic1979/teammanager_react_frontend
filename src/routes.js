@@ -5,7 +5,7 @@ import {LoginPage} from "./containers/LoginPage"
 import {LogoutPage} from "./containers/LogoutPage"
 import {RegisterPage} from "./containers/RegisterPage"
 import {NotFoundPage} from "./containers/NotFoundPage"
-
+import {ProjectListPage} from "./containers/ProjectListPage"
 
 import {connect} from 'react-redux';
 
@@ -20,6 +20,7 @@ class Routes extends Component {
                   <Route exact path='/login' component={LoginPage} />
                   <Route exact path='/logout' component={LogoutPage} />
                   <Route exact path='/register' component={RegisterPage} /> 
+                  <Route exact path='/projects' component={ProjectListPage} /> 
                   <Route path='*' component={NotFoundPage} />                   
               </Switch>
             </div>
