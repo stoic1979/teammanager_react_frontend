@@ -89,4 +89,12 @@ function selectedProject(key){
     }
 }
 
+function selectedProject(key){
+    console.log("++++ project actions, selectedProject() key: ", key);
+    return {
+        type: projectConstants.SELECTED_PROJECT,
+        payload: key
+    }
+}
+
 

@@ -22,6 +22,8 @@ const styles={
     float: 'right',
   },
 };
+
+
 class ProjectListPage extends React.Component {
   constructor(props){
     super(props);
@@ -29,8 +31,6 @@ class ProjectListPage extends React.Component {
   }    
 
   componentDidMount() {
-    console.log('ProcessList -> componentDidMount');
-
     const {dispatch} = this.props;
 
     var resp = dispatch(projectActions.getAll());
@@ -46,7 +46,7 @@ class ProjectListPage extends React.Component {
     dispatch(projectActions.selectedProject(key));
 
     console.log("row is selected, key=" + key);
-    this.props.history.push('/');
+    this.props.history.push('/project');
   };
 
 

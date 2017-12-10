@@ -48,6 +48,10 @@ function create(project_data) {
       console.log(`project-service create project resp: ${  JSON.stringify(project_resp)}` );
 
       return project_resp;
+    })
+    .catch( (error) => {
+          console.log("==================> error: " + error);
+
     });
 }// create
 
