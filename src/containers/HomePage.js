@@ -3,6 +3,11 @@ import { connect } from 'react-redux';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+
+
+import {projectActions} from '../actions';
+
+import {store} from '../store';
 /**
  * A simple table demonstrating the hierarchy of the `Table` component and its sub-components.
  */

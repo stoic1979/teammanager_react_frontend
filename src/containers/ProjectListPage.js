@@ -1,12 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import {pink500, grey200, grey500} from 'material-ui/styles/colors';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn,
+} from 'material-ui/Table';
+import {projectActions} from '../actions';
 
 /**
  * A simple table demonstrating the hierarchy of the `Table` component and its sub-components.
  */
+const styles={
+ flatBtn: {
+    fill: grey500,
+    float: 'right',
+  },
+};
 class ProjectListPage extends React.Component {
   constructor(props){
     super(props);
@@ -15,26 +32,86 @@ class ProjectListPage extends React.Component {
   }    
 
   componentDidMount() {
+    console.log('ProcessList -> componentDidMount');
+
     const {dispatch} = this.props;
 
-    //var user = JSON.parse(localStorage.getItem('user'));
+    var resp = dispatch(projectActions.getAll());
+    console.log(`ProcessList -> resp: ${  JSON.stringify(resp)}`);
+
+    this.handleRowSelection = this.handleRowSelection.bind(this); 
+  }
+
+  // componentDidMount() {
+  //   const {dispatch} = this.props;
+
+  //   //var user = JSON.parse(localStorage.getItem('user'));
          
-  }
+  // }
 
-  testClicked() {
+  // testClicked() {
 
-  }
+  // }
+
+  // ------------------------
+  // handleRowSelection
+  // ------------------------
+  handleRowSelection = (key) => {
+    const {dispatch} = this.props;
+    dispatch(projectActions.selectedProject(key));
+
+    console.log("row is selected, key=" + key);
+    this.props.history.push('/');
+  };
+
 
   render() {
     // var  studies = JSON.parse(localStorage.getItem('studies'));
-    console.log("props: " +this.props);
+    // console.log("props: " +this.props);
+    console.log(`---> render got projects: ${  JSON.stringify(this.props.projects)}`);
+
+    var tableBody = [];
+    if (this.props.projects) {
+      for (var i = 0; i < this.props.projects.length; i++) {
+        console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
+        var project = this.props.projects[i];
+        tableBody.push(
+          <TableRow key={project.id} >
+              console.log("got project: " + project.created_at);
+            <TableRowColumn>{project.created_at}</TableRowColumn>
+            <TableRowColumn>{project.updated_at}</TableRowColumn>
+            <TableRowColumn>{project.title}</TableRowColumn>
+            <TableRowColumn>{project.description}</TableRowColumn>
+            <TableRowColumn>{project.manager}</TableRowColumn>
+          </TableRow>
+                );
+      }
+    }
 
       return (
         <MuiThemeProvider>
           <div>
+            <FlatButton
+                label="New Project"
+                style={styles.flatBtn}
+                href="/createProject"
+              />
             <h2>Projects for {this.state.name}</h2>
-            Cnt: {this.state.cnt}
-            <RaisedButton label="Test" primary={true} onClick={this.testClicked}/>
+              <Table onRowSelection={this.handleRowSelection} >
+                  <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+                    <TableRow>
+                      <TableHeaderColumn>Created At</TableHeaderColumn>
+                      <TableHeaderColumn>Updated At</TableHeaderColumn>
+                      <TableHeaderColumn>Title</TableHeaderColumn>
+                      <TableHeaderColumn>Description</TableHeaderColumn>
+                      <TableHeaderColumn>Manager</TableHeaderColumn>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody displayRowCheckbox={false}>
+                    {tableBody}
+                  </TableBody>
+                </Table>
+            
           </div>
       </MuiThemeProvider>
       );
@@ -42,11 +119,10 @@ class ProjectListPage extends React.Component {
   }
 
 function mapStateToProps(state) {
-  return state;
-
-  //return {
-    //studies: state.studies
-  //};
+  console.log(`---> ProjectList got state: ${  JSON.stringify(state.projects)}` );
+  return {
+   projects: state.projects
+ };
 }
  
 const connectedProjectListPage = connect(mapStateToProps)(ProjectListPage);
