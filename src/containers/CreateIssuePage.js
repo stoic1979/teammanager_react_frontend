@@ -26,10 +26,10 @@ const styles = {
 
 //---------------------------------------------------
 //
-//         LOGIN PAGE
+//         CREATE ISSUE PAGE
 //
 //---------------------------------------------------
-class CreateProjectPage extends React.Component {
+class CreateIssuePage extends React.Component {
 
   // ------------------------------------------------
   // constructor
@@ -61,7 +61,6 @@ class CreateProjectPage extends React.Component {
     this.setState({[name]: value});
   }
 
-
   // ------------------------------------------------
   // handleSubmit
   // ------------------------------------------------
@@ -77,7 +76,7 @@ class CreateProjectPage extends React.Component {
     console.log("project_data" +JSON.stringify(project_data));
 
     if (project_id && created_at && updated_at && title && manager ) {
-      console.log('dispatching -> create project');
+      console.log('dispatching -> create issue');
       // var history = this.props.history;
       dispatch(projectActions.create( project_data));
     }
@@ -90,7 +89,7 @@ render() {
       <MuiThemeProvider>
         <form name="form" onSubmit={this.handleSubmit}> 
           <div style={styles.Container}>
-          <h3>Create Project</h3>
+          <h3>Create Issue</h3>
             <TextField
               hintText="Project id"
               floatingLabelText="Project id"
@@ -144,5 +143,5 @@ function mapStateToProps(state) {
   };
 }
 
-const connectedCreateProjectPage = connect(mapStateToProps)(CreateProjectPage);
-export {connectedCreateProjectPage as CreateProjectPage};
+const connectedCreateIssuePage = connect(mapStateToProps)(CreateIssuePage);
+export {connectedCreateIssuePage as CreateIssuePage};
