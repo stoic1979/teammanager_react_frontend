@@ -45,7 +45,7 @@ class ProjectListPage extends React.Component {
     const {dispatch} = this.props;
     dispatch(projectActions.selectedProject(key));
 
-    console.log("row is selected, key=" + key);
+    console.log("ProjectListPage :: row is selected, key=" + key);
     this.props.history.push('/project');
   };
 

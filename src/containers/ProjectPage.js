@@ -52,7 +52,9 @@ class ProjectPage extends React.Component {
   render() {
     // var  studies = JSON.parse(localStorage.getItem('studies'));
     // console.log("props: " +this.props);
-    console.log(`---> render got projects: ${  JSON.stringify(this.props.projects)}`);
+    console.log(`---> ProjectPage render got projects: ${  JSON.stringify(this.props.projects)}`);
+    console.log(`---> ProjectPage render got projects: ${  JSON.stringify(this.props.selectedProject)}`);
+
 
     var tableBody = [];
     if (this.props.projects) {
@@ -77,7 +79,7 @@ class ProjectPage extends React.Component {
   }
 
 function mapStateToProps(state) {
-  console.log(`---> ProjectPage got state: ${  JSON.stringify(state.projects)}` );
+  console.log(`---> ProjectPage got state: ${  JSON.stringify(state)}` );
   return {
    projects: state.projects,
    selectedProject: state.selectedProject
