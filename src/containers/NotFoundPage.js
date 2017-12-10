@@ -3,24 +3,13 @@ import { connect } from 'react-redux';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-/**
- * A simple table demonstrating the hierarchy of the `Table` component and its sub-components.
- */
+
 class NotFoundPage extends React.Component {
   constructor(props){
     super(props);
   }    
 
-
-  componentDidMount() {
-    const {dispatch} = this.props;
-
-    //var user = JSON.parse(localStorage.getItem('user'));
-    
-        
-  }
-
-    render() {
+  render() {
      // var  studies = JSON.parse(localStorage.getItem('studies'));
      console.log("props: " +this.props);
 
@@ -36,7 +25,7 @@ class NotFoundPage extends React.Component {
       </MuiThemeProvider>
       );
     }
-    }
+}//NotFoundPage
 
 
 function mapStateToProps(state) {

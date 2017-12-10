@@ -15,9 +15,7 @@ import {
 } from 'material-ui/Table';
 import {projectActions} from '../actions';
 
-/**
- * A simple table demonstrating the hierarchy of the `Table` component and its sub-components.
- */
+
 const styles={
  flatBtn: {
     fill: grey500,
@@ -28,7 +26,6 @@ class ProjectListPage extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = {name: "Navi", cnt: 1};
   }    
 
   componentDidMount() {
@@ -37,21 +34,9 @@ class ProjectListPage extends React.Component {
     const {dispatch} = this.props;
 
     var resp = dispatch(projectActions.getAll());
-    console.log(`ProcessList -> resp: ${  JSON.stringify(resp)}`);
 
     this.handleRowSelection = this.handleRowSelection.bind(this); 
   }
-
-  // componentDidMount() {
-  //   const {dispatch} = this.props;
-
-  //   //var user = JSON.parse(localStorage.getItem('user'));
-         
-  // }
-
-  // testClicked() {
-
-  // }
 
   // ------------------------
   // handleRowSelection
@@ -76,13 +61,14 @@ class ProjectListPage extends React.Component {
         console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
         var project = this.props.projects[i];
         tableBody.push(
-          <TableRow key={project.id} >
+          <TableRow key={i+1} >
               console.log("got project: " + project.created_at);
-            <TableRowColumn>{project.created_at}</TableRowColumn>
-            <TableRowColumn>{project.updated_at}</TableRowColumn>
+            <TableRowColumn style={{width: '50px'}}>{i+1}</TableRowColumn>
             <TableRowColumn>{project.title}</TableRowColumn>
             <TableRowColumn>{project.description}</TableRowColumn>
-            <TableRowColumn>{project.manager}</TableRowColumn>
+            <TableRowColumn>{project.manager.first_name} {project.manager.last_name}</TableRowColumn>
+            <TableRowColumn>{project.created_at}</TableRowColumn>
+
           </TableRow>
                 );
       }
@@ -96,15 +82,15 @@ class ProjectListPage extends React.Component {
                 style={styles.flatBtn}
                 href="/createProject"
               />
-            <h2>Projects for {this.state.name}</h2>
+            <h2>Projects</h2>
               <Table onRowSelection={this.handleRowSelection} >
                   <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                     <TableRow>
-                      <TableHeaderColumn>Created At</TableHeaderColumn>
-                      <TableHeaderColumn>Updated At</TableHeaderColumn>
+                      <TableHeaderColumn style={{width: '50px'}}>#</TableHeaderColumn>
                       <TableHeaderColumn>Title</TableHeaderColumn>
                       <TableHeaderColumn>Description</TableHeaderColumn>
                       <TableHeaderColumn>Manager</TableHeaderColumn>
+                      <TableHeaderColumn>Created At</TableHeaderColumn>
                     </TableRow>
                   </TableHeader>
                   <TableBody displayRowCheckbox={false}>

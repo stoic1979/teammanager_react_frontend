@@ -52,6 +52,9 @@ function create(project_data) {
 
 
 function getAll() {
+
+  console.log("====== getAll ======");
+
   return (dispatch) => {
     dispatch(request());
 
@@ -68,10 +71,12 @@ function getAll() {
     return {type: projectConstants.GETALL_REQUEST};
   }
   function success(projects) {
-    // console.log("--- action got projects: " + JSON.stringify(projects) );
+    console.log("********* action got projects: " + JSON.stringify(projects) );
     return {type: projectConstants.GETALL_SUCCESS, projects};
   }
   function failure(error) {
+        console.log("********* action got projects failure: " +error );
+
     return {type: projectConstants.GETALL_FAILURE, error};
   }
 }

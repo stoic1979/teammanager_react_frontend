@@ -52,6 +52,10 @@ function create(project_data) {
 }// create
 
 function getAll() {
+
+    console.log("====== project-service getAll ======");
+
+
     const requestOptions = {
         method: 'GET',
         headers: {'x-access-token': _getToken()},
@@ -59,6 +63,9 @@ function getAll() {
     const url = `${settings.API_ROOT}/projects/all`
     return fetch(url, requestOptions)
     .then((response) => {
+
+          console.log("+++++++ resp: " + response);
+
           if (!response.ok) {
             return Promise.reject(response.statusText);
           }
@@ -66,7 +73,7 @@ function getAll() {
           return response.json();
         })
     .then((projects) => {
-      console.log(`project-service getAll project_resp: ${  JSON.stringify(projects)}` );
+      console.log(`++++++++ project-service getAll project_resp: ${  JSON.stringify(projects)}` );
 
       return projects;
     });
