@@ -1,4 +1,3 @@
-import {authHeader} from '../helpers';
 import {settings} from "../config"
 
 

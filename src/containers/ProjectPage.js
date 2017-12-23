@@ -21,6 +21,9 @@ const styles={
     fill: grey500,
     float: 'right',
   },
+  main:{
+    marginLeft:20,
+  },
 };
 class ProjectPage extends React.Component {
   constructor(props){
@@ -63,7 +66,7 @@ class ProjectPage extends React.Component {
 
       return (
         <MuiThemeProvider>
-          <div>
+          <div style={styles.main}>
             <FlatButton
                 label="New Issue"
                 style={styles.flatBtn}

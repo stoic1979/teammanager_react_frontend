@@ -98,7 +98,6 @@ render() {
               value={project_id}
               onChange={this.handleChange} 
             />
-            <br/>
             <TextField
               hintText="Project Creation Date"
               floatingLabelText="Created At"
@@ -120,7 +119,7 @@ render() {
               value={title}
               onChange={this.handleChange} 
             />
-             <TextField
+            <TextField
               hintText="Manager"
               floatingLabelText="Manager"
               name="manager"

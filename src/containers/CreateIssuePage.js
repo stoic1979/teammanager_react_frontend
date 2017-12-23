@@ -2,10 +2,9 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-
+import selectedProjectreducer from '../reducers'
 import {connect} from 'react-redux';
 import {projectActions} from '../actions';
-
 const styles = {  
   Container: {
       minWidth: 320,
@@ -39,13 +38,12 @@ class CreateIssuePage extends React.Component {
 
     this.state = {     
       project_id:'',
-      created_at: '',
-      updated_at:' ',
-      title:' ',
-      manager:' ',
+      created_at:'',
+      updated_at:'',
+      title:'',
+      manager:'',
       submitted: false
     }
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     // this.handleLogout = this.handleLogout.bind(this);
@@ -66,10 +64,11 @@ class CreateIssuePage extends React.Component {
   // ------------------------------------------------
   handleSubmit(e) {
     e.preventDefault();
-
+    console.log(this.state);
     console.log('-- create project handleSubmit --');
 
     this.setState({submitted: true});
+    console.log(this.state);
     const {project_id, created_at, updated_at, title, manager } = this.state;
     var  project_data={project_id, created_at, updated_at, title, manager };
     const {dispatch} = this.props;
@@ -81,7 +80,13 @@ class CreateIssuePage extends React.Component {
       dispatch(projectActions.create( project_data));
     }
   }
-
+  //--------------------------------------------------
+  //componentDidMount
+  //--------------------------------------------------
+    componentDidMount(){
+      this.setState({project_id:localStorage.getItem('project_id')});
+      localStorage.setItem('project_id','');
+    }
 render() {
   const {project_id,  created_at, updated_at, title, manager} = this.state;
   return (

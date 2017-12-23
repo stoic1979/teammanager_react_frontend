@@ -3,6 +3,12 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
 import {Loggedin} from "./Loggedin"
 import {Loggedout} from "./Loggedout"
+import Menu from 'material-ui/svg-icons/navigation/menu';
+import Close from 'material-ui/svg-icons/navigation/close';
+import IconButton from 'material-ui/IconButton';
+
+
+
 
 import {connect} from 'react-redux';
 
@@ -15,6 +21,7 @@ import {literals} from "../config"
 // 
 // -----------------------------------------------------------------------
 export default class Header extends React.Component {
+  
 
 
   // ------------------------------------------------
@@ -22,10 +29,10 @@ export default class Header extends React.Component {
   // ------------------------------------------------
   render() {
     const {loggedIn} = this.props;
+    
     //console.log("Header got defs: " + defs.WEBSITE_TITLE );
 
     //const title = defs.WEBSITE_TITLE;
-    const title = "ABC"
 
     return (
          <div>
@@ -33,10 +40,10 @@ export default class Header extends React.Component {
               <div>
                 <AppBar
                   title={literals.WEBSITE_TITLE}
-                  showMenuIconButton={true}
+                  iconElementLeft={<IconButton><Menu/></IconButton>}
                   iconElementRight={loggedIn ? <Loggedin /> :  <Loggedout />}
+                  onLeftIconButtonClick={this.props.onClick}
                 />
-
               </div>
             </MuiThemeProvider>
           </div>

@@ -11,6 +11,12 @@ import {store} from '../store';
 /**
  * A simple table demonstrating the hierarchy of the `Table` component and its sub-components.
  */
+const styles={
+  main:{
+    marginLeft:20,
+  },
+};
+
 class HomePage extends React.Component {
   constructor(props){
     super(props);
@@ -31,7 +37,7 @@ class HomePage extends React.Component {
 
       return (
         <MuiThemeProvider>
-          <div>HOME</div>
+          <div style={styles.main}>HOME</div>
       </MuiThemeProvider>
       );
     }

@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
-import {pink500, grey200, grey500} from 'material-ui/styles/colors';
+import { grey500} from 'material-ui/styles/colors';
 
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {
@@ -21,14 +20,14 @@ const styles={
     fill: grey500,
     float: 'right',
   },
+  main:{
+    marginLeft:20,
+  },
 };
 
 
 class ProjectListPage extends React.Component {
-  constructor(props){
-    super(props);
-
-  }    
+  
 
   componentDidMount() {
     const {dispatch} = this.props;
@@ -46,7 +45,10 @@ class ProjectListPage extends React.Component {
     dispatch(projectActions.selectedProject(key));
 
     console.log("ProjectListPage :: row is selected, key=" + key);
-    this.props.history.push('/project');
+      localStorage.setItem('project_id',key);
+       
+
+     this.props.history.push('/project');
   };
 
 
@@ -76,7 +78,7 @@ class ProjectListPage extends React.Component {
 
       return (
         <MuiThemeProvider>
-          <div>
+          <div style={styles.main}>
             <FlatButton
                 label="New Project"
                 style={styles.flatBtn}
