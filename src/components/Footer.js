@@ -13,7 +13,7 @@ const styles = {
   footer: {
     fontWeight: 500,
     fontSize: '1.0em',
-    position:'absolute',
+    position:'fixed',
     left:0,
     bottom:0,
     right:0,
@@ -33,13 +33,13 @@ const Footer = (props) => {
           <FlatButton
             label="About Us"
             labelPosition="before"
-            icon={<Home />}
+           
             href="/"
           />
           <FlatButton
             label="Contact Us"
             labelPosition="before"
-            icon={<People />}
+           
             href="/"
           />
         

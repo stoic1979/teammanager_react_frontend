@@ -45,10 +45,10 @@ class ProjectPage extends React.Component {
   // ------------------------
   handleRowSelection = (key) => {
     const {dispatch} = this.props;
-    dispatch(projectActions.selectedProject(key));
+    // dispatch(projectActions.selectedProject(key));
 
     console.log("row is selected, key=" + key);
-    this.props.history.push('/');
+    // this.props.history.push('/');
   };
 
 
@@ -56,12 +56,26 @@ class ProjectPage extends React.Component {
     // var  studies = JSON.parse(localStorage.getItem('studies'));
     // console.log("props: " +this.props);
     console.log(`---> ProjectPage render got projects: ${  JSON.stringify(this.props.projects)}`);
-    console.log(`---> ProjectPage render got projects: ${  JSON.stringify(this.props.selectedProject)}`);
+    console.log(`---> ProjectPage render got selected project: ${  JSON.stringify(this.props.selectedProject)}`);
 
 
     var tableBody = [];
     if (this.props.projects) {
-      
+      for (var i = this.props.selectedProject; i <=this.props.projects[i]; i++) {
+        console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
+        var project = this.props.projects[i];
+        tableBody.push(
+          <TableRow key={i+1} >
+              console.log("got project: " + project.created_at);
+            <TableRowColumn >{project._id}</TableRowColumn>
+            <TableRowColumn>{project.title}</TableRowColumn>
+            <TableRowColumn>{project.description}</TableRowColumn>
+            <TableRowColumn>{project.manager.first_name} {project.manager.last_name}</TableRowColumn>
+            <TableRowColumn>{project.created_at}</TableRowColumn>
+
+          </TableRow>
+                );
+      }
     }
 
       return (
@@ -73,6 +87,20 @@ class ProjectPage extends React.Component {
                 href="/createIssue"
               />
             <h2>Issues</h2>
+            <Table onRowSelection={this.handleRowSelection} >
+              <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+                <TableRow>
+                    <TableHeaderColumn >#</TableHeaderColumn>
+                    <TableHeaderColumn>Title</TableHeaderColumn>
+                    <TableHeaderColumn>Description</TableHeaderColumn>
+                    <TableHeaderColumn>Manager</TableHeaderColumn>
+                    <TableHeaderColumn>Created At</TableHeaderColumn>
+                  </TableRow>
+                </TableHeader>
+                <TableBody displayRowCheckbox={false}>
+                  {tableBody}
+                </TableBody>
+              </Table>
               
             
           </div>

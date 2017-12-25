@@ -39,7 +39,6 @@ export default class Header extends React.Component {
             <MuiThemeProvider>
               <div>
                 <AppBar
-                  title={literals.WEBSITE_TITLE}
                   iconElementLeft={<IconButton><Menu/></IconButton>}
                   iconElementRight={loggedIn ? <Loggedin /> :  <Loggedout />}
                   onLeftIconButtonClick={this.props.onClick}
