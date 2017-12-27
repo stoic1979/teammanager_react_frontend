@@ -18,17 +18,20 @@ function create(issue_data) {
   console.log(`[issue-service] got user: ${  JSON.stringify(user)}`);
   console.log(`[issue-service] got token: ${  user.token}`);
 
-  var body = `project=${  issue_data.project}`;
-  body += `&assignee=${  issue_data.assignee}`;
-  body += `&summary=${  issue_data.summary}`;
-  body += `&description=${  issue_data.description}`;
-  body += `&type=${  issue_data.type}`;
-  body += `&priority=${  issue_data.priority}`;
-  body += `&status=${  issue_data.status}`;
-  body += `&estimated_hours=${  issue_data.estimated_hours}`;
-  body += `&start_date=${  issue_data.start_date}`;
-  body += `&end_date=${  issue_data.end_date}`;
-  body += `&created_at=${  issue_data.created_at}`;
+  var body = `project=${issue_data.project}`;
+  body += `&assignee=${issue_data.assignee}`;
+  body += `&summary=${issue_data.summary}`;
+  body += `&description=${issue_data.description}`;
+  body += `&type=${issue_data.type}`;
+  body += `&priority=${issue_data.priority}`;
+  body += `&status=${issue_data.status}`;
+  body += `&estimated_hours=${issue_data.estimated_hours}`;
+  body += `&start_date=${issue_data.start_date}`;
+  body += `&end_date=${issue_data.end_date}`;
+  body += `&created_at=${issue_data.created_at}`;
+  body += `&updated_at=${issue_data.updated_at}`;
+ 
+
   body += '&__v=0';
   
 
@@ -69,7 +72,7 @@ function getAll() {
         method: 'GET',
         headers: {'x-access-token': _getToken()},
     };
-    const url = `${settings.API_ROOT}/issues/all`
+    const url = `${settings.API_ROOT}/issues/all_by_project/5a086f106ce8df1e206592e4`
     return fetch(url, requestOptions)
     .then((response) => {
 

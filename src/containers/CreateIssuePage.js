@@ -53,6 +53,7 @@ class CreateIssuePage extends React.Component {
       start_date:'',
       end_date:'',
       created_at:'',
+      updated_at:'',
       submitted: false
     }
     this.handleChange = this.handleChange.bind(this);
@@ -80,12 +81,12 @@ class CreateIssuePage extends React.Component {
 
     this.setState({submitted: true});
     console.log(this.state);
-    const {project, assignee, summary, description, type, priority, status, estimated_hours, start_date, end_date, created_at } = this.state;
-    var  issue_data={project, assignee, summary, description, type, priority,  status, estimated_hours, start_date, end_date, created_at };
+    const {project, assignee, summary, description, type, priority, status, estimated_hours, start_date, end_date, created_at, updated_at } = this.state;
+    var  issue_data={project, assignee, summary, description, type, priority,  status, estimated_hours, start_date, end_date, created_at, updated_at};
     const {dispatch} = this.props;
     console.log("issue_data" +JSON.stringify(issue_data));
 
-    if (project && assignee && summary && description && type && priority && status && estimated_hours && start_date && end_date && created_at  ) {
+    if (project && assignee && summary && description && type && priority && status && estimated_hours && start_date && end_date  ) {
       console.log('dispatching -> create issue');
       // var history = this.props.history;
       dispatch(issueActions.create( issue_data));
@@ -198,6 +199,13 @@ render() {
               floatingLabelText="Created At"
               name="created_at"
               value={created_at}
+              onChange={this.handleChange} 
+            />
+            <TextField
+              hintText="Updated at"
+              floatingLabelText="Updated At"
+              name="updated_at"
+              value={updated_at}
               onChange={this.handleChange} 
             />
             </Col>

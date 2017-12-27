@@ -14,6 +14,7 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import {projectActions} from '../actions';
+import {issueActions} from '../actions';
 
 
 const styles={
@@ -37,6 +38,10 @@ class ProjectPage extends React.Component {
 
     var resp = dispatch(projectActions.getAll());
 
+    var issues = dispatch(issueActions.getAll());
+
+
+
     this.handleRowSelection = this.handleRowSelection.bind(this); 
   }
 
@@ -57,27 +62,45 @@ class ProjectPage extends React.Component {
     // console.log("props: " +this.props);
     console.log(`---> ProjectPage render got projects: ${  JSON.stringify(this.props.projects)}`);
     console.log(`---> ProjectPage render got selected project: ${  JSON.stringify(this.props.selectedProject)}`);
+    console.log(`---> ProjectPage render got issues: ${  JSON.stringify(this.props.issues)}`);
 
 
+    // var tableBody = [];
+    // if (this.props.projects) {
+    //   for (var i = this.props.selectedProject; i <=this.props.projects[i]; i++) {
+    //     console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
+    //     var project = this.props.projects[i];
+    //     tableBody.push(
+    //       <TableRow key={i+1} >
+    //           console.log("got project: " + project.created_at);
+    //         <TableRowColumn >{project._id}</TableRowColumn>
+    //         <TableRowColumn>{project.title}</TableRowColumn>
+    //         <TableRowColumn>{project.description}</TableRowColumn>
+    //         <TableRowColumn>{project.manager.first_name} {project.manager.last_name}</TableRowColumn>
+    //         <TableRowColumn>{project.created_at}</TableRowColumn>
+
+    //       </TableRow>
+    //             );
+    //   }
+    // }
     var tableBody = [];
-    if (this.props.projects) {
-      for (var i = this.props.selectedProject; i <=this.props.projects[i]; i++) {
-        console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
-        var project = this.props.projects[i];
+    if (this.props.issues) {
+      for (var i = 0; i < this.props.issues.length; i++) {
+        console.log(`issues ${  i + 1  }:${  JSON.stringify(this.props.issues[i])}`);
+        var issue = this.props.issues[i];
         tableBody.push(
           <TableRow key={i+1} >
-              console.log("got project: " + project.created_at);
-            <TableRowColumn >{project._id}</TableRowColumn>
-            <TableRowColumn>{project.title}</TableRowColumn>
-            <TableRowColumn>{project.description}</TableRowColumn>
-            <TableRowColumn>{project.manager.first_name} {project.manager.last_name}</TableRowColumn>
-            <TableRowColumn>{project.created_at}</TableRowColumn>
+              console.log("got project: " + issue.created_at);
+            <TableRowColumn style={{width: '50px'}}>{i+1}</TableRowColumn>
+            <TableRowColumn>{issue.description}</TableRowColumn>
+            <TableRowColumn>{issue.summary}</TableRowColumn>
+            <TableRowColumn>{issue.type} </TableRowColumn>
+            <TableRowColumn>{issue.created_at}</TableRowColumn>
 
           </TableRow>
                 );
       }
     }
-
       return (
         <MuiThemeProvider>
           <div style={styles.main}>
@@ -90,10 +113,10 @@ class ProjectPage extends React.Component {
             <Table onRowSelection={this.handleRowSelection} >
               <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                 <TableRow>
-                    <TableHeaderColumn >#</TableHeaderColumn>
-                    <TableHeaderColumn>Title</TableHeaderColumn>
+                    <TableHeaderColumn style={{width: '50px'}}>#</TableHeaderColumn>
                     <TableHeaderColumn>Description</TableHeaderColumn>
-                    <TableHeaderColumn>Manager</TableHeaderColumn>
+                    <TableHeaderColumn>Summary</TableHeaderColumn>
+                    <TableHeaderColumn>Type</TableHeaderColumn>
                     <TableHeaderColumn>Created At</TableHeaderColumn>
                   </TableRow>
                 </TableHeader>
@@ -113,7 +136,8 @@ function mapStateToProps(state) {
   console.log(`---> ProjectPage got state: ${  JSON.stringify(state)}` );
   return {
    projects: state.projects,
-   selectedProject: state.selectedProject
+   selectedProject: state.selectedProject,
+   issues:state.issues
  };
 }
  

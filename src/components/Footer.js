@@ -17,11 +17,16 @@ const styles = {
     left:0,
     bottom:0,
     right:0,
-
+    
+    },
+  btn:{
+    color:'white',
   },
   paper:{
-    backgroundColor:'lightGray',
+    backgroundColor:'black',
+    color:'white',
   },
+ 
 };
 const Footer = (props) => {
   return (
@@ -29,18 +34,18 @@ const Footer = (props) => {
     <Paper style={styles.paper}>
       <Row center="xs">
         <Col xs={true}>
-          <span style={styles.span}>© 2017 Team Manager All Right Reserved. </span>
+          <span style={styles.span}>© 2017 Team Manager  </span>
           <FlatButton
             label="About Us"
             labelPosition="before"
-           
-            href="/"
+            style={styles.btn}
+            href="/aboutUs"
           />
           <FlatButton
             label="Contact Us"
             labelPosition="before"
-           
-            href="/"
+            style={styles.btn}
+            href="/contactUs"
           />
         
         </Col>

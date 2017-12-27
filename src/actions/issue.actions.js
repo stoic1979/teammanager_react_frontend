@@ -24,7 +24,7 @@ function create(issue_data) {
             .then(
                 (issue_data) => {
                   dispatch(success(issue_data));
-                  console.log('action:create project: push /');
+                  console.log('action:create issue: push /');
                   // browserHistory.push('/familyList');
                 },
                 (error) => {
@@ -34,10 +34,10 @@ function create(issue_data) {
             );
   };
 
-  function request(project) {
+  function request(issue) {
     return {type: issueConstants.CREATE_REQUEST, issue_data};
   }
-  function success(project) {
+  function success(issue) {
     return {type: issueConstants.CREATE_SUCCESS, issue_data};
   }
   function failure(error) {
@@ -75,26 +75,19 @@ function getAll() {
     return {type: issueConstants.GETALL_SUCCESS, issues};
   }
   function failure(error) {
-        console.log("********* action got issues failure: " +error );
+        console.log("********* action got projects failure: " +error );
 
     return {type: issueConstants.GETALL_FAILURE, error};
   }
 }
 
 function selectedIssue(key){
-    console.log("++++ issue actions, selectedIssue() key: ", key);
+    console.log("++++ issue actions, selectedProject() key: ", key);
     return {
         type: issueConstants.ISSUE_SELECTED,
         payload: key
     }
 }
 
-// function selectedProject(key){
-//     console.log("++++ project actions, selectedProject() key: ", key);
-//     return {
-//         type: issueConstants.SELECTED_PROJECT,
-//         payload: key
-//     }
-// }
 
 

@@ -3,9 +3,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {Container,Col,Row} from 'react-grid-system';
+import selectedProjectreducer from '../reducers'
 import {connect} from 'react-redux';
-import {projectActions} from '../actions';
-
+import {issueActions} from '../actions';
 const styles = {  
   Container: {
       minWidth: 320,
@@ -19,15 +19,15 @@ const styles = {
      },
   sbt:{
       marginLeft:'40%',
-   },
- };
+    },
+  };
 
 //---------------------------------------------------
 //
-//         LOGIN PAGE
+//         CREATE ISSUE PAGE
 //
 //---------------------------------------------------
-class CreateProjectPage extends React.Component {
+class CreateTeamPage extends React.Component {
 
   // ------------------------------------------------
   // constructor
@@ -36,14 +36,13 @@ class CreateProjectPage extends React.Component {
     super(props);
 
     this.state = {     
-      description:'',
-      created_at: '',
-      updated_at:' ',
-      title:' ',
-      manager:' ',
+      name:'',
+      manager:'',
+      members:'',
+      created_at:'',
+      updated_at:'',
       submitted: false
     }
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     // this.handleLogout = this.handleLogout.bind(this);
@@ -59,51 +58,61 @@ class CreateProjectPage extends React.Component {
     this.setState({[name]: value});
   }
 
-
   // ------------------------------------------------
   // handleSubmit
   // ------------------------------------------------
   handleSubmit(e) {
     e.preventDefault();
-
-    console.log('-- create project handleSubmit --');
+    console.log(this.state);
+    console.log('-- create issue handleSubmit --');
 
     this.setState({submitted: true});
-    const {description, created_at, updated_at, title, manager } = this.state;
-    var  project_data={description, created_at, updated_at, title, manager };
+    console.log(this.state);
+    const {name, manager, members, created_at, updated_at } = this.state;
+    var  team_data={name, manager, members, created_at, updated_at};
     const {dispatch} = this.props;
-    console.log("project_data" +JSON.stringify(project_data));
+    console.log("team_data" +JSON.stringify(team_data));
 
-    if (description && created_at && updated_at && title && manager ) {
-      console.log('dispatching -> create project');
+    if (name && manager && members && created_at && updated_at) {
+      console.log('dispatching -> create team');
       // var history = this.props.history;
-      dispatch(projectActions.create( project_data));
+      // dispatch(issueActions.create( issue_data));
     }
   }
-
+  //--------------------------------------------------
+  //componentDidMount
+  //--------------------------------------------------
+    componentDidMount(){
+      // this.setState({project_id:localStorage.getItem('project_id')});
+      this.setState({assignee:localStorage.getItem('user.username')});
+      // localStorage.setItem('project_id','');
+    }
 render() {
-  const {description,  created_at, updated_at, title, manager} = this.state;
+
+  
+
+  const {name, manager, members, created_at, updated_at} = this.state;
   return (
     <div>
       <MuiThemeProvider>
         <form name="form" onSubmit={this.handleSubmit}> 
           <div style={styles.Container}>
-            <h3>Create Project</h3>
+            <h3>Create Team</h3>
             <Container>
               <Row>
                 <Col sm={6}>
                   <TextField
-                    hintText="Title"
-                    floatingLabelText="Title "
-                    name="title"
-                    value={title}
+                    hintText="Name"
+                    floatingLabelText="Name "
+                    name="name"
+                    value={name}
                     onChange={this.handleChange} 
                   />
                   <TextField
-                    hintText="Manager"
-                    floatingLabelText="Manager"
-                    name="manager"
-                    value={manager}
+                    hintText="Members"
+                    floatingLabelText="Members "
+                    name="members"
+                    value={members}
                     onChange={this.handleChange} 
                   />
                   <TextField
@@ -116,10 +125,10 @@ render() {
                 </Col>
                 <Col sm={6}>
                   <TextField
-                    hintText="Description"
-                    floatingLabelText="Description"
-                    name="description"
-                    value={description}
+                    hintText="Manager"
+                    floatingLabelText="Manager"
+                    name="manager"
+                    value={manager}
                     onChange={this.handleChange} 
                   />
                   <TextField
@@ -143,11 +152,17 @@ render() {
 }//LoginPage
 
 function mapStateToProps(state) {
-  const {alert} = state;
-  return {
-    alert,
+  // const {alert} = state;
+  console.log("create issue got state" + JSON.stringify(state));
+  
+    return {
+    projects: state.projects,
+   selectedProject: state.selectedProject
+  
+
   };
+
 }
 
-const connectedCreateProjectPage = connect(mapStateToProps)(CreateProjectPage);
-export {connectedCreateProjectPage as CreateProjectPage};
+const connectedCreateTeamPage = connect(mapStateToProps)(CreateTeamPage);
+export {connectedCreateTeamPage as CreateTeamPage};

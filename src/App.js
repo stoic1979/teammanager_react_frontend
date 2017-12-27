@@ -9,7 +9,8 @@ import AppBar from 'material-ui/AppBar';
 import FontIcon from 'material-ui/FontIcon';
 
 import RemoveRedEye from 'material-ui/svg-icons/image/remove-red-eye';
-import PersonAdd from 'material-ui/svg-icons/social/person-add';
+import Issue from 'material-ui/svg-icons/alert/error';
+import GroupAdd from 'material-ui/svg-icons/social/group-add';
 
 import {Routes} from './routes'
 
@@ -52,9 +53,10 @@ class App extends Component {
             onClick={loggedIn ? this.handleToggle : this.handle}
             />
             <Drawer width={245} open={this.state.open}>  
-              <AppBar title={literals.WEBSITE_TITLE} showMenuIconButton={false}/>
+              <AppBar title="TEAM  MANAGER" showMenuIconButton={false}/>
               <MenuItem href="/projectList" leftIcon={<RemoveRedEye />} >Projects</MenuItem>
-              <MenuItem href="/project" leftIcon={<PersonAdd />} >Issues</MenuItem>
+              <MenuItem href="/project" leftIcon={<Issue />} >Issues</MenuItem>
+              <MenuItem href="/createTeam" leftIcon={<GroupAdd />} >Team</MenuItem>
               
             </Drawer>
             <hr />
