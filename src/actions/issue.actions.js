@@ -51,14 +51,14 @@ function create(issue_data) {
 //
 
 
-function getAll() {
+function getAll(selectedProject) {
 
   console.log("====== getAll ======");
-
+  console.log("selectedProject in issue action "+selectedProject);
   return (dispatch) => {
     dispatch(request());
 
-    issueService.getAll()
+    issueService.getAll(selectedProject)
             .then(
                 (issues) => dispatch(success(issues)),
                 (error) => dispatch(failure(error))

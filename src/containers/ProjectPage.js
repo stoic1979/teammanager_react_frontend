@@ -30,19 +30,36 @@ class ProjectPage extends React.Component {
   constructor(props){
     super(props);
 
+    this.State={
+      selectedProject:'',
+    }
+
   }    
 
   componentDidMount() {
 
-    const {dispatch} = this.props;
+     var selectedProject = '';
+    if (this.props.projects) {
+      for (var i = this.props.selectedProject; i <=this.props.projects[i]; i++) {
+         console.log(`projects :${  JSON.stringify(this.props.projects[i])}`);
+         var project = this.props.projects[i];
+         selectedProject=project._id;
+       }
+     }
+    console.log("selected project id in componentDidMount " +selectedProject); 
 
+    const {dispatch} = this.props;
+    
     var resp = dispatch(projectActions.getAll());
 
-    var issues = dispatch(issueActions.getAll());
+    var issues = dispatch(issueActions.getAll(selectedProject));
 
-
+    
 
     this.handleRowSelection = this.handleRowSelection.bind(this); 
+
+
+   
   }
 
   // ------------------------
@@ -65,24 +82,8 @@ class ProjectPage extends React.Component {
     console.log(`---> ProjectPage render got issues: ${  JSON.stringify(this.props.issues)}`);
 
 
-    // var tableBody = [];
-    // if (this.props.projects) {
-    //   for (var i = this.props.selectedProject; i <=this.props.projects[i]; i++) {
-    //     console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
-    //     var project = this.props.projects[i];
-    //     tableBody.push(
-    //       <TableRow key={i+1} >
-    //           console.log("got project: " + project.created_at);
-    //         <TableRowColumn >{project._id}</TableRowColumn>
-    //         <TableRowColumn>{project.title}</TableRowColumn>
-    //         <TableRowColumn>{project.description}</TableRowColumn>
-    //         <TableRowColumn>{project.manager.first_name} {project.manager.last_name}</TableRowColumn>
-    //         <TableRowColumn>{project.created_at}</TableRowColumn>
-
-    //       </TableRow>
-    //             );
-    //   }
-    // }
+     
+   
     var tableBody = [];
     if (this.props.issues) {
       for (var i = 0; i < this.props.issues.length; i++) {
@@ -92,10 +93,10 @@ class ProjectPage extends React.Component {
           <TableRow key={i+1} >
               console.log("got project: " + issue.created_at);
             <TableRowColumn style={{width: '50px'}}>{i+1}</TableRowColumn>
-            <TableRowColumn>{issue.description}</TableRowColumn>
             <TableRowColumn>{issue.summary}</TableRowColumn>
             <TableRowColumn>{issue.type} </TableRowColumn>
-            <TableRowColumn>{issue.created_at}</TableRowColumn>
+            <TableRowColumn>{issue.status}</TableRowColumn>
+            <TableRowColumn>{issue.priority}</TableRowColumn>
 
           </TableRow>
                 );
@@ -114,10 +115,10 @@ class ProjectPage extends React.Component {
               <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                 <TableRow>
                     <TableHeaderColumn style={{width: '50px'}}>#</TableHeaderColumn>
-                    <TableHeaderColumn>Description</TableHeaderColumn>
                     <TableHeaderColumn>Summary</TableHeaderColumn>
                     <TableHeaderColumn>Type</TableHeaderColumn>
-                    <TableHeaderColumn>Created At</TableHeaderColumn>
+                    <TableHeaderColumn>Status</TableHeaderColumn>
+                    <TableHeaderColumn>Priority</TableHeaderColumn>
                   </TableRow>
                 </TableHeader>
                 <TableBody displayRowCheckbox={false}>

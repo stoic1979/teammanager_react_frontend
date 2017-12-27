@@ -63,16 +63,16 @@ function create(issue_data) {
     });
 }// create
 
-function getAll() {
+function getAll(selectedProject) {
 
     console.log("====== issue-service getAll ======");
-
+   console.log("selectedProject in issue service " +selectedProject);
 
     const requestOptions = {
         method: 'GET',
         headers: {'x-access-token': _getToken()},
     };
-    const url = `${settings.API_ROOT}/issues/all_by_project/5a086f106ce8df1e206592e4`
+    const url = `${settings.API_ROOT}/issues/all_by_project/${selectedProject}`
     return fetch(url, requestOptions)
     .then((response) => {
 

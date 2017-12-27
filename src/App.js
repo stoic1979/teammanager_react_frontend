@@ -43,6 +43,14 @@ class App extends Component {
     render() {
       const contentStyle = {  transition: 'margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)' };
       const {loggedIn} = this.props;
+      var {user}      = this.props;
+      if(user){
+        var role=user.role;
+      }
+      
+      console.log('user logged in ' +JSON.stringify(loggedIn));
+      console.log('user in App '+JSON.stringify(user));
+      console.log('role in app '+role);
       if (this.state.open) {
         contentStyle.marginLeft = 245;
       }
@@ -50,7 +58,7 @@ class App extends Component {
          <div style={contentStyle}>
           <MuiThemeProvider>
             <Header 
-            onClick={loggedIn ? this.handleToggle : this.handle}
+            onClick={role=="MANAGER" ? this.handleToggle : this.handle}
             />
             <Drawer width={245} open={this.state.open}>  
               <AppBar title="TEAM  MANAGER" showMenuIconButton={false}/>
@@ -74,6 +82,8 @@ class App extends Component {
 function mapStateToProps(state) {
   // const {alert} = state;
    return state.authentication;
+  
+  
 }
 
 const connectedApp = connect(mapStateToProps)(App);

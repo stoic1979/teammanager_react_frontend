@@ -20,12 +20,14 @@ export function authentication(state = initialState, action) {
       return {
         loggingIn: true,
         user: action.user,
+
       };
     case userConstants.LOGIN_SUCCESS:
       console.log('[authentication-reducer] : LOGIN_SUCCESS');
       return {
         loggedIn: true,
         user: action.user,
+        
       };
     case userConstants.LOGIN_FAILURE:
       return {};

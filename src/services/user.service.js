@@ -42,6 +42,7 @@ function login(history,username, password) {
         if (token_resp && token_resp.token) {
             var user = {
                 username: username,
+                role:token_resp.role,
                 token: token_resp.token,
             };
 
