@@ -37,10 +37,10 @@ class CreateProjectPage extends React.Component {
 
     this.state = {     
       description:'',
-      created_at: '',
+      created_at:'',
       updated_at:' ',
-      title:' ',
-      manager:' ',
+      title:'',
+      manager:'',
       submitted: false
     }
 

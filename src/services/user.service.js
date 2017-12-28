@@ -28,13 +28,22 @@ function login(history,username, password) {
     const url = `${settings.API_ROOT}/users/login`
     return fetch(url, requestOptions)
         .then((response) => {
+
+
+
+
             if (!response.ok) {
                 return Promise.reject(response.statusText);
             }
             return response.json();
         })
     .then((token_resp) => {
-        console.log(`token_resp: ${  JSON.stringify(token_resp)}` );
+        console.log(`----->>> token_resp: ${  JSON.stringify(token_resp)}` );
+
+
+        if (!token_resp.success) {
+                return Promise.reject(token_resp.message);
+            }
 
         // ----------------------------------------------------------
         // login successful if there's a jwt token in the response

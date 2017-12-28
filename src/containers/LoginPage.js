@@ -2,6 +2,8 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import Dialog from 'material-ui/Dialog';
+import FlatButton from 'material-ui/FlatButton';
 
 import {connect} from 'react-redux';
 import {userActions} from '../actions';
@@ -16,12 +18,9 @@ const styles = {
       right: 0,
       margin: 'auto',
      },
-  btn:{
-    marginLeft : 20,
-      },
-  mybtn: {
-      color: 'white'
-     }
+  sbt:{
+    marginLeft:'20%',
+  },
 };
 
 //---------------------------------------------------
@@ -40,11 +39,13 @@ class LoginPage extends React.Component {
     this.state = {     
       username:'',
       password: '',
+     
       submitted: false
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+   
     // this.handleLogout = this.handleLogout.bind(this);
   }
 
@@ -58,7 +59,7 @@ class LoginPage extends React.Component {
     this.setState({[name]: value});
   }
 
-
+ 
   // ------------------------------------------------
   // handleLogOut
   // ------------------------------------------------
@@ -85,18 +86,19 @@ class LoginPage extends React.Component {
     this.setState({submitted: true});
     const {username, password} = this.state;
     const {dispatch} = this.props;
-
-    if (username && password) {
-      console.log('dispatching -> login');
-      var history = this.props.history;
-      dispatch(userActions.login(history, username, password));
-    }
-  }
+    var history = this.props.history;
+    if(username && password){
+      console.log("dispatching user action");
+    dispatch(userActions.login(history,username,password));
+   }
+ 
+     }
 
 render() {
-  return (
+return (
     <div>
       <MuiThemeProvider>
+        <center>{this.props.alert && this.props.alert.message}</center>
         <form name="form" onSubmit={this.handleSubmit}> 
           <div style={styles.Container}>
           <h3>Log In</h3>
@@ -114,8 +116,8 @@ render() {
               name="password"
               onChange={this.handleChange} 
             />
-            <br/>
-            <RaisedButton label="Login" primary={true} type="submit"/>
+            <br/><br/>
+            <RaisedButton label="Login" style={styles.sbt} primary={true} type="submit"/>
           </div>
         </form>
       </MuiThemeProvider>

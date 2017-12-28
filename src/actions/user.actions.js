@@ -24,6 +24,9 @@ function login(history, email, password) {
             .then(
                 (user) => {
                   dispatch(success(user));
+
+                  console.log("++++++++++++++++ success response: " + JSON.stringify(user) );
+
                   console.log('FIXME :: action:login: push / ???');
                   
                 },
@@ -43,6 +46,7 @@ function login(history, email, password) {
     return {type: userConstants.LOGIN_SUCCESS, user};
   }
   function failure(error) {
+    console.log("Login error resp: " + JSON.stringify(error) );
     return {type: userConstants.LOGIN_FAILURE, error};
   }
 }
