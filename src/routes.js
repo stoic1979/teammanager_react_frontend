@@ -13,6 +13,7 @@ import {CreateProjectPage} from "./containers/CreateProjectPage"
 import {CreateIssuePage} from "./containers/CreateIssuePage"
 import {CreateTeamPage} from "./containers/CreateTeamPage"
 import {TeamListPage} from "./containers/TeamListPage"
+import {PricingPage} from "./containers/PricingPage"
 
 import {connect} from 'react-redux';
 
@@ -35,6 +36,7 @@ class Routes extends Component {
                   <Route exact path='/createIssue'   component={CreateIssuePage} /> 
                   <Route exact path='/createTeam'       component={CreateTeamPage} /> 
                   <Route exact path='/teamList'       component={TeamListPage} /> 
+                  <Route exact path='/pricing'       component={PricingPage} />  
                   <Route path='*'                    component={NotFoundPage} />                   
               </Switch>
             </div>
