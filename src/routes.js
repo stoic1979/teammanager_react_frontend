@@ -11,8 +11,8 @@ import {ProjectListPage} from "./containers/ProjectListPage"
 import {ProjectPage} from "./containers/ProjectPage"
 import {CreateProjectPage} from "./containers/CreateProjectPage"
 import {CreateIssuePage} from "./containers/CreateIssuePage"
-import {CreateTeamPage} from "./containers/CreateTeamPage"
-import {TeamListPage} from "./containers/TeamListPage"
+import {CreateTeamMemberPage} from "./containers/CreateTeamMemberPage"
+import {TeamMemberListPage} from "./containers/TeamMemberListPage"
 import {PricingPage} from "./containers/PricingPage"
 
 import {connect} from 'react-redux';
@@ -24,20 +24,20 @@ class Routes extends Component {
          <Router>
             <div>
               <Switch>
-                  <Route exact path='/'              component={HomePage} />
-                  <Route exact path='/aboutUs'       component={AboutUsPage} />
-                  <Route exact path='/contactUs'     component={ContactUsPage} />
-                  <Route exact path='/login'         component={LoginPage} />
-                  <Route exact path='/logout'        component={LogoutPage} />
-                  <Route exact path='/register'      component={RegisterPage} /> 
-                  <Route exact path='/projectList'   component={ProjectListPage} />
-                  <Route exact path='/project'       component={ProjectPage} />
-                  <Route exact path='/createProject' component={CreateProjectPage} /> 
-                  <Route exact path='/createIssue'   component={CreateIssuePage} /> 
-                  <Route exact path='/createTeam'       component={CreateTeamPage} /> 
-                  <Route exact path='/teamList'       component={TeamListPage} /> 
-                  <Route exact path='/pricing'       component={PricingPage} />  
-                  <Route path='*'                    component={NotFoundPage} />                   
+                  <Route exact path='/'                 component={HomePage} />
+                  <Route exact path='/aboutUs'          component={AboutUsPage} />
+                  <Route exact path='/contactUs'        component={ContactUsPage} />
+                  <Route exact path='/login'            component={LoginPage} />
+                  <Route exact path='/logout'           component={LogoutPage} />
+                  <Route exact path='/register'         component={RegisterPage} /> 
+                  <Route exact path='/projectList'      component={ProjectListPage} />
+                  <Route exact path='/project'          component={ProjectPage} />
+                  <Route exact path='/createProject'    component={CreateProjectPage} /> 
+                  <Route exact path='/createIssue'      component={CreateIssuePage} /> 
+                  <Route exact path='/createTeamMember' component={CreateTeamMemberPage} /> 
+                  <Route exact path='/teamMemberList'   component={TeamMemberListPage} /> 
+                  <Route exact path='/pricing'          component={PricingPage} />  
+                  <Route path='*'                       component={NotFoundPage} />                   
               </Switch>
             </div>
          </Router>

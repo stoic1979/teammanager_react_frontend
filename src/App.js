@@ -64,7 +64,7 @@ class App extends Component {
               <AppBar title="TEAM  MANAGER" showMenuIconButton={false}/>
               <MenuItem href="/projectList" leftIcon={<RemoveRedEye />} >Projects</MenuItem>
               <MenuItem href="/project" leftIcon={<Issue />} >Issues</MenuItem>
-              <MenuItem href="/createTeam" leftIcon={<GroupAdd />} >Team</MenuItem>
+              <MenuItem href="/teamMemberList" leftIcon={<GroupAdd />} >Team</MenuItem>
               
             </Drawer>
             <hr />

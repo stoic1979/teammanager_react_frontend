@@ -7,7 +7,8 @@ import {alert} from './alert.reducer';
 import {projects} from './projects.reducer';
 import {issues} from './issues.reducer';
 import {tasks} from './tasks.reducer';
-import {selectedProject} from './selectedProject.reducer';
+import {selectedProject} from './selected.project.reducer';
+import {teamMember} from './team.member.reducer';
 
 
 
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   selectedProject,
   tasks,
   issues,
+  teamMember,
 
 });
 

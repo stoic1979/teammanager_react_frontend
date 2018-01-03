@@ -12,7 +12,7 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
-import {projectActions} from '../actions';
+import {teamMemberActions} from '../actions';
 
 
 const styles={
@@ -26,49 +26,49 @@ const styles={
 };
 
 
-class TeamListPage extends React.Component {
+class TeamMemberListPage extends React.Component {
   
 
   componentDidMount() {
     const {dispatch} = this.props;
 
-    var resp = dispatch(projectActions.getAll());
+    var resp = dispatch(teamMemberActions.getAll());
 
-    this.handleRowSelection = this.handleRowSelection.bind(this); 
+    // this.handleRowSelection = this.handleRowSelection.bind(this); 
   }
 
-  // ------------------------
-  // handleRowSelection
-  // ------------------------
-  handleRowSelection = (key) => {
-    const {dispatch} = this.props;
-    dispatch(projectActions.selectedProject(key));
+  // // ------------------------
+  // // handleRowSelection
+  // // ------------------------
+  // handleRowSelection = (key) => {
+  //   const {dispatch} = this.props;
+  //   dispatch(teamMemberActions.selectedProject(key));
 
-    console.log("ProjectListPage :: row is selected, key=" + key);
-      localStorage.setItem('project_id',key);
+  //   console.log("ProjectListPage :: row is selected, key=" + key);
+  //     localStorage.setItem('project_id',key);
        
 
-     // this.props.history.push('/project');
-  };
+  //    // this.props.history.push('/project');
+  // };
 
 
   render() {
     // var  studies = JSON.parse(localStorage.getItem('studies'));
     // console.log("props: " +this.props);
-    console.log(`---> render got projects: ${  JSON.stringify(this.props.projects)}`);
+    console.log(`---> render got team members: ${  JSON.stringify(this.props.teamMember)}`);
 
     var tableBody = [];
-    if (this.props.projects) {
-      for (var i = 0; i < this.props.projects.length; i++) {
-        console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
-        var project = this.props.projects[i];
+    if (this.props.teamMember) {
+      for (var i = 0; i < this.props.teamMember.length; i++) {
+        console.log(`teamMember ${  i + 1  }:${  JSON.stringify(this.props.teamMember[i])}`);
+        var member = this.props.teamMember[i];
         tableBody.push(
           <TableRow key={i+1} >
               console.log("got project: " + project.created_at);
             <TableRowColumn style={{width: '50px'}}>{i+1}</TableRowColumn>
-            <TableRowColumn>{project.name}</TableRowColumn>
+            <TableRowColumn>{member.user}</TableRowColumn>
            
-            <TableRowColumn>{project.manager.first_name} {project.manager.last_name}</TableRowColumn>
+            <TableRowColumn>{member.team }</TableRowColumn>
             
 
           </TableRow>
@@ -80,17 +80,17 @@ class TeamListPage extends React.Component {
         <MuiThemeProvider>
           <div style={styles.main}>
             <FlatButton
-                label="New Team"
+                label="Invite Team Member"
                 style={styles.flatBtn}
-                href="/createTeam"
+                href="/createTeamMember"
               />
             <h2>Team</h2>
               <Table onRowSelection={this.handleRowSelection} >
                   <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                     <TableRow>
                       <TableHeaderColumn style={{width: '50px'}}>#</TableHeaderColumn>
-                      <TableHeaderColumn>Name</TableHeaderColumn>
-                      <TableHeaderColumn>Manager</TableHeaderColumn>
+                      <TableHeaderColumn>User</TableHeaderColumn>
+                      <TableHeaderColumn>Team</TableHeaderColumn>
                     </TableRow>
                   </TableHeader>
                   <TableBody displayRowCheckbox={false}>
@@ -105,11 +105,11 @@ class TeamListPage extends React.Component {
   }
 
 function mapStateToProps(state) {
-  console.log(`---> ProjectList got state: ${  JSON.stringify(state.projects)}` );
+  console.log(`---> TeamListPage got state: ${  JSON.stringify(state.teamMember)}` );
   return {
-   projects: state.projects
+   teamMember: state.teamMember
  };
 }
  
-const connectedTeamListPage = connect(mapStateToProps)(TeamListPage);
-export { connectedTeamListPage as TeamListPage };
+const connectedTeamMemberListPage = connect(mapStateToProps)(TeamMemberListPage);
+export { connectedTeamMemberListPage as TeamMemberListPage };
