@@ -39,14 +39,15 @@ constructor(props){
   super(props);
 
  this.state = {
-            user: {
-                id: '',
-                name: '',
-                email: '',
-                password: ''
-            },
-            submitted: false
-        };
+        first_name : '',
+        last_name  : '',
+        username   : '',
+        email      : '',
+        password   : '',
+        role       : '',
+        submitted  : false
+
+    };
  
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -56,17 +57,12 @@ constructor(props){
   // handleChange
   // ------------------------------------------------
  
-    handleChange(event) {
-      console.log(`-- handleChange, target: ${event.target.name}`);
-        const { name, value } = event.target;
-        const { user } = this.state;
-        this.setState({
-            user: {
-                ...user,
-                [name]: value
-            }
-        });
-    }
+   handleChange(e) {
+    console.log(`-- handleChange, target: ${e.target.name}`);
+
+    const {name, value} = e.target;
+    this.setState({[name]: value});
+  }
 
   // ------------------------------------------------
   // handleSubmit
@@ -76,10 +72,10 @@ constructor(props){
         event.preventDefault();
        
         this.setState({ submitted: true });
-        const { user } = this.state;
+        const { first_name, last_name, username, email, password, role} = this.state;
         const { dispatch } = this.props;
-
-        if (user.id && user.name && user.email && user.password) {
+        var user={first_name, last_name, username, email, password, role};
+        if (first_name && last_name && username && email && password && role) {
           console.log('dispatching -> register');
           var history = this.props.history;
           dispatch(userActions.register(history, user));
@@ -88,7 +84,7 @@ constructor(props){
 
 
 render() {
-   const{first_name,last_name,email,password,user_name,role}=this.state;
+   const{first_name,last_name,email,password,username,role}=this.state;
     return (
       <div>
         <MuiThemeProvider>
@@ -115,8 +111,8 @@ render() {
                       <TextField
                         hintText="User Name"
                         floatingLabelText="User Name"
-                        name="user_name"
-                        value={user_name}
+                        name="username"
+                        value={username}
                         onChange={this.handleChange} 
                       />
                     </Col>

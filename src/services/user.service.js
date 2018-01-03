@@ -76,7 +76,7 @@ function logout(history) {
 }
 
 function register(user) {
-    var body = `security_level=1&username=${user.username  }&password=${  user.password  }&id=${  user.id  }&name=${  user.name}`;
+    var body = `first_name=${user.first_name}&last_name=${user.last_name  }&email=${user.email}&password=${  user.password  }&username=${  user.username  }&role=${  user.role}`;
 
     console.log(`body: ${  body}`);
 
@@ -85,7 +85,7 @@ function register(user) {
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         body: body,
     };
-    const url = `${settings.API_ROOT}/users/register`
+    const url = `${settings.API_ROOT}/users/signup`
     return fetch(url, requestOptions).then(handleResponse);
 }
 
