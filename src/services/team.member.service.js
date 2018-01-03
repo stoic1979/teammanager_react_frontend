@@ -78,10 +78,10 @@ function getAll() {
 
           return response.json();
         })
-    .then((team) => {
-      console.log(`++++++++ project-service getAll project_resp: ${  JSON.stringify(team)}` );
+    .then((team_member) => {
+      console.log(`++++++++ project-service getAll project_resp: ${  JSON.stringify(team_member)}` );
 
-      return team;
+      return team_member;
     });
 }// getAll
 

@@ -66,9 +66,9 @@ class TeamMemberListPage extends React.Component {
           <TableRow key={i+1} >
               console.log("got project: " + project.created_at);
             <TableRowColumn style={{width: '50px'}}>{i+1}</TableRowColumn>
-            <TableRowColumn>{member.user}</TableRowColumn>
+            <TableRowColumn>{member.user.last_name}</TableRowColumn>
            
-            <TableRowColumn>{member.team }</TableRowColumn>
+            <TableRowColumn>{member.team.name }</TableRowColumn>
             
 
           </TableRow>
