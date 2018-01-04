@@ -4,11 +4,14 @@ import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {Container,Col,Row} from 'react-grid-system';
 import SelectField from 'material-ui/SelectField';
+import DatePicker from 'material-ui/DatePicker';
 import MenuItem from 'material-ui/MenuItem';
 import selectedProjectreducer from '../reducers'
 import {connect} from 'react-redux';
 import {issueActions} from '../actions';
 import {projectActions} from '../actions';
+import {userActions} from '../actions';
+
 
 const styles = {  
   Container: {
@@ -63,11 +66,12 @@ class CreateIssuePage extends React.Component {
       updated_at:'',
       submitted: false
     }
-    this.handleChange   = this.handleChange.bind(this);
-    this.handleSubmit   = this.handleSubmit.bind(this);
-    this.handleType     = this.handleType.bind(this);
-    this.handleStatus   = this.handleStatus.bind(this);
-    this.handlePriority = this.handlePriority.bind(this);
+    this.handleChange    = this.handleChange.bind(this);
+    this.handleSubmit    = this.handleSubmit.bind(this);
+    this.handleType      = this.handleType.bind(this);
+    this.handleStatus    = this.handleStatus.bind(this);
+    this.handlePriority  = this.handlePriority.bind(this);
+    this.handleStartDate = this.handleStartDate.bind(this);
     
   }
 
@@ -77,7 +81,7 @@ componentDidMount() {
   const {dispatch} = this.props;
     
   var resp = dispatch(projectActions.getAll());
-
+  var res = dispatch(userActions.getAll());
   
 
   }
@@ -97,6 +101,20 @@ componentDidMount() {
     this.setState({[name]: value});
   }
 
+  // handle start date value
+ handleStartDate = (event, date) => {
+    this.setState({
+      start_date: date,
+    });
+  };
+
+
+  // handle start date value
+ handleEndDate = (event, date) => {
+    this.setState({
+      end_date: date,
+    });
+  };
   // ------------------------------------------------
   // handleSubmit
   // ------------------------------------------------
@@ -128,7 +146,7 @@ render() {
 
     if (this.props.projects) {
       for (var i = 0; i < this.props.projects.length; i++) {
-        console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
+        // console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
         if(i==key){
         var pro = this.props.projects[i];
 
@@ -177,12 +195,11 @@ render() {
               <MenuItem value={"BUG"} primaryText="Bug " />
               <MenuItem value={"ENHANCEMENT"} primaryText="Enhancement" />
             </SelectField>
-            <TextField
-              hintText="Start Date"
+            <DatePicker
               floatingLabelText="Start Date"
-              name="start_date"
-              value={start_date}
-              onChange={this.handleChange} 
+              hintText="Start Date"
+              value={this.state.start_date}
+              onChange={this.handleStartDate}
             />
             </Col>
             <Col sm={6}>
@@ -219,12 +236,11 @@ render() {
               <MenuItem value={"MEDIUM"} primaryText="Testing" />
               <MenuItem value={"LOW"} primaryText="Closed " />
             </SelectField>
-            <TextField
-              hintText="End Date"
+            <DatePicker
               floatingLabelText="End Date"
-              name="end_date"
-              value={end_date}
-              onChange={this.handleChange} 
+              hintText="End Date"
+              value={this.state.end_date}
+              onChange={this.handleEndDate}
             />
            
             </Col>
@@ -246,10 +262,12 @@ function mapStateToProps(state) {
   // const {alert} = state;
   // console.log("create issue got state" + JSON.stringify(state));
   console.log("create issue got projects" + JSON.stringify(state.projects));
+  console.log("create issue got users" + JSON.stringify(state.users));
   
     return {
     projects: state.projects,
-   selectedProject: state.selectedProject
+    selectedProject: state.selectedProject,
+    users: state.users
   
 
   };

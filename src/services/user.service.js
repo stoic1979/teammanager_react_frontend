@@ -11,6 +11,11 @@ export const userService = {
 };
 
 
+function _getToken() {
+  var user = JSON.parse(localStorage.getItem('user'));
+  return user.token;
+}
+
 function login(history,username, password) {
     var body = `username=${username  }&password=${  password}`;
 
@@ -92,10 +97,10 @@ function register(user) {
 function getAll() {
     const requestOptions = {
         method: 'GET',
-        headers: authHeader(),
+        headers: {'x-access-token': _getToken()},
     };
-
-    return fetch('/users', requestOptions).then(handleResponse);
+    const url = `${settings.API_ROOT}/users/all`
+    return fetch(url, requestOptions).then(handleResponse);
 }
 
 function getById(id) {

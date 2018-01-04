@@ -52,7 +52,7 @@ export default class Header extends React.Component {
 
 
 function mapStateToProps(state) {
-  console.log("--- header got state: " + JSON.stringify(state));
+  // console.log("--- header got state: " + JSON.stringify(state));
 
   return state.authentication;
 }

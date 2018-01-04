@@ -43,7 +43,7 @@ function create(project_data) {
           return response.json();
         })
     .then((project_resp) => {
-      console.log(`project-service create project resp: ${  JSON.stringify(project_resp)}` );
+      // console.log(`project-service create project resp: ${  JSON.stringify(project_resp)}` );
 
       return project_resp;
     })
@@ -66,7 +66,7 @@ function getAll() {
     return fetch(url, requestOptions)
     .then((response) => {
 
-          console.log("+++++++ resp: " + response);
+          // console.log("+++++++ resp: " + response);
 
           if (!response.ok) {
             return Promise.reject(response.statusText);
@@ -75,7 +75,7 @@ function getAll() {
           return response.json();
         })
     .then((projects) => {
-      console.log(`++++++++ project-service getAll project_resp: ${  JSON.stringify(projects)}` );
+      // console.log(`++++++++ project-service getAll project_resp: ${  JSON.stringify(projects)}` );
 
       return projects;
     });
