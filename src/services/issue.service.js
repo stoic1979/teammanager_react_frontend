@@ -19,7 +19,7 @@ function create(issue_data) {
   console.log(`[issue-service] got token: ${  user.token}`);
 
   var body = 'project=5a4db281e218f5141cc0eefb';
-  
+  body += `&assignee=${issue_data.assignee}`;
   body += `&summary=${issue_data.summary}`;
   body += `&description=${issue_data.description}`;
   body += `&type=${issue_data.type}`;

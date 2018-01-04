@@ -53,7 +53,7 @@ class CreateIssuePage extends React.Component {
 
     this.state = {     
       project:'',
-     
+      assignee:'',
       summary:'',
       description:'',
       type:'',
@@ -72,6 +72,7 @@ class CreateIssuePage extends React.Component {
     this.handleStatus    = this.handleStatus.bind(this);
     this.handlePriority  = this.handlePriority.bind(this);
     this.handleStartDate = this.handleStartDate.bind(this);
+    this.handleAssignee  = this.handleAssignee.bind(this);
     
   }
 
@@ -91,6 +92,7 @@ componentDidMount() {
  handleStatus = (event, index, value) => this.setState({status:value});
 
  handlePriority = (event, index, value) => this.setState({priority:value});
+ handleAssignee = (event, index, value) => this.setState({assignee:value});
   // ------------------------------------------------
   // handleChange
   // ------------------------------------------------
@@ -126,8 +128,8 @@ componentDidMount() {
 
     this.setState({submitted: true});
     console.log(this.state);
-    const {project, summary, description, type, priority, status, estimated_hours, start_date, end_date, created_at, updated_at } = this.state;
-    var  issue_data={project, summary, description, type, priority,  status, estimated_hours, start_date, end_date, created_at, updated_at};
+    const {assignee, project, summary, description, type, priority, status, estimated_hours, start_date, end_date, created_at, updated_at } = this.state;
+    var  issue_data={assignee, project, summary, description, type, priority,  status, estimated_hours, start_date, end_date, created_at, updated_at};
     const {dispatch} = this.props;
     console.log("issue_data" +JSON.stringify(issue_data));
 
@@ -160,7 +162,17 @@ render() {
       }
 
     }
-  const { summary, description, type, priority, status, estimated_hours, start_date, end_date, created_at, updated_at} = this.state;
+    var Items=[];
+    if(this.props.users){
+      for(var i=0;i<this.props.users.length;i++){
+        console.log(`users ${  i + 1  }:${  JSON.stringify(this.props.users[i])}`);
+        var user=this.props.users[i];
+        Items.push(
+          <MenuItem value={user._id} primaryText={user.username} />
+          );
+      }
+    }
+  const {assignee, summary, description, type, priority, status, estimated_hours, start_date, end_date, created_at, updated_at} = this.state;
   return (
     <div>
       <MuiThemeProvider>
@@ -170,6 +182,15 @@ render() {
           <Container>
           <Row>
           <Col sm={6}>
+            <SelectField
+              floatingLabelText="Assignee "
+              name="assignee"
+              value={this.state.assignee}
+              onChange={this.handleAssignee}
+              style={styles.customWidth}
+            >
+              {Items}
+            </SelectField>
             <TextField
               hintText="Summary"
               floatingLabelText="Summary"
@@ -184,6 +205,12 @@ render() {
               value={estimated_hours}
               onChange={this.handleChange} 
             />
+            <DatePicker
+              floatingLabelText="Start Date"
+              hintText="Start Date"
+              value={this.state.start_date}
+              onChange={this.handleStartDate}
+            />
             <SelectField
               floatingLabelText="Type "
               name="type"
@@ -195,12 +222,7 @@ render() {
               <MenuItem value={"BUG"} primaryText="Bug " />
               <MenuItem value={"ENHANCEMENT"} primaryText="Enhancement" />
             </SelectField>
-            <DatePicker
-              floatingLabelText="Start Date"
-              hintText="Start Date"
-              value={this.state.start_date}
-              onChange={this.handleStartDate}
-            />
+            
             </Col>
             <Col sm={6}>
             <TextField
