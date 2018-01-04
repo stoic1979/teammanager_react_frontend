@@ -9,7 +9,7 @@ import {projectActions} from '../actions';
 const styles = {  
   Container: {
       minWidth: 320,
-      maxWidth: 800,
+      maxWidth: 400,
       height:'auto',
       position: 'absolute',
       left: 0,
@@ -18,7 +18,7 @@ const styles = {
       marginBottom:40,
      },
   sbt:{
-      marginLeft:'40%',
+      marginLeft:'10%',
    },
  };
 
@@ -37,10 +37,8 @@ class CreateProjectPage extends React.Component {
 
     this.state = {     
       description:'',
-      created_at:'',
-      updated_at:' ',
       title:'',
-      manager:'',
+      
       submitted: false
     }
 
@@ -69,12 +67,12 @@ class CreateProjectPage extends React.Component {
     console.log('-- create project handleSubmit --');
 
     this.setState({submitted: true});
-    const {description, created_at, updated_at, title, manager } = this.state;
-    var  project_data={description, created_at, updated_at, title, manager };
+    const {description, title} = this.state;
+    var  project_data={description,  title };
     const {dispatch} = this.props;
     console.log("project_data" +JSON.stringify(project_data));
 
-    if (description && created_at && updated_at && title && manager ) {
+    if (description && title  ) {
       console.log('dispatching -> create project');
       // var history = this.props.history;
       dispatch(projectActions.create( project_data));
@@ -82,57 +80,29 @@ class CreateProjectPage extends React.Component {
   }
 
 render() {
-  const {description,  created_at, updated_at, title, manager} = this.state;
+  const {description, title} = this.state;
   return (
     <div>
       <MuiThemeProvider>
         <form name="form" onSubmit={this.handleSubmit}> 
           <div style={styles.Container}>
             <h3>Create Project</h3>
-            <Container>
-              <Row>
-                <Col sm={6}>
-                  <TextField
-                    hintText="Title"
-                    floatingLabelText="Title "
-                    name="title"
-                    value={title}
-                    onChange={this.handleChange} 
-                  />
-                  <TextField
-                    hintText="Manager"
-                    floatingLabelText="Manager"
-                    name="manager"
-                    value={manager}
-                    onChange={this.handleChange} 
-                  />
-                  <TextField
-                    hintText="Updated at"
-                    floatingLabelText="Updated At"
-                    name="updated_at"
-                    value={updated_at}
-                    onChange={this.handleChange} 
-                  />
-                </Col>
-                <Col sm={6}>
-                  <TextField
-                    hintText="Description"
-                    floatingLabelText="Description"
-                    name="description"
-                    value={description}
-                    onChange={this.handleChange} 
-                  />
-                  <TextField
-                    hintText="Created at"
-                    floatingLabelText="Created At"
-                    name="created_at"
-                    value={created_at}
-                    onChange={this.handleChange} 
-                  />
-                </Col>
-              </Row>
-            </Container>
+            <TextField
+              hintText="Title"
+              floatingLabelText="Title "
+              name="title"
+              value={title}
+              onChange={this.handleChange} 
+            />
             <br/>
+            <TextField
+              hintText="Description"
+              floatingLabelText="Description"
+              name="description"
+              value={description}
+              onChange={this.handleChange} 
+            />
+            <br/><br/>
             <RaisedButton style={styles.sbt} label="Submit" primary={true} type="submit"/>
           </div>
         </form>

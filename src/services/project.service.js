@@ -18,11 +18,10 @@ function create(project_data) {
   console.log(`[project-service] got user: ${  JSON.stringify(user)}`);
   console.log(`[project-service] got token: ${  user.token}`);
 
-  var body = `created_at=${  project_data.created_at}`;
-  body += `&updated_at=${  project_data.updated_at}`;
-  body += `&title=${  project_data.title}`;
+  var body = `&title=${  project_data.title}`;
+
   body += `&description=${  project_data.description}`;
-  body += `&type_id=${  project_data.manager}`;
+  body += `&manager=${  project_data.manager}`;
   body += '&__v=0';
   
 
@@ -31,10 +30,10 @@ function create(project_data) {
 
   const requestOptions = {
     method: 'POST',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    headers: {'x-access-token': _getToken(),'Content-Type': 'application/x-www-form-urlencoded'},
     body: body,
   };
-  const url = `${settings.API_ROOT}/add_project`
+  const url = `${settings.API_ROOT}/projects/add`
   return fetch(url, requestOptions)
         .then((response) => {
           if (!response.ok) {

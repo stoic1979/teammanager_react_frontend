@@ -18,8 +18,8 @@ function create(issue_data) {
   console.log(`[issue-service] got user: ${  JSON.stringify(user)}`);
   console.log(`[issue-service] got token: ${  user.token}`);
 
-  var body = `project=${issue_data.project}`;
-  body += `&assignee=${issue_data.assignee}`;
+  var body = 'project=5a4db3aee218f5141cc0eefc';
+  
   body += `&summary=${issue_data.summary}`;
   body += `&description=${issue_data.description}`;
   body += `&type=${issue_data.type}`;
@@ -40,7 +40,7 @@ function create(issue_data) {
 
   const requestOptions = {
     method: 'POST',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    headers: {'x-access-token': _getToken(),'Content-Type': 'application/x-www-form-urlencoded'},
     body: body,
   };
   const url = `${settings.API_ROOT}/issues/add`

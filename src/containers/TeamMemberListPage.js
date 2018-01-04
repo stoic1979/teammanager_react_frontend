@@ -66,13 +66,10 @@ class TeamMemberListPage extends React.Component {
           <TableRow key={i+1} >
               console.log("got project: " + project.created_at);
             <TableRowColumn style={{width: '50px'}}>{i+1}</TableRowColumn>
-            <TableRowColumn>{member.user.last_name}</TableRowColumn>
-           
+            <TableRowColumn>{member.user.username}</TableRowColumn>
             <TableRowColumn>{member.team.name }</TableRowColumn>
-            
-
           </TableRow>
-                );
+             );
       }
     }
 
@@ -91,7 +88,7 @@ class TeamMemberListPage extends React.Component {
                       <TableHeaderColumn style={{width: '50px'}}>#</TableHeaderColumn>
                       <TableHeaderColumn>User</TableHeaderColumn>
                       <TableHeaderColumn>Team</TableHeaderColumn>
-                    </TableRow>
+                      </TableRow>
                   </TableHeader>
                   <TableBody displayRowCheckbox={false}>
                     {tableBody}

@@ -9,7 +9,7 @@ import {teamMemberActions} from '../actions';
 const styles = {  
   Container: {
       minWidth: 350,
-      maxWidth: 400,
+      maxWidth: 550,
       height:'auto',
       position: 'absolute',
       left: 0,
@@ -86,21 +86,14 @@ render() {
         <form name="form" onSubmit={this.handleSubmit}> 
           <div style={styles.Container}>
             <h3>Invite Team Member</h3>
-            <Container>
-              <Row>
-                <Col sm={6}>
-                  <TextField
-                    hintText="Email"
-                    floatingLabelText="Enter Email"
-                    name="email"
-                    value={email}
-                    onChange={this.handleChange} 
-                  />
-                  
-                </Col>
-              </Row>
-            </Container>
-            <br/>
+              <TextField
+                hintText="Email"
+                floatingLabelText="Enter Email"
+                name="email"
+                value={email}
+                onChange={this.handleChange} 
+              />
+              <br/><br/>
             <RaisedButton style={styles.sbt} label="Invite" primary={true} type="submit"/>
           </div>
         </form>

@@ -46,7 +46,7 @@ class ProjectPage extends React.Component {
          selectedProject=project._id;
        }
      }
-    console.log("selected project id in componentDidMount " +selectedProject); 
+    console.log("selected project id in componentDidMount -------------------" +selectedProject); 
 
     const {dispatch} = this.props;
     
