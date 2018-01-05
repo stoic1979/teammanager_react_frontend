@@ -48,7 +48,7 @@ class ProjectListPage extends React.Component {
       localStorage.setItem('project_id',key);
        
 
-     this.props.history.push('/project');
+     this.props.history.push('/issueList');
   };
 
 
@@ -72,7 +72,7 @@ class ProjectListPage extends React.Component {
             <TableRowColumn>{project.created_at}</TableRowColumn>
 
           </TableRow>
-                );
+            );
       }
     }
 

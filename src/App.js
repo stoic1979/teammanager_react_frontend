@@ -59,12 +59,12 @@ class App extends Component {
           <MuiThemeProvider>
             <Header 
             onClick={role=="MANAGER" ? this.handleToggle : this.handle}
-            
+
             />
             <Drawer width={245} open={this.state.open}>  
               <AppBar title="TEAM  MANAGER" showMenuIconButton={false}/>
               <MenuItem href="/projectList" leftIcon={<RemoveRedEye />} >Projects</MenuItem>
-              <MenuItem href="/project" leftIcon={<Issue />} >Issues</MenuItem>
+              <MenuItem href="/issueList" leftIcon={<Issue />} >Issues</MenuItem>
               <MenuItem href="/teamMemberList" leftIcon={<GroupAdd />} >Team</MenuItem>
               
             </Drawer>

@@ -26,13 +26,16 @@ const styles={
   main:{
     marginLeft:20,
   },
+  customWidth: {
+    width: 150,
+  },
 };
 class IssueListPage extends React.Component {
   constructor(props){
     super(props);
 
     this.state={
-      // selectedProject:'',
+      selectedProject:'',
       project:'',
     }
 
@@ -40,21 +43,23 @@ class IssueListPage extends React.Component {
 
   componentDidMount() {
 
-    var selectedProject = '';
+    var project_id = '';
     if (this.props.projects) {
       for (var i = this.props.selectedProject; i <=this.props.projects[i]; i++) {
         console.log(`projects :${  JSON.stringify(this.props.projects[i])}`);
         var project = this.props.projects[i];
-        selectedProject=project._id;
+        project_id=project._id;
+        
        }
      }
-    console.log("selected project id in componentDidMount " +selectedProject); 
-
+    console.log("selected project id in componentDidMount " +project_id); 
+    
+    
     const {dispatch} = this.props;
     
     var resp = dispatch(projectActions.getAll());
 
-    var issues = dispatch(issueActions.getAll(selectedProject));
+    var issues = dispatch(issueActions.getAll(project_id));
 
     this.handleRowSelection = this.handleRowSelection.bind(this); 
     this.handleProject      = this.handleProject.bind(this); 
@@ -135,9 +140,7 @@ class IssueListPage extends React.Component {
                   {tableBody}
                 </TableBody>
               </Table>
-              
-            
-          </div>
+            </div>
       </MuiThemeProvider>
       );
     }
