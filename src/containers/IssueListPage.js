@@ -42,13 +42,15 @@ class IssueListPage extends React.Component {
   }    
 
   componentDidMount() {
-
+    
     var project_id = '';
     if (this.props.projects) {
       for (var i = this.props.selectedProject; i <=this.props.projects[i]; i++) {
         console.log(`projects :${  JSON.stringify(this.props.projects[i])}`);
         var project = this.props.projects[i];
         project_id=project._id;
+       
+        
         
        }
      }
@@ -79,16 +81,16 @@ class IssueListPage extends React.Component {
   handleProject = (event, index, value) => this.setState({project:value});
 
   render() {
+   var key = JSON.parse(localStorage.getItem('project_id'));
     var item=[];
     if (this.props.projects) {
       for (var i = 0; i < this.props.projects.length; i++) {
-        // console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
         var pro = this.props.projects[i];
-        item.push(
-          <MenuItem value={pro._id} primaryText={pro.title} />
-          );
-       }
-     }
+        if(i==key){
+          var project_name=pro.title;
+        }
+      }
+    }
      
    var tableBody = [];
     if (this.props.issues) {
@@ -111,21 +113,13 @@ class IssueListPage extends React.Component {
       return (
         <MuiThemeProvider>
           <div style={styles.main}>
-            <SelectField
-              floatingLabelText="Project "
-              name="project"
-              value={this.state.project}
-              onChange={this.handleProject}
-              style={styles.customWidth}
-            >
-              {item}
-            </SelectField>
             <FlatButton
                 label="New Issue"
                 style={styles.flatBtn}
                 href="/createIssue"
               />
-            <h2>Issues</h2>
+            
+            <h2> {project_name} Issues  </h2>
             <Table onRowSelection={this.handleRowSelection} >
               <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                 <TableRow>

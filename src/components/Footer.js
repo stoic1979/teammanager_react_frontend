@@ -54,7 +54,6 @@ const Footer = (props) => {
             href="/pricing"
           />
         </Col>
-
       </Row>
     </Paper>
 
