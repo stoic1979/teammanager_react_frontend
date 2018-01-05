@@ -48,7 +48,7 @@ const Footer = (props) => {
             href="/contactUs"
           />
           <FlatButton
-            label="Pricing Tabe"
+            label="Pricing "
             labelPosition="before"
             style={styles.btn}
             href="/pricing"
