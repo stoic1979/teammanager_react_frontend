@@ -199,106 +199,102 @@ render() {
       <MuiThemeProvider>
         <form name="form" onSubmit={this.handleSubmit}> 
           <div style={styles.Container}>
-          <h3>Add Issue </h3>
-          <Container>
-          <Row>
-          <Col sm={6}>
-            <SelectField
-              floatingLabelText="Assignee "
-              name="assignee"
-              value={this.state.assignee}
-              onChange={this.handleAssignee}
-              style={styles.customWidth}
-            >
-              {Items}
-            </SelectField>
-            <TextField
-              hintText="Summary"
-              floatingLabelText="Summary"
-              name="summary"
-              value={summary}
-              onChange={this.handleChange} 
-            />
-            <TextField
-              hintText="Estimated hours"
-              floatingLabelText="Estimated hours"
-              name="estimated_hours"
-              value={estimated_hours}
-              onChange={this.handleChange} 
-            />
-            
-            <SelectField
-              floatingLabelText="Type "
-              name="type"
-              value={this.state.type}
-              onChange={this.handleType}
-              style={styles.customWidth}
-            >
-              <MenuItem value={"TASK"} primaryText="Task" />
-              <MenuItem value={"BUG"} primaryText="Bug " />
-              <MenuItem value={"ENHANCEMENT"} primaryText="Enhancement" />
-            </SelectField>
-            <DatePicker
-              floatingLabelText="Start Date"
-              hintText="Start Date"
-              value={this.state.start_date}
-              onChange={this.handleStartDate}
-            />
-            </Col>
-            <Col sm={6}>
-            <SelectField
-              floatingLabelText="Project "
-              name="project"
-              value={this.state.project}
-              onChange={this.handleProject}
-              style={styles.customWidth}
-            >
-              {item}
-            </SelectField>
-            <TextField
-              hintText="Description"
-              floatingLabelText="Description"
-              name="description"
-              value={description}
-              onChange={this.handleChange} 
-            />
-            <SelectField
-              floatingLabelText="Status "
-              name="status"
-              value={this.state.status}
-              onChange={this.handleStatus}
-              style={styles.customWidth}
-            >
-              <MenuItem value={"NOT-STARTED"} primaryText="Not-Started" />
-              <MenuItem value={"WORKING"} primaryText="Working " />
-              <MenuItem value={"TESTING"} primaryText="Testing" />
-              <MenuItem value={"CLOSED"} primaryText="Closed " />
-              <MenuItem value={"REOPENED"} primaryText="Reopened" />
-            </SelectField>
-            
-            <SelectField
-              floatingLabelText="Priority "
-              name="priority"
-              value={this.state.priority}
-              onChange={this.handlePriority}
-              style={styles.customWidth}
-            >
-              <MenuItem value={"BLOCKER"} primaryText="Not-Started" />
-              <MenuItem value={"HIGH"} primaryText="Working " />
-              <MenuItem value={"MEDIUM"} primaryText="Testing" />
-              <MenuItem value={"LOW"} primaryText="Closed " />
-            </SelectField>
-            <DatePicker
-              floatingLabelText="End Date"
-              hintText="End Date"
-              value={this.state.end_date}
-              onChange={this.handleEndDate}
-            />
-           
-            </Col>
-            </Row>
+            <h3>Add Issue </h3>
+            <Container>
+              <Row>
+                <Col sm={6}>
+                <SelectField
+                  floatingLabelText="Project "
+                  name="project"
+                  value={this.state.project}
+                  onChange={this.handleProject}
+                  style={styles.customWidth}
+                >
+                  {item}
+                </SelectField>
+                <TextField
+                  hintText="Summary"
+                  floatingLabelText="Summary"
+                  name="summary"
+                  value={summary}
+                  onChange={this.handleChange} 
+                />
+                <TextField
+                  hintText="Estimated hours"
+                  floatingLabelText="Estimated hours"
+                  name="estimated_hours"
+                  value={estimated_hours}
+                  onChange={this.handleChange} 
+                />
+                <SelectField
+                  floatingLabelText="Type "
+                  name="type"
+                  value={this.state.type}
+                  onChange={this.handleType}
+                  style={styles.customWidth}
+                >
+                  <MenuItem value={"TASK"} primaryText="Task" />
+                  <MenuItem value={"BUG"} primaryText="Bug " />
+                  <MenuItem value={"ENHANCEMENT"} primaryText="Enhancement" />
+                </SelectField>
+                <DatePicker
+                  floatingLabelText="Start Date"
+                  hintText="Start Date"
+                  value={this.state.start_date}
+                  onChange={this.handleStartDate}
+                />
+              </Col>
+              <Col sm={6}>
+                <SelectField
+                  floatingLabelText="Assignee "
+                  name="assignee"
+                  value={this.state.assignee}
+                  onChange={this.handleAssignee}
+                  style={styles.customWidth}
+                >
+                {Items}
+                </SelectField>
+                <TextField
+                  hintText="Description"
+                  floatingLabelText="Description"
+                  name="description"
+                  value={description}
+                  onChange={this.handleChange} 
+                />
+                <SelectField
+                  floatingLabelText="Status "
+                  name="status"
+                  value={this.state.status}
+                  onChange={this.handleStatus}
+                  style={styles.customWidth}
+                >
+                  <MenuItem value={"NOT-STARTED"} primaryText="Not-Started" />
+                  <MenuItem value={"WORKING"} primaryText="Working " />
+                  <MenuItem value={"TESTING"} primaryText="Testing" />
+                  <MenuItem value={"CLOSED"} primaryText="Closed " />
+                  <MenuItem value={"REOPENED"} primaryText="Reopened" />
+                </SelectField>
+                <SelectField
+                  floatingLabelText="Priority "
+                  name="priority"
+                  value={this.state.priority}
+                  onChange={this.handlePriority}
+                  style={styles.customWidth}
+                >
+                  <MenuItem value={"BLOCKER"} primaryText="Not-Started" />
+                  <MenuItem value={"HIGH"} primaryText="Working " />
+                  <MenuItem value={"MEDIUM"} primaryText="Testing" />
+                  <MenuItem value={"LOW"} primaryText="Closed " />
+                </SelectField>
+                <DatePicker
+                  floatingLabelText="End Date"
+                  hintText="End Date"
+                  value={this.state.end_date}
+                  onChange={this.handleEndDate}
+                />
+              </Col>
+              </Row>
             </Container>
-            
             <br/>
             <RaisedButton style={styles.sbt} label="Submit" primary={true} type="submit"/>
           </div>

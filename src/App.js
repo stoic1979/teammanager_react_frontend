@@ -34,7 +34,7 @@ class App extends Component {
 
   handleToggle = () => this.setState({open: !this.state.open});
 
-  handle = () =>console.log("you are not logged in");
+  handle = () =>console.log("Sorry ! You don't have a access to sidebar");
   
 
     // ------------------------------------------------
@@ -59,6 +59,7 @@ class App extends Component {
           <MuiThemeProvider>
             <Header 
             onClick={role=="MANAGER" ? this.handleToggle : this.handle}
+            
             />
             <Drawer width={245} open={this.state.open}>  
               <AppBar title="TEAM  MANAGER" showMenuIconButton={false}/>

@@ -8,7 +8,7 @@ import {LogoutPage} from "./containers/LogoutPage"
 import {RegisterPage} from "./containers/RegisterPage"
 import {NotFoundPage} from "./containers/NotFoundPage"
 import {ProjectListPage} from "./containers/ProjectListPage"
-import {ProjectPage} from "./containers/ProjectPage"
+import {IssueListPage} from "./containers/IssueListPage"
 import {CreateProjectPage} from "./containers/CreateProjectPage"
 import {CreateIssuePage} from "./containers/CreateIssuePage"
 import {CreateTeamMemberPage} from "./containers/CreateTeamMemberPage"
@@ -31,7 +31,7 @@ class Routes extends Component {
                   <Route exact path='/logout'           component={LogoutPage} />
                   <Route exact path='/register'         component={RegisterPage} /> 
                   <Route exact path='/projectList'      component={ProjectListPage} />
-                  <Route exact path='/project'          component={ProjectPage} />
+                  <Route exact path='/issueList'         component={IssueListPage} />
                   <Route exact path='/createProject'    component={CreateProjectPage} /> 
                   <Route exact path='/createIssue'      component={CreateIssuePage} /> 
                   <Route exact path='/createTeamMember' component={CreateTeamMemberPage} /> 
