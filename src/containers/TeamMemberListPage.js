@@ -67,6 +67,7 @@ class TeamMemberListPage extends React.Component {
               console.log("got project: " + project.created_at);
             <TableRowColumn style={{width: '50px'}}>{i+1}</TableRowColumn>
             <TableRowColumn>{member.user.username}</TableRowColumn>
+            <TableRowColumn>{member.user.email}</TableRowColumn>
             <TableRowColumn>{member.team.name }</TableRowColumn>
           </TableRow>
              );
@@ -87,6 +88,7 @@ class TeamMemberListPage extends React.Component {
                     <TableRow>
                       <TableHeaderColumn style={{width: '50px'}}>#</TableHeaderColumn>
                       <TableHeaderColumn>User</TableHeaderColumn>
+                      <TableHeaderColumn>Email</TableHeaderColumn>
                       <TableHeaderColumn>Team</TableHeaderColumn>
                       </TableRow>
                   </TableHeader>
