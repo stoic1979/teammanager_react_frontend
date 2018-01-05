@@ -73,6 +73,7 @@ class CreateIssuePage extends React.Component {
     this.handlePriority  = this.handlePriority.bind(this);
     this.handleStartDate = this.handleStartDate.bind(this);
     this.handleAssignee  = this.handleAssignee.bind(this);
+    this.handleProject   = this.handleProject.bind(this);
     
   }
 
@@ -92,7 +93,10 @@ componentDidMount() {
  handleStatus = (event, index, value) => this.setState({status:value});
 
  handlePriority = (event, index, value) => this.setState({priority:value});
+
  handleAssignee = (event, index, value) => this.setState({assignee:value});
+
+ handleProject = (event, index, value) => this.setState({project:value});
   // ------------------------------------------------
   // handleChange
   // ------------------------------------------------
@@ -141,23 +145,38 @@ componentDidMount() {
   }
   
 render() {
- 
+   
     // this.setState({project: id});
     
-    var key = JSON.parse(localStorage.getItem('project_id'));
+    // var key = JSON.parse(localStorage.getItem('project_id'));
 
+    // if (this.props.projects) {
+    //   for (var i = 0; i < this.props.projects.length; i++) {
+    //     // console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
+    //     if(i==key){
+    //     var pro = this.props.projects[i];
+
+    //     var project_id=pro._id;
+    //     var project_name=pro.title;
+       
+    //     console.log("selected Project id-------->> "+project_id);
+    //     console.log("selected Project name-------->> "+project_name);
+    //   }
+        
+    //   }
+
+    // }
+    var item=[];
     if (this.props.projects) {
       for (var i = 0; i < this.props.projects.length; i++) {
-        // console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
-        if(i==key){
+        console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
+       
         var pro = this.props.projects[i];
 
-        var project=pro._id;
-        var project_name=pro.title;
+         item.push(
+          <MenuItem value={pro._id} primaryText={pro.title} />
+          );
        
-        console.log("selected Project id-------->> "+project);
-        console.log("selected Project name-------->> "+project_name);
-      }
         
       }
 
@@ -165,20 +184,22 @@ render() {
     var Items=[];
     if(this.props.users){
       for(var i=0;i<this.props.users.length;i++){
-        console.log(`users ${  i + 1  }:${  JSON.stringify(this.props.users[i])}`);
+        // console.log(`users ${  i + 1  }:${  JSON.stringify(this.props.users[i])}`);
         var user=this.props.users[i];
         Items.push(
           <MenuItem value={user._id} primaryText={user.username} />
           );
       }
     }
-  const {assignee, summary, description, type, priority, status, estimated_hours, start_date, end_date, created_at, updated_at} = this.state;
+
+    
+  const {assignee, project, summary, description, type, priority, status, estimated_hours, start_date, end_date, created_at, updated_at} = this.state;
   return (
     <div>
       <MuiThemeProvider>
         <form name="form" onSubmit={this.handleSubmit}> 
           <div style={styles.Container}>
-          <h3>Add Issue to {project_name}</h3>
+          <h3>Add Issue </h3>
           <Container>
           <Row>
           <Col sm={6}>
@@ -205,12 +226,7 @@ render() {
               value={estimated_hours}
               onChange={this.handleChange} 
             />
-            <DatePicker
-              floatingLabelText="Start Date"
-              hintText="Start Date"
-              value={this.state.start_date}
-              onChange={this.handleStartDate}
-            />
+            
             <SelectField
               floatingLabelText="Type "
               name="type"
@@ -222,9 +238,23 @@ render() {
               <MenuItem value={"BUG"} primaryText="Bug " />
               <MenuItem value={"ENHANCEMENT"} primaryText="Enhancement" />
             </SelectField>
-            
+            <DatePicker
+              floatingLabelText="Start Date"
+              hintText="Start Date"
+              value={this.state.start_date}
+              onChange={this.handleStartDate}
+            />
             </Col>
             <Col sm={6}>
+            <SelectField
+              floatingLabelText="Project "
+              name="project"
+              value={this.state.project}
+              onChange={this.handleProject}
+              style={styles.customWidth}
+            >
+              {item}
+            </SelectField>
             <TextField
               hintText="Description"
               floatingLabelText="Description"

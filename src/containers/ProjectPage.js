@@ -38,7 +38,7 @@ class ProjectPage extends React.Component {
 
   componentDidMount() {
 
-     var selectedProject = '';
+    var selectedProject = '';
     if (this.props.projects) {
       for (var i = this.props.selectedProject; i <=this.props.projects[i]; i++) {
          console.log(`projects :${  JSON.stringify(this.props.projects[i])}`);
@@ -46,7 +46,7 @@ class ProjectPage extends React.Component {
          selectedProject=project._id;
        }
      }
-    console.log("selected project id in componentDidMount -------------------" +selectedProject); 
+    console.log("selected project id in componentDidMount " +selectedProject); 
 
     const {dispatch} = this.props;
     
