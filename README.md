@@ -21,7 +21,13 @@ Team manager has the following features:-
  * Username: tmmanager
  * Password: 123
 
-# Dashboard screenshot
+# Dashboard screenshots
+![Alt text](screenshots/CreateProject.png?raw=true "Dashboard - add Project")
+
+![Alt text](screenshots/AddIssue.png?raw=true "Dashboard - add Issue")
+
+# Projects screenshot
+![Alt text](screenshots/Projects.png?raw=true "Project List")
 
 # Issues screenshot
 ![Alt text](screenshots/Issues.png?raw=true "Issues for a project")
