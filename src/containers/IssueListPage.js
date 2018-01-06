@@ -119,7 +119,7 @@ class IssueListPage extends React.Component {
                 href="/createIssue"
               />
             
-            <h2> {project_name} Issues  </h2>
+            <h2>  Issues  </h2>
             <Table onRowSelection={this.handleRowSelection} >
               <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                 <TableRow>

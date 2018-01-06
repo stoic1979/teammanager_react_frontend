@@ -3,7 +3,7 @@ export const settings = {
     //API_ROOT: process.env.TEAMMANAGER_API_ROOT, // FIXME !!!!
 
     API_ROOT: "https://teammanager9.herokuapp.com",
-    // API_ROOT: "http://localhost:4444",
+     // API_ROOT: "http://localhost:4444",
     // User roles
     ADMINISTRATOR: 'ADMIN',
     MANAGER: 'moderator',
