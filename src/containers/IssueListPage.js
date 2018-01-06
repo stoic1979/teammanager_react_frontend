@@ -102,6 +102,7 @@ class IssueListPage extends React.Component {
             // console.log("got project: " + issue.created_at);
             <TableRowColumn style={{width: '50px'}}>{i+1}</TableRowColumn>
             <TableRowColumn>{issue.summary}</TableRowColumn>
+            <TableRowColumn>{issue.assignee.username}</TableRowColumn>
             <TableRowColumn>{issue.type} </TableRowColumn>
             <TableRowColumn>{issue.status}</TableRowColumn>
             <TableRowColumn>{issue.priority}</TableRowColumn>
@@ -125,6 +126,7 @@ class IssueListPage extends React.Component {
                 <TableRow>
                     <TableHeaderColumn style={{width: '50px'}}>#</TableHeaderColumn>
                     <TableHeaderColumn>Summary</TableHeaderColumn>
+                    <TableHeaderColumn>Assignee</TableHeaderColumn>
                     <TableHeaderColumn>Type</TableHeaderColumn>
                     <TableHeaderColumn>Status</TableHeaderColumn>
                     <TableHeaderColumn>Priority</TableHeaderColumn>
@@ -141,7 +143,8 @@ class IssueListPage extends React.Component {
   }
 
 function mapStateToProps(state) {
-  console.log(`---> IssueListPage got state: ${  JSON.stringify(state)}` );
+  // console.log(`---> IssueListPage got state: ${  JSON.stringify(state)}` );
+   console.log(`---> IssueListPage got issues: ${  JSON.stringify(state.issues)}` );
   return {
    projects: state.projects,
    selectedProject: state.selectedProject,
