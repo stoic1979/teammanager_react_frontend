@@ -20,3 +20,11 @@ Team manager has the following features:-
 [Live Demo On Heroku](https://teammanager-react.herokuapp.com/)
  * Username: tmmanager
  * Password: 123
+
+# Dashboard screenshot
+![Alt text](screenshots/Project list.png?raw=true "Project List")
+
+# Issues screenshot
+![Alt text](screenshots/issues.png?raw=true "Issues for a project")
+
+
