@@ -18,6 +18,7 @@ import Issue from 'material-ui/svg-icons/alert/error';
 import GroupAdd from 'material-ui/svg-icons/social/group-add';
 import {projectActions} from './actions';
 import {Routes} from './routes'
+import {issueActions} from './actions';
 
 
 import {connect} from 'react-redux';
@@ -25,6 +26,12 @@ import {connect} from 'react-redux';
 import {literals} from "./config"
 
 
+// --------------------------css style--------------------------------------
+const styles = {  
+    txt: {
+      marginLeft: 15
+     }
+  };
 // -----------------------------------------------------------------------
 //
 //            APP
@@ -35,14 +42,16 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {open: false};
+
   }
 
   componentDidMount() {
-
-  const {dispatch} = this.props;
-    
-  var resp = dispatch(projectActions.getAll());
-    }
+    var user = JSON.parse(localStorage.getItem('user'));
+    if(user){
+      const {dispatch} = this.props;
+      var resp = dispatch(projectActions.getAll());
+      }
+  }
 
   handleToggle = () => this.setState({open: !this.state.open});
 
@@ -59,6 +68,15 @@ class App extends Component {
       openMenu: value,
     });
   }
+
+  handleChange = (event, value) => {
+    console.log("project id in app--------->"+value);
+    
+    var project_id =value;
+    const {dispatch} = this.props;
+    var issues = dispatch(issueActions.getAll(project_id));
+    // this.props.history.push('/issueList');
+  };
 
 
     // ------------------------------------------------
@@ -101,16 +119,17 @@ class App extends Component {
               <MenuItem   leftIcon={<RemoveRedEye />}>
                 <FlatButton onClick={this.handleOpenMenu} label="Projects" />
                 <IconMenu
-                 iconButtonElement={<DropDown />}
+                 iconButtonElement={<IconButton><DropDown /></IconButton>}
                  open={this.state.openMenu}
                  onRequestChange={this.handleOnRequestChange}
+                 onChange={this.handleChange}
                 >
                   {item}
                 </IconMenu>
               </MenuItem>
              
-              <MenuItem href="/issueList" leftIcon={<Issue />} >Issues</MenuItem>
-              <MenuItem href="/teamMemberList" leftIcon={<GroupAdd />} >Team</MenuItem>
+              <MenuItem href="/issueList" leftIcon={<Issue />} ><div style={styles.txt}>ISSUES</div></MenuItem>
+              <MenuItem href="/teamMemberList" leftIcon={<GroupAdd />} ><div style={styles.txt}>TEAM</div></MenuItem>
               
             </Drawer>
             <hr />
