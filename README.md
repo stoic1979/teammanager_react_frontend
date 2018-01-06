@@ -22,7 +22,6 @@ Team manager has the following features:-
  * Password: 123
 
 # Dashboard screenshot
-![Alt text](screenshots/ProjectList.png?raw=true "Project List")
 
 # Issues screenshot
 ![Alt text](screenshots/Issues.png?raw=true "Issues for a project")
