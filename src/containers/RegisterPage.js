@@ -43,7 +43,6 @@ constructor(props){
  this.state = {
         first_name : '',
         last_name  : '',
-        username   : '',
         email      : '',
         password   : '',
         role       : '',
@@ -88,10 +87,10 @@ constructor(props){
         event.preventDefault();
        
         this.setState({ submitted: true });
-        const { first_name, last_name, username, email, password, role,team_name} = this.state;
+        const { first_name, last_name, email, password, role,team_name} = this.state;
         const { dispatch } = this.props;
-        var user={first_name, last_name, username, email, password, role,team_name};
-        if (first_name && last_name && username && email && password && role) {
+        var user={first_name, last_name, email, password, role,team_name};
+        if (first_name && last_name  && email && password && role) {
           console.log('dispatching -> register');
           var history = this.props.history;
           dispatch(userActions.register(history, user));
@@ -100,7 +99,7 @@ constructor(props){
 
 
 render() {
-   const{first_name,last_name,email,password,username,role,team_name,disabled}=this.state;
+   const{first_name,last_name,email,password,role,team_name,disabled}=this.state;
     return (
       <div>
         <MuiThemeProvider>
@@ -124,21 +123,18 @@ render() {
                         value={email}
                         onChange={this.handleChange} 
                       />
-                      <TextField
-                        hintText="User Name"
-                        floatingLabelText="User Name"
-                        name="username"
-                        value={username}
-                        onChange={this.handleChange} 
-                      />
-                      <TextField
-                        hintText="Team"
-                        disabled={this.state.disabled}
-                        floatingLabelText="Team"
-                        name="team_name"
-                        value={team_name}
-                        onChange={this.handleChange} 
-                      />
+                      <SelectField
+                        floatingLabelText="Role "
+                        name="role"
+                        value={this.state.role}
+                        onChange={this.handleRole}
+                        style={styles.customWidth}
+                      >
+                        <MenuItem value={"MANAGER"} primaryText="Manager" />
+                        <MenuItem value={"WORKER"} primaryText="Worker " />
+                      </SelectField>
+                      
+                     
                     </Col>
                     <Col sm={6}>
                       <TextField
@@ -156,16 +152,15 @@ render() {
                         value={password}
                         onChange={this.handleChange} 
                       />
-                      <SelectField
-                        floatingLabelText="Role "
-                        name="role"
-                        value={this.state.role}
-                        onChange={this.handleRole}
-                        style={styles.customWidth}
-                      >
-                        <MenuItem value={"MANAGER"} primaryText="Manager" />
-                        <MenuItem value={"WORKER"} primaryText="Worker " />
-                      </SelectField>
+                       { this.state.role == "MANAGER" && <TextField
+                        hintText="Team"
+                        disabled={this.state.disabled}
+                        floatingLabelText="Team"
+                        name="team_name"
+                        value={team_name}
+                        onChange={this.handleChange} 
+                      />}
+                      
                     </Col>
                   </Row>
                 </Container>

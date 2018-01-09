@@ -37,7 +37,7 @@ class LoginPage extends React.Component {
     super(props);
 
     this.state = {     
-      username:'',
+      email:'',
       password: '',
      
       submitted: false
@@ -84,12 +84,12 @@ class LoginPage extends React.Component {
     console.log('-- handleSubmit --');
 
     this.setState({submitted: true});
-    const {username, password} = this.state;
+    const {email, password} = this.state;
     const {dispatch} = this.props;
     var history = this.props.history;
-    if(username && password){
+    if(email && password){
       console.log("dispatching user action");
-    dispatch(userActions.login(history,username,password));
+    dispatch(userActions.login(history,email,password));
    }
  
      }
@@ -103,9 +103,9 @@ return (
           <div style={styles.Container}>
           <h3>Log In</h3>
             <TextField
-              hintText="Enter your Username"
-              floatingLabelText="Username"
-              name="username"
+              hintText="Enter your Email"
+              floatingLabelText="Email"
+              name="email"
               onChange={this.handleChange} 
             />
             <br/>

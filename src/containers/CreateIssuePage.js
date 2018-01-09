@@ -176,9 +176,7 @@ render() {
          item.push(
           <MenuItem value={pro._id} primaryText={pro.title} />
           );
-       
-        
-      }
+       }
 
     }
     var Items=[];
@@ -187,7 +185,7 @@ render() {
         // console.log(`users ${  i + 1  }:${  JSON.stringify(this.props.users[i])}`);
         var user=this.props.users[i];
         Items.push(
-          <MenuItem value={user._id} primaryText={user.username} />
+          <MenuItem value={user._id} primaryText={user.first_name +" "+ user.last_name} />
           );
       }
     }

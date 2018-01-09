@@ -16,8 +16,8 @@ function _getToken() {
   return user.token;
 }
 
-function login(history,username, password) {
-    var body = `username=${username  }&password=${  password}`;
+function login(history,email, password) {
+    var body = `email=${email  }&password=${  password}`;
 
     const requestOptions = {
         method: 'POST',
@@ -55,7 +55,7 @@ function login(history,username, password) {
         // ----------------------------------------------------------
         if (token_resp && token_resp.token) {
             var user = {
-                username: username,
+                email: email,
                 role:token_resp.role,
                 token: token_resp.token,
             };
@@ -81,7 +81,7 @@ function logout(history) {
 }
 
 function register(user) {
-    var body = `first_name=${user.first_name}&last_name=${user.last_name  }&email=${user.email}&password=${  user.password  }&username=${  user.username  }&role=${  user.role}&team_name=${ user.team_name }`;
+    var body = `first_name=${user.first_name}&last_name=${user.last_name  }&email=${user.email}&password=${  user.password  }&role=${  user.role}&team_name=${ user.team_name }`;
 
     console.log(`body: ${  body}`);
 

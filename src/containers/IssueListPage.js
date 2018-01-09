@@ -102,7 +102,7 @@ class IssueListPage extends React.Component {
             // console.log("got project: " + issue.created_at);
             <TableRowColumn style={{width: '50px'}}>{i+1}</TableRowColumn>
             <TableRowColumn>{issue.summary}</TableRowColumn>
-            <TableRowColumn>{issue.assignee.username}</TableRowColumn>
+            <TableRowColumn>{issue.assignee.first_name} {issue.assignee.last_name}</TableRowColumn>
             <TableRowColumn>{issue.type} </TableRowColumn>
             <TableRowColumn>{issue.status}</TableRowColumn>
             <TableRowColumn>{issue.priority}</TableRowColumn>
