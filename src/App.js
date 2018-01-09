@@ -75,7 +75,7 @@ class App extends Component {
     var project_id =value;
     const {dispatch} = this.props;
     var issues = dispatch(issueActions.getAll(project_id));
-    // this.props.history.push('/issueList');
+    
   };
 
 
@@ -85,14 +85,14 @@ class App extends Component {
     render() {
        var item=[];
        if (this.props.projects) {
-      for (var i = 0; i < this.props.projects.length; i++) {
-        console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
-        var pro = this.props.projects[i];
-        item.push(
-          <MenuItem value={pro._id} primaryText={pro.title} />
-          );
-       }
-    }
+          for (var i = 0; i < this.props.projects.length; i++) {
+            console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
+            var pro = this.props.projects[i];
+            item.push(
+              <MenuItem value={pro._id}   primaryText={pro.title} />
+              );
+          }
+        }
      
       const contentStyle = {  transition: 'margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)' };
       const {loggedIn} = this.props;
@@ -146,10 +146,11 @@ class App extends Component {
 
 function mapStateToProps(state) {
   // const {alert} = state;
+  // console.log("App got state "+JSON.stringify(state));
   return {
-   projects: state.projects,
-   user: state.authentication.user,
-   loggedIn:state.authentication.loggedIn
+    projects: state.projects,
+    user: state.authentication.user,
+    loggedIn:state.authentication.loggedIn
  };
   
   
