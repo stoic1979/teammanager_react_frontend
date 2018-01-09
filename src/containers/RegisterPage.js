@@ -3,6 +3,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import {Container,Col,Row} from 'react-grid-system';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 import {connect} from 'react-redux';
 import {userActions} from '../actions';
 
@@ -45,12 +47,15 @@ constructor(props){
         email      : '',
         password   : '',
         role       : '',
+        team       : '',
+        disabled   : true,
         submitted  : false
 
     };
  
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleRole   = this.handleRole.bind(this);
     }
 
   // ------------------------------------------------
@@ -64,6 +69,17 @@ constructor(props){
     this.setState({[name]: value});
   }
 
+   handleRole(event, index, value) {
+    this.setState({role:value});
+
+    if(value=="Manager") {
+      this.setState({disabled:false});
+      }
+    else {
+      this.setState({disabled:true});
+      }
+    }
+
   // ------------------------------------------------
   // handleSubmit
   // ------------------------------------------------
@@ -72,9 +88,9 @@ constructor(props){
         event.preventDefault();
        
         this.setState({ submitted: true });
-        const { first_name, last_name, username, email, password, role} = this.state;
+        const { first_name, last_name, username, email, password, role,team} = this.state;
         const { dispatch } = this.props;
-        var user={first_name, last_name, username, email, password, role};
+        var user={first_name, last_name, username, email, password, role,team};
         if (first_name && last_name && username && email && password && role) {
           console.log('dispatching -> register');
           var history = this.props.history;
@@ -84,7 +100,7 @@ constructor(props){
 
 
 render() {
-   const{first_name,last_name,email,password,username,role}=this.state;
+   const{first_name,last_name,email,password,username,role,team,disabled}=this.state;
     return (
       <div>
         <MuiThemeProvider>
@@ -115,6 +131,14 @@ render() {
                         value={username}
                         onChange={this.handleChange} 
                       />
+                      <TextField
+                        hintText="Team"
+                        disabled={this.state.disabled}
+                        floatingLabelText="Team"
+                        name="team"
+                        value={team}
+                        onChange={this.handleChange} 
+                      />
                     </Col>
                     <Col sm={6}>
                       <TextField
@@ -132,13 +156,16 @@ render() {
                         value={password}
                         onChange={this.handleChange} 
                       />
-                      <TextField
-                        hintText="Role"
-                        floatingLabelText="Role"
+                      <SelectField
+                        floatingLabelText="Role "
                         name="role"
-                        value={role}
-                        onChange={this.handleChange} 
-                      />
+                        value={this.state.role}
+                        onChange={this.handleRole}
+                        style={styles.customWidth}
+                      >
+                        <MenuItem value={"Manager"} primaryText="Manager" />
+                        <MenuItem value={"Worker"} primaryText="Worker " />
+                      </SelectField>
                     </Col>
                   </Row>
                 </Container>
