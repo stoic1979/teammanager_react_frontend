@@ -81,7 +81,7 @@ function logout(history) {
 }
 
 function register(user) {
-    var body = `first_name=${user.first_name}&last_name=${user.last_name  }&email=${user.email}&password=${  user.password  }&username=${  user.username  }&role=${  user.role}&team=${ user.team }`;
+    var body = `first_name=${user.first_name}&last_name=${user.last_name  }&email=${user.email}&password=${  user.password  }&username=${  user.username  }&role=${  user.role}&team_name=${ user.team_name }`;
 
     console.log(`body: ${  body}`);
 

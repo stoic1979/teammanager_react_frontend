@@ -47,7 +47,7 @@ constructor(props){
         email      : '',
         password   : '',
         role       : '',
-        team       : '',
+        team_name  : '',
         disabled   : true,
         submitted  : false
 
@@ -72,7 +72,7 @@ constructor(props){
    handleRole(event, index, value) {
     this.setState({role:value});
 
-    if(value=="Manager") {
+    if(value=="MANAGER") {
       this.setState({disabled:false});
       }
     else {
@@ -88,9 +88,9 @@ constructor(props){
         event.preventDefault();
        
         this.setState({ submitted: true });
-        const { first_name, last_name, username, email, password, role,team} = this.state;
+        const { first_name, last_name, username, email, password, role,team_name} = this.state;
         const { dispatch } = this.props;
-        var user={first_name, last_name, username, email, password, role,team};
+        var user={first_name, last_name, username, email, password, role,team_name};
         if (first_name && last_name && username && email && password && role) {
           console.log('dispatching -> register');
           var history = this.props.history;
@@ -100,7 +100,7 @@ constructor(props){
 
 
 render() {
-   const{first_name,last_name,email,password,username,role,team,disabled}=this.state;
+   const{first_name,last_name,email,password,username,role,team_name,disabled}=this.state;
     return (
       <div>
         <MuiThemeProvider>
@@ -135,8 +135,8 @@ render() {
                         hintText="Team"
                         disabled={this.state.disabled}
                         floatingLabelText="Team"
-                        name="team"
-                        value={team}
+                        name="team_name"
+                        value={team_name}
                         onChange={this.handleChange} 
                       />
                     </Col>
@@ -163,8 +163,8 @@ render() {
                         onChange={this.handleRole}
                         style={styles.customWidth}
                       >
-                        <MenuItem value={"Manager"} primaryText="Manager" />
-                        <MenuItem value={"Worker"} primaryText="Worker " />
+                        <MenuItem value={"MANAGER"} primaryText="Manager" />
+                        <MenuItem value={"WORKER"} primaryText="Worker " />
                       </SelectField>
                     </Col>
                   </Row>
