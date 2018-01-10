@@ -3,20 +3,19 @@ import FlatButton from 'material-ui/FlatButton';
 
 import {connect} from 'react-redux';
 
-
 const styles = {  
   mybtn: {
       color: 'white'
      }
   };
 
-
 class Loggedin extends React.Component {
   static muiName = 'FlatButton';
-
+    
     // ------------------------------------------------
     // render UI
     // ------------------------------------------------
+
     render() {
     return (
       <div>
@@ -29,7 +28,6 @@ class Loggedin extends React.Component {
     );
   }
 }
-
 
 function mapStateToProps(state) {
   const {alert} = state;

@@ -1,18 +1,16 @@
 import {settings} from "../config"
 
-
 export const issueService = { getAll,create };
-
 
 function _getToken() {
   var user = JSON.parse(localStorage.getItem('user'));
   return user.token;
 }
 
-
 // -----------------------------------------------------------------------------
 //     CREATE ISSUE
 // -----------------------------------------------------------------------------
+
 function create(issue_data) {
   var user = JSON.parse(localStorage.getItem('user'));
   console.log(`[issue-service] got user: ${  JSON.stringify(user)}`);
@@ -30,13 +28,10 @@ function create(issue_data) {
   body += `&end_date=${issue_data.end_date}`;
   body += `&created_at=${issue_data.created_at}`;
   body += `&updated_at=${issue_data.updated_at}`;
- 
-
+  
   body += '&__v=0';
   
-
   console.log(`[issue-service] sending req, body: \n${  body}`);
-
 
   const requestOptions = {
     method: 'POST',
@@ -59,14 +54,13 @@ function create(issue_data) {
     })
     .catch( (error) => {
           console.log("==================> error: " + error);
-
-    });
+      });
 }// create
 
 function getAll(selectedProject) {
 
-    console.log("====== issue-service getAll ======");
-   console.log("selectedProject in issue service " +selectedProject);
+  console.log("====== issue-service getAll ======");
+  console.log("selectedProject in issue service " +selectedProject);
 
     const requestOptions = {
         method: 'GET',

@@ -1,12 +1,15 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-/**
- * A simple table demonstrating the hierarchy of the `Table` component and its sub-components.
- */
+import { connect } from 'react-redux';
+
+//---------------------------------------------------
+//
+//         TEST PAGE
+//
+//---------------------------------------------------
+
 class TestPage extends React.Component {
   constructor(props){
     super(props);
@@ -17,10 +20,7 @@ class TestPage extends React.Component {
 
   componentDidMount() {
     const {dispatch} = this.props;
-
     //var user = JSON.parse(localStorage.getItem('user'));
-         
-
   }
 
   testClicked() {
@@ -28,17 +28,13 @@ class TestPage extends React.Component {
     var x = this.state.cnt + 1;
     this.setState({cnt: x});
     console.log("-- testClicked, cnt: " + this.state.cnt);
-    
 
   }
-
   render() {
-    // var  studies = JSON.parse(localStorage.getItem('studies'));
-    console.log("props: " +this.props);
 
     setTimeout(this.testClicked, 1000); 
 
-      return (
+    return (
         <MuiThemeProvider>
           <div>
             <h2>name: {this.state.name}</h2>
@@ -52,11 +48,7 @@ class TestPage extends React.Component {
 
 function mapStateToProps(state) {
   return state;
-
-  //return {
-    //studies: state.studies
-  //};
-}
+  }
  
 const connectedTestPage = connect(mapStateToProps)(TestPage);
 export { connectedTestPage as TestPage };

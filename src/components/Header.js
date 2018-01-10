@@ -7,11 +7,7 @@ import Menu from 'material-ui/svg-icons/navigation/menu';
 import Close from 'material-ui/svg-icons/navigation/close';
 import IconButton from 'material-ui/IconButton';
 
-
-
-
 import {connect} from 'react-redux';
-
 import {literals} from "../config"
 
 
@@ -30,10 +26,6 @@ export default class Header extends React.Component {
   render() {
     const {loggedIn} = this.props;
     
-    //console.log("Header got defs: " + defs.WEBSITE_TITLE );
-
-    //const title = defs.WEBSITE_TITLE;
-
     return (
          <div>
             <MuiThemeProvider>
@@ -50,10 +42,8 @@ export default class Header extends React.Component {
    }
 }//Header
 
-
 function mapStateToProps(state) {
   // console.log("--- header got state: " + JSON.stringify(state));
-
   return state.authentication;
 }
 

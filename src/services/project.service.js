@@ -1,14 +1,11 @@
 import {settings} from "../config"
 
-
 export const projectService = { getAll,create };
-
 
 function _getToken() {
   var user = JSON.parse(localStorage.getItem('user'));
   return user.token;
 }
-
 
 // -----------------------------------------------------------------------------
 //     CREATE PROJECT
@@ -19,14 +16,11 @@ function create(project_data) {
   console.log(`[project-service] got token: ${  user.token}`);
 
   var body = `&title=${  project_data.title}`;
-
   body += `&description=${  project_data.description}`;
   body += `&manager=${  project_data.manager}`;
   body += '&__v=0';
   
-
   console.log(`[project-service] sending req, body: \n${  body}`);
-
 
   const requestOptions = {
     method: 'POST',

@@ -5,6 +5,8 @@ export function selectedProject(state = null, action) {
         case projectConstants.SELECTED_PROJECT:
             return action.payload;
             break;
+        default:
+      		return state;
     }
     return state;
 }

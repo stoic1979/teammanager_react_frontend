@@ -2,10 +2,10 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import {Container,Col,Row} from 'react-grid-system';
-import selectedProjectreducer from '../reducers'
+
 import {connect} from 'react-redux';
 import {teamMemberActions} from '../actions';
+
 const styles = {  
   Container: {
       minWidth: 350,
@@ -24,7 +24,7 @@ const styles = {
 
 //---------------------------------------------------
 //
-//         CREATE ISSUE PAGE
+//         CREATE TEAM MEMBER PAGE
 //
 //---------------------------------------------------
 class CreateTeamMemberPage extends React.Component {
@@ -70,15 +70,12 @@ class CreateTeamMemberPage extends React.Component {
     
     if (email) {
       console.log('dispatching -> create team member');
-      var history = this.props.history;
+      // var history = this.props.history;
       dispatch(teamMemberActions.create(email));
     }
   }
   
 render() {
-
-  
-
   const {email} = this.state;
   return (
     <div>
@@ -104,16 +101,13 @@ render() {
 }//LoginPage
 
 function mapStateToProps(state) {
-  // const {alert} = state;
-  console.log("create issue got state" + JSON.stringify(state));
-  
-    return {
+  const {alert} = state;
+  // console.log("create team got state" + JSON.stringify(state));
+  return {
+    alert,
     projects: state.projects,
-   selectedProject: state.selectedProject
-  
-
+    selectedProject: state.selectedProject
   };
-
 }
 
 const connectedCreateTeamMemberPage = connect(mapStateToProps)(CreateTeamMemberPage);

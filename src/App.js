@@ -20,11 +20,8 @@ import {projectActions} from './actions';
 import {Routes} from './routes'
 import {issueActions} from './actions';
 
-
 import {connect} from 'react-redux';
-
 import {literals} from "./config"
-
 
 // --------------------------css style--------------------------------------
 const styles = {  
@@ -77,7 +74,6 @@ class App extends Component {
     var issues = dispatch(issueActions.getAll(project_id));
     
   };
-
 
     // ------------------------------------------------
     // render UI
@@ -145,15 +141,14 @@ class App extends Component {
 }//App
 
 function mapStateToProps(state) {
-  // const {alert} = state;
+  const {alert} = state;
   // console.log("App got state "+JSON.stringify(state));
   return {
+    alert,
     projects: state.projects,
     user: state.authentication.user,
     loggedIn:state.authentication.loggedIn
- };
-  
-  
+  };
 }
 
 const connectedApp = connect(mapStateToProps)(App);

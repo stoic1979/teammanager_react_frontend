@@ -13,7 +13,6 @@ class Loggedout extends React.Component {
   static muiName = 'FlatButton';
   constructor(props){
     super(props); 
-    
     this.state = {     
      
     }
@@ -28,9 +27,6 @@ class Loggedout extends React.Component {
     );
   }
 }
-
-
-
 
 function mapStateToProps(state) {
   const {alert} = state;

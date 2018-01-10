@@ -1,10 +1,6 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import {Row, Col} from 'react-flexbox-grid';
 import FlatButton from 'material-ui/FlatButton';
-import FontIcon from 'material-ui/FontIcon';
-import People from 'material-ui/svg-icons/social/person';
-import ActionAndroid from 'material-ui/svg-icons/action/android';
-import Home from 'material-ui/svg-icons/action/home';
 import Paper from 'material-ui/Paper';
 
 

@@ -1,7 +1,6 @@
 import {authHeader} from '../helpers';
 import {settings} from "../config"
 
-
 export const userService = {
     login,
     logout,
@@ -9,7 +8,6 @@ export const userService = {
     getAll,
     getById
 };
-
 
 function _getToken() {
   var user = JSON.parse(localStorage.getItem('user'));
@@ -26,16 +24,11 @@ function login(history,email, password) {
     };
 
     console.log("----> body: " + body);
-
-
     console.log("API root: " + settings.API_ROOT);
 
     const url = `${settings.API_ROOT}/users/login`
     return fetch(url, requestOptions)
         .then((response) => {
-
-
-
 
             if (!response.ok) {
                 return Promise.reject(response.statusText);
@@ -66,7 +59,6 @@ function login(history,email, password) {
             // ------------------------------------------------------
             localStorage.setItem('user', JSON.stringify(user));
             history.push('/');
-
         }
 
         return user;

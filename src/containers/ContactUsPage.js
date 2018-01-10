@@ -1,27 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import {Container,Col,Row} from 'react-grid-system';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import Phone from 'material-ui/svg-icons/communication/contact-phone';
-import Email from 'material-ui/svg-icons/communication/email';
-import Location from 'material-ui/svg-icons/communication/location-on';
-
-
-
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
+import { connect } from 'react-redux';
 
-
-import {projectActions} from '../actions';
-
-import {store} from '../store';
-/**
- * A simple table demonstrating the hierarchy of the `Table` component and its sub-components.
- */
 const styles={
-  
-   Container: {
+  Container: {
       minWidth: 320,
       maxWidth: 850,
       height:'auto',
@@ -32,13 +18,19 @@ const styles={
       marginBottom:40,
       marginTop: 60,
      },
-    add:{
-      color:'gray',
-    },
-    sbt:{
+  add:{
+    color:'gray',
+  },
+  sbt:{
     marginLeft:'40%',
-    },
+  },
 };
+
+//---------------------------------------------------
+//
+//         CONTACT US PAGE
+//
+//---------------------------------------------------
 
 class ContactUsPage extends React.Component {
    // ------------------------------------------------
@@ -89,73 +81,69 @@ class ContactUsPage extends React.Component {
 
       return (
         <MuiThemeProvider>
-          <div style={styles.Container}>
-            CONTACT US
-            <Container>
-              <Row>
-              <Col sm={6}>
-                <TextField
-                  hintText="Name"
-                  floatingLabelText="Name"
-                  name="name"
-                  value={name}
-                  onChange={this.handleChange} 
-                />
-                <TextField
-                  hintText="Email"
-                  floatingLabelText="Email"
-                  name="email"
-                  value={email}
-                  onChange={this.handleChange} 
-                />
-                <TextField
-                  hintText="Subject"
-                  floatingLabelText="Subject"
-                  name="subject"
-                  value={subject}
-                  onChange={this.handleChange} 
-                />
-                
-              </Col>
-              <Col sm={6}>
-                <TextField
-                  hintText="Message"
-                  floatingLabelText="Message"
-                  multiLine={true}
-                  rows={3}
-                  rowsMax={6}
-                  name="message"
-                  value={message}
-                  onChange={this.handleChange} 
-                />
-                <br/><br/>
-                <div style={styles.add}>
-                   Phone : - 0160-5004037 
-                  <br/><br/>
-                  Email : - weavebytes@gmail.com
-                  <br/><br/>
-                    Address : - SCO 81, 2nd Floor, City Heart, Opposite Bank Square, Kharar-Chandigarh Road, Kharar, 
+          <form name="form" onSubmit={this.handleSubmit}> 
+            <div style={styles.Container}>
+              CONTACT US
+              <Container>
+                <Row>
+                  <Col sm={6}>
+                    <TextField
+                      hintText="Name"
+                      floatingLabelText="Name"
+                      name="name"
+                      value={name}
+                      onChange={this.handleChange} 
+                    />
+                    <TextField
+                      hintText="Email"
+                      floatingLabelText="Email"
+                      name="email"
+                      value={email}
+                      onChange={this.handleChange} 
+                    />
+                    <TextField
+                      hintText="Subject"
+                      floatingLabelText="Subject"
+                      name="subject"
+                      value={subject}
+                      onChange={this.handleChange} 
+                    />
+                  </Col>
+                  <Col sm={6}>
+                    <TextField
+                      hintText="Message"
+                      floatingLabelText="Message"
+                      multiLine={true}
+                      rows={3}
+                      rowsMax={6}
+                      name="message"
+                      value={message}
+                      onChange={this.handleChange} 
+                    />
+                    <br/><br/>
+                    <div style={styles.add}>
+                      Phone : - 0160-5004037 
+                      <br/><br/>
+                      Email : - weavebytes@gmail.com
+                      <br/><br/>
+                      Address : - SCO 81, 2nd Floor, City Heart, Opposite Bank Square, Kharar-Chandigarh Road, Kharar, 
                                 Mohali, Punjab,India --140301
-                </div>
-                </Col>
-            </Row>
-          </Container>
-          <br/><br/><br/>
-          <RaisedButton style={styles.sbt} label="Submit" primary={true} type="submit"/>
-        </div>
-      </MuiThemeProvider>
+                    </div>
+                  </Col>
+                </Row>
+              </Container>
+              <br/><br/><br/>
+              <RaisedButton style={styles.sbt} label="Submit" primary={true} type="submit"/>
+            </div>
+          </form>
+        </MuiThemeProvider>
       );
     }
-    }
-
+  }
 
 function mapStateToProps(state) {
   return state;
-
-  //return {
-    //studies: state.studies
-  //};
-}
+  }
  
 const connectedContactUsPage = connect(mapStateToProps)(ContactUsPage);
 export { connectedContactUsPage as ContactUsPage };

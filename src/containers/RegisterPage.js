@@ -5,6 +5,7 @@ import TextField from 'material-ui/TextField';
 import {Container,Col,Row} from 'react-grid-system';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+
 import {connect} from 'react-redux';
 import {userActions} from '../actions';
 
@@ -37,38 +38,42 @@ class RegisterPage extends React.Component {
   // ------------------------------------------------
   // constructor
   // ------------------------------------------------
-constructor(props){
-  super(props);
+  constructor(props){
+    super(props);
 
- this.state = {
-        first_name : '',
-        last_name  : '',
-        email      : '',
-        password   : '',
-        role       : '',
-        team_name  : '',
-        disabled   : true,
-        submitted  : false
-
+    this.state = {
+      first_name : '',
+      last_name  : '',
+      email      : '',
+      password   : '',
+      role       : '',
+      team_name  : '',
+      disabled   : true,
+      submitted  : false
     };
  
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleRole   = this.handleRole.bind(this);
-    }
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleRole   = this.handleRole.bind(this);
+    
+  }
 
   // ------------------------------------------------
   // handleChange
   // ------------------------------------------------
  
-   handleChange(e) {
+  handleChange(e) {
     console.log(`-- handleChange, target: ${e.target.name}`);
 
     const {name, value} = e.target;
     this.setState({[name]: value});
   }
 
-   handleRole(event, index, value) {
+  // ------------------------------------------------
+  // handle the value of role select field
+  // ------------------------------------------------
+
+  handleRole(event, index, value) {
     this.setState({role:value});
 
     if(value=="MANAGER") {
@@ -83,28 +88,28 @@ constructor(props){
   // handleSubmit
   // ------------------------------------------------
  
-    handleSubmit(event) {
-        event.preventDefault();
+  handleSubmit(event) {
+    event.preventDefault();
        
-        this.setState({ submitted: true });
-        const { first_name, last_name, email, password, role,team_name} = this.state;
-        const { dispatch } = this.props;
-        var user={first_name, last_name, email, password, role,team_name};
-        if (first_name && last_name  && email && password && role) {
-          console.log('dispatching -> register');
-          var history = this.props.history;
-          dispatch(userActions.register(history, user));
-        }
+    this.setState({ submitted: true });
+    const { first_name, last_name, email, password, role,team_name} = this.state;
+    const { dispatch } = this.props;
+    var user={first_name, last_name, email, password, role,team_name};
+
+    if (first_name && last_name  && email && password && role) {
+      console.log('dispatching -> register');
+      var history = this.props.history;
+      dispatch(userActions.register(history, user));
     }
+  }
 
-
-render() {
-   const{first_name,last_name,email,password,role,team_name,disabled}=this.state;
-    return (
-      <div>
-        <MuiThemeProvider>
-          <div style={styles.Container}>
-            <h3>Sign Up</h3>
+    render() {
+    const{first_name,last_name,email,password,role,team_name,disabled}=this.state;
+      return (
+        <div>
+          <MuiThemeProvider>
+            <div style={styles.Container}>
+              <h3>Sign Up</h3>
               <form name="form" onSubmit={this.handleSubmit}> 
                 <Container>
                   <Row>
@@ -133,8 +138,6 @@ render() {
                         <MenuItem value={"MANAGER"} primaryText="Manager" />
                         <MenuItem value={"WORKER"} primaryText="Worker " />
                       </SelectField>
-                      
-                     
                     </Col>
                     <Col sm={6}>
                       <TextField
@@ -160,7 +163,6 @@ render() {
                         value={team_name}
                         onChange={this.handleChange} 
                       />}
-                      
                     </Col>
                   </Row>
                 </Container>
@@ -168,12 +170,11 @@ render() {
                 <RaisedButton style={styles.sbt} label="Submit" primary={true} type="submit"/>
               </form>
             </div>
-         </MuiThemeProvider>
-      </div>
-    );
-  } // render
-}// Register Page
-
+          </MuiThemeProvider>
+        </div>
+      );
+    } // render
+  }// Register Page
 
 function mapStateToProps(state) {
   const {alert} = state;

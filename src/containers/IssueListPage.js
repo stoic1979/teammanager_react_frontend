@@ -1,22 +1,12 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
-import {pink500, grey200, grey500} from 'material-ui/styles/colors';
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
+import {grey500} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-} from 'material-ui/Table';
+import {Table,TableBody,TableHeader,TableHeaderColumn,TableRow,TableRowColumn,} from 'material-ui/Table';
+
+import { connect } from 'react-redux';
 import {projectActions} from '../actions';
 import {issueActions} from '../actions';
-
 
 const styles={
  flatBtn: {
@@ -30,6 +20,13 @@ const styles={
     width: 150,
   },
 };
+
+//---------------------------------------------------
+//
+//         ISSUE LIST PAGE
+//
+//---------------------------------------------------
+
 class IssueListPage extends React.Component {
   constructor(props){
     super(props);
@@ -38,46 +35,39 @@ class IssueListPage extends React.Component {
       selectedProject:'',
       project:'',
     }
-
   }    
 
   componentDidMount() {
-    
     var project_id = '';
     if (this.props.projects) {
       for (var i = this.props.selectedProject; i <=this.props.projects[i]; i++) {
         console.log(`projects :${  JSON.stringify(this.props.projects[i])}`);
         var project = this.props.projects[i];
         project_id=project._id;
-       
-        
-        
-       }
-     }
+      }
+    }
     console.log("selected project id in componentDidMount " +project_id); 
-    
-    
+
     const {dispatch} = this.props;
-    
     var resp = dispatch(projectActions.getAll());
 
     var issues = dispatch(issueActions.getAll(project_id));
 
     this.handleRowSelection = this.handleRowSelection.bind(this); 
     this.handleProject      = this.handleProject.bind(this); 
+  }
 
-    }
-
-  // ------------------------
+  // -----------------------------------------
   // handleRowSelection
-  // ------------------------
+  // -----------------------------------------
   handleRowSelection = (key) => {
     const {dispatch} = this.props;
    console.log("row is selected, key=" + key);
    };
 
+   //----------------------------------------------- -
    //  handle project id selected by user
-
+   // -----------------------------------------------
   handleProject = (event, index, value) => this.setState({project:value});
 
   render() {
@@ -94,12 +84,10 @@ class IssueListPage extends React.Component {
      
    var tableBody = [];
     if (this.props.issues) {
-      for (var i = 0; i < this.props.issues.length; i++) {
-        // console.log(`issues ${  i + 1  }:${  JSON.stringify(this.props.issues[i])}`);
+      for ( i = 0; i < this.props.issues.length; i++) {
         var issue = this.props.issues[i];
         tableBody.push(
           <TableRow key={i+1} >
-            // console.log("got project: " + issue.created_at);
             <TableRowColumn style={{width: '50px'}}>{i+1}</TableRowColumn>
             <TableRowColumn>{issue.summary}</TableRowColumn>
             <TableRowColumn>{issue.assignee.first_name} {issue.assignee.last_name}</TableRowColumn>
@@ -143,13 +131,14 @@ class IssueListPage extends React.Component {
   }
 
 function mapStateToProps(state) {
-  // console.log(`---> IssueListPage got state: ${  JSON.stringify(state)}` );
-   console.log(`---> IssueListPage got issues: ${  JSON.stringify(state.issues)}` );
+  const {alert} = state;
+  // console.log(`---> IssueListPage got issues: ${  JSON.stringify(state.issues)}` );
   return {
-   projects: state.projects,
-   selectedProject: state.selectedProject,
-   issues:state.issues
- };
+    alert,
+    projects: state.projects,
+    selectedProject: state.selectedProject,
+    issues:state.issues
+  };
 }
  
 const connectedIssueListPage = connect(mapStateToProps)(IssueListPage);

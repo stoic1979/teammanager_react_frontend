@@ -1,14 +1,11 @@
 import {settings} from "../config"
 
-
 export const taskService = { getAll,create };
-
 
 function _getToken() {
   var user = JSON.parse(localStorage.getItem('user'));
   return user.token;
 }
-
 
 // -----------------------------------------------------------------------------
 //     CREATE PROJECT
@@ -25,9 +22,7 @@ function create(task_data) {
   body += `&type_id=${  task_data.manager}`;
   body += '&__v=0';
   
-
   console.log(`[project-service] sending req, body: \n${  body}`);
-
 
   const requestOptions = {
     method: 'POST',

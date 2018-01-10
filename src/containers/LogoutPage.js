@@ -1,7 +1,6 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-
 import {connect} from 'react-redux';
 import {userActions} from '../actions';
 
@@ -20,7 +19,7 @@ const styles = {
 
 //---------------------------------------------------
 //
-//         LOGIN PAGE
+//         LOGOUT PAGE
 //
 //---------------------------------------------------
 class LogoutPage extends React.Component {
@@ -37,52 +36,18 @@ class LogoutPage extends React.Component {
 
     dispatch(userActions.logout(history));
 
-    this.state = {     
-      
-      
-    }
-
-   
-
-    
-    // this.handleLogout = this.handleLogout.bind(this);
   }
 
-  // ------------------------------------------------
-  // handleChange
-  
-
-  // ------------------------------------------------
-  // handleLogOut
-  // ------------------------------------------------
-  // handleLogout(e) {
-
-  //   console.log(`-- handleLogout ---`);
-
-  //   e.preventDefault();
-
-  //   const {dispatch} = this.props;
-  //   var history = this.props.history;
-
-  //   dispatch(userActions.logout(history));
-  // }
-
-  // ------------------------------------------------
-  // handleSubmit
-  // ------------------------------------------------
- 
-
-render() {
-  return (
-    <div>
-      <MuiThemeProvider>
-        <form name="form" onSubmit={this.handleSubmit}> 
-          <div style={styles.Container}>
-          <h3>Log out</h3>
-            
-          </div>
-        </form>
-      </MuiThemeProvider>
+  render() {
+    return (
+      <div>
+        <MuiThemeProvider>
+          <form name="form" onSubmit={this.handleSubmit}> 
+            <div style={styles.Container}>
+              <h3>Log out</h3>
+            </div>
+          </form>
+        </MuiThemeProvider>
       </div>
     );
   }//render

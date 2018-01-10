@@ -2,7 +2,7 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import {Container,Col,Row} from 'react-grid-system';
+
 import {connect} from 'react-redux';
 import {projectActions} from '../actions';
 
@@ -24,7 +24,7 @@ const styles = {
 
 //---------------------------------------------------
 //
-//         LOGIN PAGE
+//         CREATE PROJECT PAGE
 //
 //---------------------------------------------------
 class CreateProjectPage extends React.Component {
@@ -38,13 +38,12 @@ class CreateProjectPage extends React.Component {
     this.state = {     
       description:'',
       title:'',
-      
+
       submitted: false
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.handleLogout = this.handleLogout.bind(this);
   }
 
   // ------------------------------------------------
@@ -56,7 +55,6 @@ class CreateProjectPage extends React.Component {
     const {name, value} = e.target;
     this.setState({[name]: value});
   }
-
 
   // ------------------------------------------------
   // handleSubmit

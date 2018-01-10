@@ -1,6 +1,4 @@
-import {authHeader} from '../helpers';
 import {settings} from "../config"
-
 
 export const teamMemberService = { 
   create,
@@ -8,27 +6,24 @@ export const teamMemberService = {
   
    };
 
-
 function _getToken() {
   var user = JSON.parse(localStorage.getItem('user'));
   return user.token;
 }
 
+// -----------------------------------------------------------------------------
+//     CREATE TEAM MEMBER
+// -----------------------------------------------------------------------------
 
-// // -----------------------------------------------------------------------------
-// //     CREATE TEAM MEMBER
-// // -----------------------------------------------------------------------------
 function create(email) {
   var user = JSON.parse(localStorage.getItem('user'));
   console.log(`[team-member-service] got user: ${  JSON.stringify(user)}`);
   console.log(`[team-member-service] got token: ${  user.token}`);
   console.log("-----> email: " + email);
   var body =`email=${email  }`;
- 
 
   console.log(`[team-member-service] sending req, body: \n${  body}`);
-
-
+  
   const requestOptions = {
     method: 'POST',
     headers: {'x-access-token': _getToken(), 'Content-Type': 'application/x-www-form-urlencoded'},
@@ -58,11 +53,10 @@ function create(email) {
 }// create
 
 function getAll() {
+  
+  console.log("====== project-service getAll ======");
 
-    console.log("====== project-service getAll ======");
-
-
-    const requestOptions = {
+  const requestOptions = {
         method: 'GET',
         headers: {'x-access-token': _getToken()},
     };

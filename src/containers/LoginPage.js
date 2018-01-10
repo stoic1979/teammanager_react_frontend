@@ -2,8 +2,6 @@ import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
 
 import {connect} from 'react-redux';
 import {userActions} from '../actions';
@@ -59,22 +57,6 @@ class LoginPage extends React.Component {
     this.setState({[name]: value});
   }
 
- 
-  // ------------------------------------------------
-  // handleLogOut
-  // ------------------------------------------------
-  // handleLogout(e) {
-
-  //   console.log(`-- handleLogout ---`);
-
-  //   e.preventDefault();
-
-  //   const {dispatch} = this.props;
-  //   var history = this.props.history;
-
-  //   dispatch(userActions.logout(history));
-  // }
-
   // ------------------------------------------------
   // handleSubmit
   // ------------------------------------------------
@@ -89,39 +71,39 @@ class LoginPage extends React.Component {
     var history = this.props.history;
     if(email && password){
       console.log("dispatching user action");
-    dispatch(userActions.login(history,email,password));
+      dispatch(userActions.login(history,email,password));
    }
- 
-     }
+ }
 
 render() {
 return (
-    <div>
-      <MuiThemeProvider>
-        <center>{this.props.alert && this.props.alert.message}</center>
-        <form name="form" onSubmit={this.handleSubmit}> 
-          <div style={styles.Container}>
+  <div>
+    <MuiThemeProvider>
+      <center>{this.props.alert && this.props.alert.message}</center>
+      <form name="form" onSubmit={this.handleSubmit}> 
+        <div style={styles.Container}>
           <h3>Log In</h3>
-            <TextField
-              hintText="Enter your Email"
-              floatingLabelText="Email"
-              name="email"
-              onChange={this.handleChange} 
-            />
-            <br/>
-            <TextField
-              type="password"
-              hintText="Enter your Password"
-              floatingLabelText="Password"
-              name="password"
-              onChange={this.handleChange} 
-            />
-            <br/><br/>
-            <RaisedButton label="Login" style={styles.sbt} primary={true} type="submit"/>
-          </div>
-        </form>
-      </MuiThemeProvider>
-      </div>
+          <TextField
+            hintText="Enter your Email"
+            floatingLabelText="Email"
+            name="email"
+            onChange={this.handleChange} 
+          />
+          <br/>
+          <TextField
+            type="password"
+            hintText="Enter your Password"
+            floatingLabelText="Password"
+            name="password"
+            onChange={this.handleChange} 
+          />
+          <br/><br/>
+          <RaisedButton label="Login" style={styles.sbt} primary={true} type="submit"/>
+        </div>
+      </form>
+    </MuiThemeProvider>
+  </div>
+
     );
   }//render
 }//LoginPage

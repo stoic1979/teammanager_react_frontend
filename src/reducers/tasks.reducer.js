@@ -13,8 +13,6 @@ export function tasks(state = {}, action) {
       return {
         error: action.error,
       };
-
-    
     default:
       return state;
   }

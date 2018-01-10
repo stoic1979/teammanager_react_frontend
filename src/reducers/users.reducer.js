@@ -13,7 +13,6 @@ export function users(state = {}, action) {
       return {
         error: action.error,
       };
-
     case userConstants.API_REQUEST:
       return {
         loading: true,
