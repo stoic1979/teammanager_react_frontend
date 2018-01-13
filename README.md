@@ -18,7 +18,7 @@ Team manager has the following features:-
 
 # Watch Demo
 [Live Demo On Heroku](https://teammanager-react.herokuapp.com/)
- * Username: tmmanager
+ * Email: tmmanager@gmail.com
  * Password: 123
 
 # Dashboard screenshots
