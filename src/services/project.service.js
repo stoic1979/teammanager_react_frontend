@@ -17,7 +17,11 @@ function create(project_data) {
 
   var body = `&title=${  project_data.title}`;
   body += `&description=${  project_data.description}`;
-  body += `&manager=${  project_data.manager}`;
+  body += `&assignee=${  project_data.assignee}`;
+  body += `&estimated_hours=${  project_data.estimated_hours}`;
+  body += `&start_date=${  project_data.start_date}`;
+  body += `&end_date=${  project_data.end_date}`;
+  
   body += '&__v=0';
   
   console.log(`[project-service] sending req, body: \n${  body}`);
