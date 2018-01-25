@@ -4,7 +4,9 @@ export const projectService = { getAll,create };
 
 function _getToken() {
   var user = JSON.parse(localStorage.getItem('user'));
-  return user.token;
+  if(user){
+    return user.token;
+  }
 }
 
 // -----------------------------------------------------------------------------
@@ -47,6 +49,7 @@ function create(project_data) {
     })
     .catch( (error) => {
           console.log("==================> error: " + error);
+          return error;
 
     });
 }// create

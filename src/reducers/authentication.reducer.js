@@ -27,10 +27,12 @@ export function authentication(state = initialState, action) {
       return {
         loggedIn: true,
         user: action.user,
-        
-      };
+        };
     case userConstants.LOGIN_FAILURE:
-      return {};
+      return {
+        loggedIn:false,
+        error:action.error,
+      };
     case userConstants.LOGOUT:
       return {};
     default:

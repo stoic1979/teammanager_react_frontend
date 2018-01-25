@@ -11,7 +11,9 @@ export const userService = {
 
 function _getToken() {
   var user = JSON.parse(localStorage.getItem('user'));
-  return user.token;
+  if(user){
+    return user.token;
+    }
 }
 
 function login(history,email, password) {
@@ -51,6 +53,7 @@ function login(history,email, password) {
                 email: email,
                 role:token_resp.role,
                 token: token_resp.token,
+                message:token_resp.message,
             };
 
             // ------------------------------------------------------

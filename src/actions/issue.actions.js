@@ -29,7 +29,7 @@ function create(issue_data) {
                 },
                 (error) => {
                   dispatch(failure(error));
-                  dispatch(alertActions.error(error));
+                  // dispatch(alertActions.error(error));
                 }
             );
   };
@@ -61,7 +61,10 @@ function getAll(selectedProject) {
     issueService.getAll(selectedProject)
             .then(
                 (issues) => dispatch(success(issues)),
-                (error) => dispatch(failure(error))
+                (error) => {
+                  dispatch(failure(error));
+                  // dispatch(alertActions.error(error));
+                }
             );
   };
 

@@ -29,7 +29,7 @@ function create(email) {
                 },
                 (error) => {
                   dispatch(failure(error));
-                  dispatch(alertActions.error(error));
+                  // dispatch(alertActions.error(error));
                 }
             );
   };
@@ -61,7 +61,10 @@ function getAll() {
     teamMemberService.getAll()
             .then(
                 (team_member) => dispatch(success(team_member)),
-                (error) => dispatch(failure(error))
+                (error) => {
+                  dispatch(failure(error));
+                  // dispatch(alertActions.error(error));
+                }
             );
   };
 

@@ -8,7 +8,9 @@ export const teamMemberService = {
 
 function _getToken() {
   var user = JSON.parse(localStorage.getItem('user'));
-  return user.token;
+  if(user){
+    return user.token;
+  }
 }
 
 // -----------------------------------------------------------------------------

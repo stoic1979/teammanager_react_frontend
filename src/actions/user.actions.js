@@ -87,7 +87,7 @@ function register(history, user) {
                 },
                 (error) => {
                   dispatch(failure(error));
-                  dispatch(alertActions.error(error));
+                  // dispatch(alertActions.error(error));
                 }
             );
   };
@@ -147,7 +147,10 @@ function getAll() {
     userService.getAll()
             .then(
                 (users) => dispatch(success(users)),
-                (error) => dispatch(failure(error))
+                (error) => {
+                  dispatch(failure(error));
+                  // dispatch(alertActions.error(error));
+                }
             );
   };
 

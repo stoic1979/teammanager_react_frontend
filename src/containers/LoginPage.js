@@ -79,7 +79,7 @@ render() {
 return (
   <div>
     <MuiThemeProvider>
-      <center>{this.props.alert && this.props.alert.message}</center>
+      <center>{this.props.alert.message}</center>
       <form name="form" onSubmit={this.handleSubmit}> 
         <div style={styles.Container}>
           <h3>Log In</h3>

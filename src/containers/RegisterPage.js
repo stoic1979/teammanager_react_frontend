@@ -108,6 +108,7 @@ class RegisterPage extends React.Component {
       return (
         <div>
           <MuiThemeProvider>
+            {this.props.alert.message}
             <div style={styles.Container}>
               <h3>Sign Up</h3>
               <form name="form" onSubmit={this.handleSubmit}> 

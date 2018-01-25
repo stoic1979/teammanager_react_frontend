@@ -134,6 +134,7 @@ render() {
   return (
     <div>
       <MuiThemeProvider>
+        <center>{this.props.alert.message}</center>
         <form name="form" onSubmit={this.handleSubmit}> 
           <div style={styles.Container}>
             <h3>Create Project</h3>

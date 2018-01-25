@@ -101,6 +101,7 @@ class IssueListPage extends React.Component {
     const project=this.state;
       return (
         <MuiThemeProvider>
+          {this.props.alert.message}
           <div style={styles.main}>
             <FlatButton
                 label="New Issue"
@@ -125,6 +126,7 @@ class IssueListPage extends React.Component {
                 </TableBody>
               </Table>
             </div>
+          }
       </MuiThemeProvider>
       );
     }

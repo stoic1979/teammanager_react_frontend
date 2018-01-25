@@ -180,6 +180,7 @@ render() {
   return (
     <div>
       <MuiThemeProvider>
+        {this.props.alert.message}
         <form name="form" onSubmit={this.handleSubmit}> 
           <div style={styles.Container}>
             <h3>Add Issue </h3>

@@ -48,6 +48,7 @@ class TeamMemberListPage extends React.Component {
       }
     return (
       <MuiThemeProvider>
+        {this.props.alert.message}
         <div style={styles.main}>
           <FlatButton
               label="Invite Team Member"

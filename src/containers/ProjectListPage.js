@@ -68,6 +68,7 @@ class ProjectListPage extends React.Component {
 
       return (
         <MuiThemeProvider>
+          <center>{this.props.alert.message}</center>
           <div style={styles.main}>
             <FlatButton
                 label="New Project"

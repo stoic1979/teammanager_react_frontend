@@ -29,7 +29,7 @@ function create(task_data) {
                 },
                 (error) => {
                   dispatch(failure(error));
-                  dispatch(alertActions.error(error));
+                  // dispatch(alertActions.error(error));
                 }
             );
   };
@@ -58,7 +58,10 @@ function getAll() {
     taskService.getAll()
             .then(
                 (tasks) => dispatch(success(tasks)),
-                (error) => dispatch(failure(error))
+                (error) => {
+                  dispatch(failure(error));
+                  // dispatch(alertActions.error(error));
+                }
             );
   };
 

@@ -29,7 +29,7 @@ function create(project_data) {
                 },
                 (error) => {
                   dispatch(failure(error));
-                  dispatch(alertActions.error(error));
+                  // dispatch(alertActions.error(error));
                 }
             );
   };
@@ -61,7 +61,10 @@ function getAll() {
     projectService.getAll()
             .then(
                 (projects) => dispatch(success(projects)),
-                (error) => dispatch(failure(error))
+                (error) => {
+                  dispatch(failure(error));
+                  // dispatch(alertActions.error(error));
+                }
             );
   };
 
