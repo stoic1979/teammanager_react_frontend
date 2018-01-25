@@ -244,6 +244,8 @@ render() {
                     name="description"
                     value={description}
                     onChange={this.handleChange} 
+                    multiLine={true}
+                    rows={2}
                   />
                   <SelectField
                     floatingLabelText="Status "
@@ -265,10 +267,10 @@ render() {
                     onChange={this.handlePriority}
                     style={styles.customWidth}
                   >
-                    <MenuItem value={"BLOCKER"} primaryText="Not-Started" />
-                    <MenuItem value={"HIGH"} primaryText="Working " />
-                    <MenuItem value={"MEDIUM"} primaryText="Testing" />
-                    <MenuItem value={"LOW"} primaryText="Closed " />
+                    <MenuItem value={"BLOCKER"} primaryText="Blocker" />
+                    <MenuItem value={"HIGH"} primaryText="High" />
+                    <MenuItem value={"MEDIUM"} primaryText="Medium" />
+                    <MenuItem value={"LOW"} primaryText="Low" />
                   </SelectField>
                   <DatePicker
                     floatingLabelText="End Date"

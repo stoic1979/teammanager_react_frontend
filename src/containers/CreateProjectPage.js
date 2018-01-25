@@ -23,7 +23,7 @@ const styles = {
       marginBottom:40,
      },
   sbt:{
-      marginLeft:'10%',
+      marginLeft:'40%',
    },
  };
 
@@ -172,6 +172,8 @@ render() {
                     name="description"
                     value={description}
                     onChange={this.handleChange} 
+                    multiLine={true}
+                    rows={2}
                   />
                   <TextField
                     hintText="Estimated hours"
