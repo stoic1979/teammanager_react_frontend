@@ -282,7 +282,7 @@ render() {
               </Row>
             </Container>
             <br/>
-            <RaisedButton style={styles.sbt} label="Submit" primary={true} type="submit"/>
+            <RaisedButton style={styles.sbt} label="Submit" href="/issueList" primary={true} type="submit"/>
           </div>
         </form>
       </MuiThemeProvider>
