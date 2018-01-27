@@ -78,7 +78,7 @@ function getAll(selectedProject) {
     return {type: issueConstants.GETALL_SUCCESS, issues};
   }
   function failure(error) {
-        console.log("********* action got projects failure: " +error );
+        console.log("********* action got issues failure: " +error );
 
     return {type: issueConstants.GETALL_FAILURE, error};
   }

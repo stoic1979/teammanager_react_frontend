@@ -1,6 +1,6 @@
 import {settings} from "../config"
 
-export const projectService = { getAll,create };
+export const projectService = { getAll, getById, create };
 
 function _getToken() {
   var user = JSON.parse(localStorage.getItem('user'));
@@ -82,6 +82,33 @@ function getAll() {
     });
 }// getAll
 
+
+function getById(id) {
+
+    console.log("====== project-service getById ======");
+
+    const requestOptions = {
+        method: 'GET',
+        headers: {'x-access-token': _getToken()},
+    };
+    const url = `${settings.API_ROOT}/projects/by_id/${  id}`
+    return fetch(url, requestOptions)
+    .then((response) => {
+
+          // console.log("+++++++ resp: " + response);
+
+          if (!response.ok) {
+            return Promise.reject(response.statusText);
+          }
+
+          return response.json();
+        })
+    .then((project) => {
+      // console.log(`++++++++ project-service getAll project_resp: ${  JSON.stringify(projects)}` );
+
+      return project;
+    });
+}// getAll
 
 
 

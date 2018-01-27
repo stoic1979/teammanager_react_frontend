@@ -1,8 +1,8 @@
 import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
-import { grey500} from 'material-ui/styles/colors';
+import {grey500} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {Table,TableBody,TableHeader,TableHeaderColumn,TableRow,TableRowColumn} from 'material-ui/Table';
+import {Table,TableBody,TableHeader,TableHeaderColumn,TableRow,TableRowColumn,} from 'material-ui/Table';
 
 import { connect } from 'react-redux';
 import {projectActions} from '../actions';
@@ -16,6 +16,9 @@ const styles={
   main:{
     marginLeft:20,
   },
+  customWidth: {
+    width: 150,
+  },
 };
 
 //---------------------------------------------------
@@ -25,45 +28,75 @@ const styles={
 //---------------------------------------------------
 
 class IssueListPage extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.state={
+      selectedProject:'',
+      project:'',
+    }
+  }    
 
   componentDidMount() {
-  
-  var p_id = '';
+    var project_id = '';
+    var p_id = '';
 
-    if(this.props.selectedProject){ 
+     if(this.props.selectedProject){ 
       p_id = this.props.selectedProject;
       console.log('------p_id++ '+p_id);
+     }
+     else {
+      p_id = JSON.parse(localStorage.getItem('project_id'));
+      console.log('--------p_id -----> '+JSON.parse(localStorage.getItem('project_id')));
+     }
+
+     console.log('id+--------- '+this.props.selectedProject);
+    if (this.props.projects) {
+      for (var i = this.props.selectedProject; i <=this.props.projects[i]; i++) {
+        console.log(`abc++++ :${  JSON.stringify(this.props.projects[i])}`);
+        var project = this.props.projects[i];
+        project_id=project._id;
+      }
     }
-    else if (localStorage.getItem('project_id')){
-      p_id = localStorage.getItem('project_id');
-      console.log('--------p_id -----> '+localStorage.getItem('project_id'));
-     }
-    else {
-      // Fix me Later
-     }
+    console.log("selected project id in componentDidMount " +project_id); 
 
     const {dispatch} = this.props;
-    var issues = dispatch(issueActions.getAll(p_id));
+    var resp = dispatch(projectActions.getAll());
+
+    var issues = dispatch(issueActions.getAll(project_id));
 
     this.handleRowSelection = this.handleRowSelection.bind(this); 
-   
-    
+    this.handleProject      = this.handleProject.bind(this); 
   }
 
-  // --------------------------------
+  // -----------------------------------------
   // handleRowSelection
-  // --------------------------------
-
+  // -----------------------------------------
   handleRowSelection = (key) => {
-    
-  };
+    const {dispatch} = this.props;
+   console.log("row is selected, key=" + key);
+   };
+
+   //----------------------------------------------- -
+   //  handle project id selected by user
+   // -----------------------------------------------
+  handleProject = (event, index, value) => this.setState({project:value});
+
   render() {
-
-    // console.log(`---> render got projects: ${  JSON.stringify(this.props.projects)}`);
-
+   var key = JSON.parse(localStorage.getItem('project_id'));
+    var item=[];
+    if (this.props.projects) {
+      for (var i = 0; i < this.props.projects.length; i++) {
+        var pro = this.props.projects[i];
+        if(i==key){
+          var project_name=pro.title;
+        }
+      }
+    }
+     
    var tableBody = [];
     if (this.props.issues) {
-      for ( var i = 0; i < this.props.issues.length; i++) {
+      for ( i = 0; i < this.props.issues.length; i++) {
         var issue = this.props.issues[i];
         tableBody.push(
           <TableRow key={i+1} >
@@ -77,17 +110,18 @@ class IssueListPage extends React.Component {
           );
         }
       }
-
+    const project=this.state;
       return (
         <MuiThemeProvider>
-          <center>{this.props.alert.message}</center>
+          {this.props.alert.message}
           <div style={styles.main}>
             <FlatButton
                 label="New Issue"
                 style={styles.flatBtn}
                 href="/createIssue"
-            />
-            <h2>Issues</h2>
+              />
+            
+            <h2>  Issues  </h2>
             <Table onRowSelection={this.handleRowSelection} >
               <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                 <TableRow>
@@ -103,15 +137,15 @@ class IssueListPage extends React.Component {
                   {tableBody}
                 </TableBody>
               </Table>
-          </div>
-        </MuiThemeProvider>
+            </div>
+      </MuiThemeProvider>
       );
     }
   }
 
 function mapStateToProps(state) {
   const {alert} = state;
-  // console.log(`---> ProjectList got state: ${  JSON.stringify(state.projects)}` );
+  // console.log(`---> IssueListPage got issues: ${  JSON.stringify(state.issues)}` );
   return {
     alert,
     projects: state.projects,
@@ -119,6 +153,6 @@ function mapStateToProps(state) {
     issues:state.issues
   };
 }
-
+ 
 const connectedIssueListPage = connect(mapStateToProps)(IssueListPage);
 export { connectedIssueListPage as IssueListPage };

@@ -6,8 +6,9 @@ import {alertActions} from './';
 export const projectActions = {
   
   getAll,
-  selectedProject,
-  create
+  getById,
+  create,
+  selectedProject
   
 };
 
@@ -82,22 +83,42 @@ function getAll() {
 
     return {type: projectConstants.GETALL_FAILURE, error};
   }
-}
+}// getAll
+
+function getById(key){
+  console.log("====== getAll ======");
+
+  return (dispatch) => {
+    dispatch(request());
+
+    projectService.getById()
+            .then(
+                (project) => dispatch(success(project)),
+                (error) => {
+                  dispatch(failure(error));
+                  // dispatch(alertActions.error(error));
+                }
+            );
+  };
+
+  function request() {
+    return {type: projectConstants.GET_BY_ID_REQUEST};
+  }
+  function success(project) {
+    console.log("********* action got projects: " + JSON.stringify(project) );
+    return {type: projectConstants.GET_BY_ID_SUCCESS, project};
+  }
+  function failure(error) {
+        console.log("********* action got projects failure: " +error );
+
+    return {type: projectConstants.GET_BY_ID_FAILURE, error};
+  }
+}// getById
 
 function selectedProject(key){
-    console.log("++++ project actions, selectedProject() key: ", key);
-    return {
-        type: projectConstants.PROJECT_SELECTED,
-        payload: key
-    }
-}
-
-function selectedProject(key){
-    console.log("++++ project actions, selectedProject() key: ", key);
+    console.log("++++ issue actions, selectedProject() key: ", key);
     return {
         type: projectConstants.SELECTED_PROJECT,
         payload: key
     }
 }
-
-

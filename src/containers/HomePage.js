@@ -12,9 +12,6 @@ const styles={
     style: "normal",
     margin : 20,
   },
-  btn:{
-    marginRight: 20,
-  },
   paper:{
     height: 400,
     width: 800,
@@ -61,8 +58,6 @@ class HomePage extends React.Component {
                       <p>
                         Signup with team manager to build up your team and have a successful business! 
                         <br/><br/>
-                        <RaisedButton href="login" label="Login" style={styles.btn} primary={true}></RaisedButton> 
-                        <RaisedButton href="register" label="Sign Up ?" primary={true}></RaisedButton>
                       </p>
                     </div>
                   </Col>

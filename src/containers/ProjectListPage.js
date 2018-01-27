@@ -38,10 +38,20 @@ class ProjectListPage extends React.Component {
 
   handleRowSelection = (key) => {
     const {dispatch} = this.props;
-    dispatch(projectActions.selectedProject(key));
+    var project_id='';
+
+    if (this.props.projects) {
+      for (var i = key; i <=this.props.projects[i]; i++) {
+        console.log(`abc++++ :${  JSON.stringify(this.props.projects[i])}`);
+        var project = this.props.projects[i];
+        project_id=project._id;
+      }
+    }
+    console.log('xyz '+project_id);
+    dispatch(projectActions.selectedProject(project_id));
 
     console.log("ProjectListPage :: row is selected, key=" + key);
-    localStorage.setItem('project_id',key);
+    localStorage.setItem('project_id',project_id);
 
     this.props.history.push('/issueList');
   };

@@ -82,8 +82,9 @@ class App extends Component {
        var item=[];
        if (this.props.projects) {
           for (var i = 0; i < this.props.projects.length; i++) {
-            console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
+            // console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
             var pro = this.props.projects[i];
+            
             item.push(
               <MenuItem value={pro._id}   primaryText={pro.title} />
               );

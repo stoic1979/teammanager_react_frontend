@@ -149,6 +149,8 @@ class CreateIssuePage extends React.Component {
       console.log('dispatching -> create issue');
       // var history = this.props.history;
       dispatch(issueActions.create( issue_data));
+
+      this.props.history.push('/issueList');
     }
   }
   
@@ -282,7 +284,7 @@ render() {
               </Row>
             </Container>
             <br/>
-            <RaisedButton style={styles.sbt} label="Submit" href="/issueList" primary={true} type="submit"/>
+            <RaisedButton style={styles.sbt} label="Submit" primary={true} type="submit"/>
           </div>
         </form>
       </MuiThemeProvider>

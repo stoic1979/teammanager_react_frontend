@@ -13,6 +13,21 @@ export function projects(state = {}, action) {
       return {
         error: action.error,
       };
+    case projectConstants.GET_BY_IDL_REQUEST:
+      return {
+        loading: true,
+      };
+    case projectConstants.GET_BY_ID_SUCCESS:
+    console.log("project reducer got response" + action.project);
+      return  action.project ;
+    case projectConstants.GET_BY_ID_FAILURE:
+      return {
+        error: action.error,
+      };
+    case projectConstants.SELECTED_PROJECT:
+      return {
+        selectedProject: action.payload,
+      };
     default:
       return state;
   }

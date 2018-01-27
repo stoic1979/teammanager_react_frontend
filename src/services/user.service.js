@@ -71,6 +71,7 @@ function login(history,email, password) {
 function logout(history) {
     // remove user from local storage to log user out
     localStorage.removeItem('user');
+    localStorage.removeItem('project_id');
     localStorage.removeItem('API');
     history.push("/login");
 }
