@@ -30,6 +30,10 @@ class IssueListPage extends React.Component {
   
   var p_id = '';
 
+    if(this.props.current_project){
+      var c = JSON.stringify(this.props.current_project);
+      console.log('current_project--> '+c);
+    }
     if(this.props.selectedProject){ 
       p_id = this.props.selectedProject;
       console.log('------p_id++ '+p_id);
@@ -44,10 +48,7 @@ class IssueListPage extends React.Component {
 
     const {dispatch} = this.props;
     var issues = dispatch(issueActions.getAll(p_id));
-
     this.handleRowSelection = this.handleRowSelection.bind(this); 
-   
-    
   }
 
   // --------------------------------
@@ -60,7 +61,10 @@ class IssueListPage extends React.Component {
   render() {
 
     // console.log(`---> render got projects: ${  JSON.stringify(this.props.projects)}`);
-
+    if(this.props.current_project){
+      var c = JSON.stringify(this.props.current_project);
+      console.log('current_project+ '+c);
+    }
    var tableBody = [];
     if (this.props.issues) {
       for ( var i = 0; i < this.props.issues.length; i++) {
@@ -111,10 +115,11 @@ class IssueListPage extends React.Component {
 
 function mapStateToProps(state) {
   const {alert} = state;
-  // console.log(`---> ProjectList got state: ${  JSON.stringify(state.projects)}` );
+  console.log(`---> IssueListPage got state: ${  JSON.stringify(state)}` );
   return {
     alert,
-    projects: state.projects,
+    projects: state.projects.projects,
+    current_project: state.projects.current_project,
     selectedProject: state.selectedProject,
     issues:state.issues
   };
