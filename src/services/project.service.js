@@ -76,8 +76,14 @@ function getAll() {
           return response.json();
         })
     .then((projects) => {
+      var reverse_projects = projects.slice().reverse();
+      var current_project = reverse_projects[0];
+      console.log('current_project in project-service '+JSON.stringify(current_project));
       // console.log(`++++++++ project-service getAll project_resp: ${  JSON.stringify(projects)}` );
-
+      var projects = {
+        projects:projects,
+        current_project : current_project
+      };
       return projects;
     });
 }// getAll

@@ -66,7 +66,7 @@ class ProjectListPage extends React.Component {
         var project = this.props.projects[i];
         tableBody.push(
           <TableRow key={i+1} >
-            <TableRowColumn style={{width: '50px'}}>{i+1}</TableRowColumn>
+            <TableRowColumn style={{width: '5px'}}>{i+1}</TableRowColumn>
             <TableRowColumn>{project.title}</TableRowColumn>
             <TableRowColumn>{project.description}</TableRowColumn>
             <TableRowColumn>{project.manager.first_name} {project.manager.last_name}</TableRowColumn>
@@ -89,7 +89,7 @@ class ProjectListPage extends React.Component {
             <Table onRowSelection={this.handleRowSelection} >
               <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                 <TableRow>
-                  <TableHeaderColumn style={{width: '50px'}}>#</TableHeaderColumn>
+                  <TableHeaderColumn style={{width: '5px'}}>#</TableHeaderColumn>
                   <TableHeaderColumn>Title</TableHeaderColumn>
                   <TableHeaderColumn>Description</TableHeaderColumn>
                   <TableHeaderColumn>Manager</TableHeaderColumn>

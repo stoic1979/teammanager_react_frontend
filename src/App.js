@@ -81,6 +81,7 @@ class App extends Component {
     render() {
        var item=[];
        if (this.props.projects) {
+        
           for (var i = 0; i < this.props.projects.length; i++) {
             // console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
             var pro = this.props.projects[i];

@@ -67,7 +67,7 @@ class IssueListPage extends React.Component {
         var issue = this.props.issues[i];
         tableBody.push(
           <TableRow key={i+1} >
-            <TableRowColumn style={{width: '50px'}}>{i+1}</TableRowColumn>
+            <TableRowColumn style={{width: '5px'}}>{i+1}</TableRowColumn>
             <TableRowColumn>{issue.summary}</TableRowColumn>
             <TableRowColumn>{issue.assignee.first_name} {issue.assignee.last_name}</TableRowColumn>
             <TableRowColumn>{issue.type} </TableRowColumn>
@@ -91,7 +91,7 @@ class IssueListPage extends React.Component {
             <Table onRowSelection={this.handleRowSelection} >
               <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                 <TableRow>
-                    <TableHeaderColumn style={{width: '50px'}}>#</TableHeaderColumn>
+                    <TableHeaderColumn style={{width: '5px'}}>#</TableHeaderColumn>
                     <TableHeaderColumn>Summary</TableHeaderColumn>
                     <TableHeaderColumn>Assignee</TableHeaderColumn>
                     <TableHeaderColumn>Type</TableHeaderColumn>
