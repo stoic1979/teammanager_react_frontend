@@ -111,7 +111,7 @@ function mapStateToProps(state) {
   // console.log(`---> ProjectList got state: ${  JSON.stringify(state.projects)}` );
   return {
     alert,
-    projects: state.projects
+    projects: state.projects.projects
   };
 }
 

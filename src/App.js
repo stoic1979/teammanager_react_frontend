@@ -81,7 +81,7 @@ class App extends Component {
     render() {
        var item=[];
        if (this.props.projects) {
-        
+
           for (var i = 0; i < this.props.projects.length; i++) {
             // console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
             var pro = this.props.projects[i];
@@ -147,7 +147,7 @@ function mapStateToProps(state) {
   // console.log("App got state "+JSON.stringify(state));
   return {
     alert,
-    projects: state.projects,
+    projects: state.projects.projects,
     user: state.authentication.user,
     loggedIn:state.authentication.loggedIn
   };
