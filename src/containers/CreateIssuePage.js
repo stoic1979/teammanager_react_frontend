@@ -300,7 +300,8 @@ function mapStateToProps(state) {
   // console.log("create issue got state" + JSON.stringify(state));
   return {
     alert,
-    projects: state.projects,
+    projects: state.projects.projects,
+    latest_project: state.projects.latest_project,
     selectedProject: state.selectedProject,
     users: state.users
   };
