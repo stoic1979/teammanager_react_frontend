@@ -47,7 +47,7 @@ class ProjectListPage extends React.Component {
         project_id=project._id;
       }
     }
-    console.log('xyz '+project_id);
+    console.log('[projectActions] selectedProject id '+project_id);
     dispatch(projectActions.selectedProject(project_id));
 
     console.log("ProjectListPage :: row is selected, key=" + key);
@@ -111,7 +111,8 @@ function mapStateToProps(state) {
   // console.log(`---> ProjectList got state: ${  JSON.stringify(state.projects)}` );
   return {
     alert,
-    projects: state.projects.projects
+    projects: state.projects.projects,
+    latest_project: state.projects.latest_project
   };
 }
 

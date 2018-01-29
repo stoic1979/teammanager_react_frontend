@@ -148,6 +148,7 @@ function mapStateToProps(state) {
   return {
     alert,
     projects: state.projects.projects,
+    latest_project: state.projects.latest_project,
     user: state.authentication.user,
     loggedIn:state.authentication.loggedIn
   };

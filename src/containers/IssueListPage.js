@@ -1,8 +1,8 @@
 import React from 'react';
 import FlatButton from 'material-ui/FlatButton';
-import { grey500} from 'material-ui/styles/colors';
+import { grey500 } from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {Table,TableBody,TableHeader,TableHeaderColumn,TableRow,TableRowColumn} from 'material-ui/Table';
+import { Table,TableBody,TableHeader,TableHeaderColumn,TableRow,TableRowColumn } from 'material-ui/Table';
 
 import { connect } from 'react-redux';
 import {projectActions} from '../actions';
@@ -27,30 +27,38 @@ const styles={
 class IssueListPage extends React.Component {
 
   componentDidMount() {
-  
-  var p_id = '';
+    
+    var p_id = '';
 
-    if(this.props.current_project){
-      var c = JSON.stringify(this.props.current_project);
-      console.log('current_project--> '+c);
-    }
     if(this.props.selectedProject){ 
       p_id = this.props.selectedProject;
-      console.log('------p_id++ '+p_id);
+      console.log('------selectedProject p_id '+p_id);
     }
     else if (localStorage.getItem('project_id')){
       p_id = localStorage.getItem('project_id');
-      console.log('--------p_id -----> '+localStorage.getItem('project_id'));
-     }
+      console.log('-------- localStorage p_id -----> '+localStorage.getItem('project_id'));
+    }
+    else if( this.props.latest_project){
+      p_id = this.props.latest_project._id;
+      console.log('-------- latest_project p_id ++ '+p_id);
+    }
     else {
       // Fix me Later
-     }
-
+    }
+    console.log('[componentDidMount] latest_project '+this.props.projects);
     const {dispatch} = this.props;
     var issues = dispatch(issueActions.getAll(p_id));
     this.handleRowSelection = this.handleRowSelection.bind(this); 
   }
 
+  componentWillReceiveProps(nextProps) {
+    // Update the latest_project with new data every time we receive props.
+    if(nextProps.latest_project){
+
+      var p_id = JSON.stringify(nextProps.latest_project._id);
+      console.log('[componentWillReceiveProps] latest_project  '+JSON.stringify(nextProps.latest_project._id));
+    }
+  }
   // --------------------------------
   // handleRowSelection
   // --------------------------------
@@ -61,9 +69,9 @@ class IssueListPage extends React.Component {
   render() {
 
     // console.log(`---> render got projects: ${  JSON.stringify(this.props.projects)}`);
-    if(this.props.current_project){
-      var c = JSON.stringify(this.props.current_project);
-      console.log('current_project+ '+c);
+    if(this.props.latest_project){
+      var c = JSON.stringify(this.props.latest_project);
+      console.log('[Issue List] latest_project+ '+c);
     }
    var tableBody = [];
     if (this.props.issues) {
@@ -119,7 +127,7 @@ function mapStateToProps(state) {
   return {
     alert,
     projects: state.projects.projects,
-    current_project: state.projects.current_project,
+    latest_project: state.projects.latest_project,
     selectedProject: state.selectedProject,
     issues:state.issues
   };

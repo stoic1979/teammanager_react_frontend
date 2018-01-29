@@ -77,12 +77,12 @@ function getAll() {
         })
     .then((projects) => {
       var reverse_projects = projects.slice().reverse();
-      var current_project = reverse_projects[0];
-      console.log('current_project in project-service '+JSON.stringify(current_project));
+      var latest_project = reverse_projects[0];
+      console.log('latest_project in project-service '+JSON.stringify(latest_project));
       // console.log(`++++++++ project-service getAll project_resp: ${  JSON.stringify(projects)}` );
       var projects = {
         projects:projects,
-        current_project : current_project
+        latest_project : latest_project
       };
       return projects;
     });
