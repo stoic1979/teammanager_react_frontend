@@ -43,7 +43,19 @@ class ProjectListPage extends React.Component {
     var project = '';
 
     if(column == 6){
-      this.props.history.push('/editProject');
+      for (var i = 0; i < this.props.projects.length; i++) {
+        console.log(`[handleCellClick] :${  JSON.stringify(this.props.projects[i])}`);
+
+        if( i == row) {
+          var project = this.props.projects[i];
+          project=project._id;
+        }
+
+        dispatch(projectActions.selectedProject(project));
+        console.log('[handleCellClick] project_id '+project);
+        localStorage.setItem('project_id',project);
+        this.props.history.push('/editProject');
+      }
     }
 
     else if (this.props.projects) {

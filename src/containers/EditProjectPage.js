@@ -124,7 +124,7 @@ class EditProjectPage extends React.Component {
 
 render() {
   if(this.props.selectedProject){
-    console.log('[Edit Project] sp '+JSON.stringify(this.props.selectedProject.project));
+    console.log('[Edit Project] '+JSON.stringify(this.props.selectedProject.project));
   }
   var Items=[];
     if(this.props.users){
