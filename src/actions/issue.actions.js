@@ -6,8 +6,9 @@ import {alertActions} from './';
 export const issueActions = {
   
   getAll,
-  selectedIssue,
   create,
+  selectedIssue,
+  getSelectedIssue,
   edit
   
 };
@@ -85,13 +86,65 @@ function getAll(selectedProject) {
   }
 }
 
-function selectedIssue(key){
-    console.log("++++ issue actions, selectedProject() key: ", key);
-    return {
-        type: issueConstants.ISSUE_SELECTED,
-        payload: key
-    }
-}
+function selectedIssue(selectedIssue){
+   console.log('[issue-action] selectedIssue()');
+
+  return (dispatch) => {
+    dispatch(request({selectedIssue}));
+
+    issueService.selectedIssue(selectedIssue)
+            .then(
+                (selectedIssue) => {
+                  dispatch(success(selectedIssue));
+                  // browserHistory.push('/familyList');
+                },
+                (error) => {
+                  dispatch(failure(error));
+                  // dispatch(alertActions.error(error));
+                }
+            );
+  };
+
+  function request(selectedIssue) {
+    return {type: issueConstants.SELECTED_PROJECT_REQUEST};
+  }
+  function success(selectedIssue) {
+    return {type: issueConstants.SELECTED_PROJECT_SUCCESS, selectedIssue};
+  }
+  function failure(error) {
+    return {type: issueConstants.SELECTED_PROJECT_FAILURE, error};
+  }
+}// selectedIssue
+
+function getSelectedIssue() {
+
+  console.log("====== getSelectedIssue ======");
+
+  return (dispatch) => {
+    dispatch(request());
+
+    issueService.getSelectedIssue()
+            .then(
+                (selectedIssue) => dispatch(success(selectedIssue)),
+                (error) => {
+                  dispatch(failure(error));
+                  // dispatch(alertActions.error(error));
+                }
+            );
+  };
+
+  function request() {
+    return {type: issueConstants.SELECTED_ISSUE_GET_REQUEST};
+  }
+  function success(selectedIssue) {
+    // console.log("********* action got selectedIssue: " + JSON.stringify(selectedIssue) );
+    return {type: issueConstants.SELECTED_ISSUE_GET_SUCCESS, selectedIssue};
+  }
+  function failure(error) {
+    // console.log("********* action got selectedIssue failure: " +error );
+    return {type: issueConstants.SELECTED_ISSUE_GET_FAILURE, error};
+  }
+}// getSelectedIssue
 
 
 // --------------- edit issue------------------------
