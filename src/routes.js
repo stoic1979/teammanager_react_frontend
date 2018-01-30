@@ -11,6 +11,8 @@ import {ProjectListPage} from "./containers/ProjectListPage"
 import {IssueListPage} from "./containers/IssueListPage"
 import {CreateProjectPage} from "./containers/CreateProjectPage"
 import {CreateIssuePage} from "./containers/CreateIssuePage"
+import {EditIssuePage} from "./containers/EditIssuePage"
+import {EditProjectPage} from "./containers/EditProjectPage"
 import {CreateTeamMemberPage} from "./containers/CreateTeamMemberPage"
 import {TeamMemberListPage} from "./containers/TeamMemberListPage"
 import {PricingPage} from "./containers/PricingPage"
@@ -33,7 +35,9 @@ class Routes extends Component {
                   <Route exact path='/projectList'      component={ProjectListPage} />
                   <Route exact path='/issueList'         component={IssueListPage} />
                   <Route exact path='/createProject'    component={CreateProjectPage} /> 
+                  <Route exact path='/editProject'      component={EditProjectPage} />
                   <Route exact path='/createIssue'      component={CreateIssuePage} /> 
+                  <Route exact path='/editIssue'        component={EditIssuePage} /> 
                   <Route exact path='/createTeamMember' component={CreateTeamMemberPage} /> 
                   <Route exact path='/teamMemberList'   component={TeamMemberListPage} /> 
                   <Route exact path='/pricing'          component={PricingPage} />  

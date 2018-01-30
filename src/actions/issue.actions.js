@@ -7,7 +7,8 @@ export const issueActions = {
   
   getAll,
   selectedIssue,
-  create
+  create,
+  edit
   
 };
 
@@ -92,5 +93,37 @@ function selectedIssue(key){
     }
 }
 
+
+// --------------- edit issue------------------------
+
+function edit(id) {
+
+  console.log("====== project edit ======");
+
+  return (dispatch) => {
+    dispatch(request());
+
+    issueService.edit()
+            .then(
+                (updatedIssue) => dispatch(success(updatedIssue)),
+                (error) => {
+                  dispatch(failure(error));
+                  // dispatch(alertActions.error(error));
+                }
+            );
+  };
+
+  function request() {
+    return {type: issueConstants.UPDATE_REQUEST};
+  }
+  function success(updatedIssue) {
+    // console.log("********* action got updatedIssue: " + JSON.stringify(updatedIssue) );
+    return {type: issueConstants.UPDATE_SUCCESS, updatedIssue};
+  }
+  function failure(error) {
+    // console.log("********* action got updatedIssue failure: " +error );
+    return {type: issueConstants.UPDATE_FAILURE, error};
+  }
+}// edit
 
 

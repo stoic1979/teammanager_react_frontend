@@ -1,6 +1,6 @@
 import {settings} from "../config"
 
-export const issueService = { getAll,create };
+export const issueService = { getAll, create, edit };
 
 function _getToken() {
   var user = JSON.parse(localStorage.getItem('user'));
@@ -87,6 +87,31 @@ function getAll(selectedProject) {
     });
 }// getAll
 
+function edit(id) {
 
+  console.log("====== issue-service edit ======");
+
+    const requestOptions = {
+        method: 'PUT',
+        headers: {'x-access-token': _getToken()},
+    };
+    const url = `${settings.API_ROOT}/issues/edit/${id}`
+    return fetch(url, requestOptions)
+    .then((response) => {
+
+          console.log("+++++++ resp: " + response);
+
+          if (!response.ok) {
+            return Promise.reject(response.statusText);
+          }
+
+          return response.json();
+        })
+    .then((updatedIssue) => {
+      console.log(`++++++++ issue-service edit updatedIssue: ${  JSON.stringify(updatedIssue)}` );
+
+      return updatedIssue;
+    });
+}// edit
 
 

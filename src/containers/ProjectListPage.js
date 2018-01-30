@@ -3,6 +3,7 @@ import FlatButton from 'material-ui/FlatButton';
 import { grey500} from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {Table,TableBody,TableHeader,TableHeaderColumn,TableRow,TableRowColumn} from 'material-ui/Table';
+import Edit from 'material-ui/svg-icons/editor/mode-edit';
 
 import { connect } from 'react-redux';
 import {projectActions} from '../actions';
@@ -29,32 +30,43 @@ class ProjectListPage extends React.Component {
     const {dispatch} = this.props;
     var resp = dispatch(projectActions.getAll());
 
-    this.handleRowSelection = this.handleRowSelection.bind(this); 
+    this.handleCellClick = this.handleCellClick.bind(this); 
   }
 
-  // --------------------------------
-  // handleRowSelection
-  // --------------------------------
+  // -----------------------------
+  // handleCellClick
+  // -----------------------------
 
-  handleRowSelection = (key) => {
+  handleCellClick(row,column,event){
+
     const {dispatch} = this.props;
-    var project_id='';
+    var project = '';
 
-    if (this.props.projects) {
-      for (var i = key; i <=this.props.projects[i]; i++) {
-        console.log(`abc++++ :${  JSON.stringify(this.props.projects[i])}`);
-        var project = this.props.projects[i];
-        project_id=project._id;
+    if(column == 6){
+      this.props.history.push('/editProject');
+    }
+
+    else if (this.props.projects) {
+      console.log('[handleCellClick] ' +row);
+      for (var i = 0; i < this.props.projects.length; i++) {
+        console.log(`[handleCellClick] :${  JSON.stringify(this.props.projects[i])}`);
+        if( i == row) {
+          var project = this.props.projects[i];
+          project=project._id;
+
+        }
+
+        dispatch(projectActions.selectedProject(project));
+        console.log('[handleCellClick] project_id '+project);
+        localStorage.setItem('project_id',project);
+        this.props.history.push('/issueList');
       }
     }
-    console.log('[projectActions] selectedProject id '+project_id);
-    dispatch(projectActions.selectedProject(project_id));
 
-    console.log("ProjectListPage :: row is selected, key=" + key);
-    localStorage.setItem('project_id',project_id);
-
-    this.props.history.push('/issueList');
-  };
+    
+    console.log('cell clicked of row '+row +" and column "+column);
+  }
+  
   render() {
 
     // console.log(`---> render got projects: ${  JSON.stringify(this.props.projects)}`);
@@ -70,7 +82,9 @@ class ProjectListPage extends React.Component {
             <TableRowColumn>{project.title}</TableRowColumn>
             <TableRowColumn>{project.description}</TableRowColumn>
             <TableRowColumn>{project.manager.first_name} {project.manager.last_name}</TableRowColumn>
-            <TableRowColumn>{project.created_at}</TableRowColumn>
+            <TableRowColumn>{project.start_date}</TableRowColumn>
+            <TableRowColumn>{project.end_date}</TableRowColumn>
+            <TableRowColumn><Edit/></TableRowColumn>
           </TableRow>
           );
         }
@@ -86,14 +100,16 @@ class ProjectListPage extends React.Component {
                 href="/createProject"
             />
             <h2>Projects</h2>
-            <Table onRowSelection={this.handleRowSelection} >
+            <Table onCellClick = {this.handleCellClick}  >
               <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-                <TableRow>
+                <TableRow >
                   <TableHeaderColumn style={{width: '5px'}}>#</TableHeaderColumn>
                   <TableHeaderColumn>Title</TableHeaderColumn>
                   <TableHeaderColumn>Description</TableHeaderColumn>
                   <TableHeaderColumn>Manager</TableHeaderColumn>
-                  <TableHeaderColumn>Created At</TableHeaderColumn>
+                  <TableHeaderColumn>Start Date</TableHeaderColumn>
+                  <TableHeaderColumn>End Date</TableHeaderColumn>
+                  <TableHeaderColumn>Edit</TableHeaderColumn>
                 </TableRow>
               </TableHeader>
               <TableBody displayRowCheckbox={false}>

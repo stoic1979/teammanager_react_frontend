@@ -40,10 +40,10 @@ const styles = {
 
 //---------------------------------------------------
 //
-//         CREATE ISSUE PAGE
+//         EDIT ISSUE PAGE
 //
 //---------------------------------------------------
-class CreateIssuePage extends React.Component {
+class EditIssuePage extends React.Component {
 
   // ------------------------------------------------
   // constructor
@@ -81,7 +81,6 @@ class CreateIssuePage extends React.Component {
 
     const {dispatch} = this.props;
       dispatch(projectActions.getAll());
-      dispatch(projectActions.getSelectedProject());
       dispatch(userActions.getAll());
   }
 
@@ -156,19 +155,6 @@ class CreateIssuePage extends React.Component {
   }
   
 render() {
-  var current_project;
-  // var project;
-  if(this.props.selectedProject){
-    current_project = JSON.stringify(this.props.selectedProject.project);
-    // project = JSON.stringify(this.props.selectedProject.project._id);
-    console.log('[Create Issue] selectedProject+ '+current_project);
-  }
-  else if(this.props.latest_project){
-      current_project = JSON.stringify(this.props.latest_project.title);
-      // project = JSON.stringify(this.props.latest_project._id);
-      console.log('[Create Issue] latest_project+ '+current_project);
-  }
-
   var item=[];
     if (this.props.projects) {
       for (var i = 0; i < this.props.projects.length; i++) {
@@ -199,7 +185,7 @@ render() {
         {this.props.alert.message}
         <form name="form" onSubmit={this.handleSubmit}> 
           <div style={styles.Container}>
-            <h3>Add Issue </h3>
+            <h3>Edit Issue </h3>
             <Container>
               <Row>
                 <Col sm={6}>
@@ -321,5 +307,5 @@ function mapStateToProps(state) {
   };
 }
 
-const connectedCreateIssuePage = connect(mapStateToProps)(CreateIssuePage);
-export {connectedCreateIssuePage as CreateIssuePage};
+const connectedEditIssuePage = connect(mapStateToProps)(EditIssuePage);
+export {connectedEditIssuePage as EditIssuePage};

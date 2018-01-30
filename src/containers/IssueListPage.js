@@ -3,6 +3,8 @@ import FlatButton from 'material-ui/FlatButton';
 import { grey500 } from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Table,TableBody,TableHeader,TableHeaderColumn,TableRow,TableRowColumn } from 'material-ui/Table';
+import Edit from 'material-ui/svg-icons/editor/mode-edit';
+import { resolve } from "react-resolver";
 
 import { connect } from 'react-redux';
 import {projectActions} from '../actions';
@@ -18,6 +20,13 @@ const styles={
   },
 };
 
+
+// @resolve("project", function(props) {
+//   const {dispatch} = this.props;
+//   return dispatch(projectActions.getSelectedProject());
+//   // dispatch(projectActions.getAll());
+// })
+
 //---------------------------------------------------
 //
 //         ISSUE LIST PAGE
@@ -26,51 +35,70 @@ const styles={
 
 class IssueListPage extends React.Component {
 
-  componentDidMount() {
-    
-    var p_id = '';
+  constructor(props){
+    super(props)
 
+    
+  }
+
+  // componentWillMount(){
+  //   const {dispatch} = this.props;
+  //   dispatch(projectActions.getSelectedProject());
+  //   dispatch(projectActions.getAll());
+  // }
+
+  componentDidMount() {
+
+    var p_id ;
+    const {dispatch} = this.props;
+    console.log('[componentDidMount] projects'+JSON.stringify(this.props.projects));
+    console.log('[componentDidMount] selectedProject'+JSON.stringify(this.props.selectedProject));
     if(this.props.selectedProject){ 
-      p_id = this.props.selectedProject;
-      console.log('------selectedProject p_id '+p_id);
+      p_id = this.props.selectedProject.project._id;
+      console.log('[componentDidMount] selectedProject p_id '+p_id);
     }
     else if (localStorage.getItem('project_id')){
       p_id = localStorage.getItem('project_id');
-      console.log('-------- localStorage p_id -----> '+localStorage.getItem('project_id'));
+      console.log('[componentDidMount] latest_project p_id '+p_id);
     }
-    else if( this.props.latest_project){
+    else if (this.props.latest_project){
       p_id = this.props.latest_project._id;
-      console.log('-------- latest_project p_id ++ '+p_id);
+      console.log('[componentDidMount] latest_project p_id '+p_id);
     }
     else {
-      // Fix me Later
+      // FIX ME LATER
     }
-    console.log('[componentDidMount] latest_project '+this.props.projects);
-    const {dispatch} = this.props;
+
     var issues = dispatch(issueActions.getAll(p_id));
-    this.handleRowSelection = this.handleRowSelection.bind(this); 
+    this.handleCellClick = this.handleCellClick.bind(this); 
   }
 
+
   componentWillReceiveProps(nextProps) {
-    // Update the latest_project with new data every time we receive props.
+
     if(nextProps.latest_project){
 
       var p_id = JSON.stringify(nextProps.latest_project._id);
       console.log('[componentWillReceiveProps] latest_project  '+JSON.stringify(nextProps.latest_project._id));
     }
   }
+
   // --------------------------------
   // handleRowSelection
   // --------------------------------
 
-  handleRowSelection = (key) => {
-    
-  };
-  render() {
+  handleCellClick(row,column,event){
+    if(column == 6){
+      this.props.history.push('/editIssue');
+    } 
+  }
 
+  render() {
+     const {project} =this.props;
+   console.log('project '+project);
     // console.log(`---> render got projects: ${  JSON.stringify(this.props.projects)}`);
     if(this.props.latest_project){
-      var c = JSON.stringify(this.props.latest_project);
+      var c = JSON.stringify(this.props.latest_project.title);
       console.log('[Issue List] latest_project+ '+c);
     }
    var tableBody = [];
@@ -85,6 +113,7 @@ class IssueListPage extends React.Component {
             <TableRowColumn>{issue.type} </TableRowColumn>
             <TableRowColumn>{issue.status}</TableRowColumn>
             <TableRowColumn>{issue.priority}</TableRowColumn>
+            <TableRowColumn><Edit/></TableRowColumn>
           </TableRow>
           );
         }
@@ -100,7 +129,7 @@ class IssueListPage extends React.Component {
                 href="/createIssue"
             />
             <h2>Issues</h2>
-            <Table onRowSelection={this.handleRowSelection} >
+            <Table onCellClick = {this.handleCellClick} >
               <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                 <TableRow>
                     <TableHeaderColumn style={{width: '5px'}}>#</TableHeaderColumn>
@@ -109,6 +138,7 @@ class IssueListPage extends React.Component {
                     <TableHeaderColumn>Type</TableHeaderColumn>
                     <TableHeaderColumn>Status</TableHeaderColumn>
                     <TableHeaderColumn>Priority</TableHeaderColumn>
+                    <TableHeaderColumn>Edit</TableHeaderColumn>
                   </TableRow>
                 </TableHeader>
                 <TableBody displayRowCheckbox={false}>
@@ -123,7 +153,7 @@ class IssueListPage extends React.Component {
 
 function mapStateToProps(state) {
   const {alert} = state;
-  console.log(`---> IssueListPage got state: ${  JSON.stringify(state)}` );
+  console.log(`---> IssueListPage got state: ${  JSON.stringify(state.selectedProject)}` );
   return {
     alert,
     projects: state.projects.projects,

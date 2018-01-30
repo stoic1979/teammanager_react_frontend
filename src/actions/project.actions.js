@@ -4,12 +4,12 @@ import {alertActions} from './';
 
 
 export const projectActions = {
-  
   getAll,
   getById,
   create,
-  selectedProject
-  
+  selectedProject,
+  getSelectedProject,
+  edit
 };
 
 // -----------------------------------------------------------------------------
@@ -69,8 +69,6 @@ function getAll() {
             );
   };
 
-  
-
   function request() {
     return {type: projectConstants.GETALL_REQUEST};
   }
@@ -115,10 +113,93 @@ function getById(key){
   }
 }// getById
 
-function selectedProject(key){
-    console.log("++++ issue actions, selectedProject() key: ", key);
-    return {
-        type: projectConstants.SELECTED_PROJECT,
-        payload: key
-    }
-}
+function selectedProject(selectedProject){
+   console.log('[project-action] create()');
+
+  return (dispatch) => {
+    dispatch(request({selectedProject}));
+
+    projectService.selectedProject(selectedProject)
+            .then(
+                (selectedProject) => {
+                  dispatch(success(selectedProject));
+                  console.log('action:create project: push /');
+                  // browserHistory.push('/familyList');
+                },
+                (error) => {
+                  dispatch(failure(error));
+                  // dispatch(alertActions.error(error));
+                }
+            );
+  };
+
+  function request(selectedProject) {
+    return {type: projectConstants.SELECTED_PROJECT_REQUEST};
+  }
+  function success(selectedProject) {
+    return {type: projectConstants.SELECTED_PROJECT_SUCCESS, selectedProject};
+  }
+  function failure(error) {
+    return {type: projectConstants.SELECTED_PROJECT_FAILURE, error};
+  }
+}// selectedProject
+
+function getSelectedProject() {
+
+  console.log("====== getSelectedProject ======");
+
+  return (dispatch) => {
+    dispatch(request());
+
+    projectService.getSelectedProject()
+            .then(
+                (selectedProject) => dispatch(success(selectedProject)),
+                (error) => {
+                  dispatch(failure(error));
+                  // dispatch(alertActions.error(error));
+                }
+            );
+  };
+
+  function request() {
+    return {type: projectConstants.SELECTED_PROJECT_GET_REQUEST};
+  }
+  function success(selectedProject) {
+    // console.log("********* action got selectedProject: " + JSON.stringify(selectedProject) );
+    return {type: projectConstants.SELECTED_PROJECT_GET_SUCCESS, selectedProject};
+  }
+  function failure(error) {
+    // console.log("********* action got selectedProject failure: " +error );
+    return {type: projectConstants.SELECTED_PROJECT_GET_FAILURE, error};
+  }
+}// getSelectedProject
+
+function edit(id) {
+
+  console.log("====== project edit ======");
+
+  return (dispatch) => {
+    dispatch(request());
+
+    projectService.edit()
+            .then(
+                (updatedProject) => dispatch(success(updatedProject)),
+                (error) => {
+                  dispatch(failure(error));
+                  // dispatch(alertActions.error(error));
+                }
+            );
+  };
+
+  function request() {
+    return {type: projectConstants.UPDATE_REQUEST};
+  }
+  function success(updatedProject) {
+    // console.log("********* action got updatedProject: " + JSON.stringify(updatedProject) );
+    return {type: projectConstants.UPDATE_SUCCESS, updatedProject};
+  }
+  function failure(error) {
+    // console.log("********* action got updatedProject failure: " +error );
+    return {type: projectConstants.UPDATE_FAILURE, error};
+  }
+}// edit
