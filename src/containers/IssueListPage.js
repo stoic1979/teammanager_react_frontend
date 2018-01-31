@@ -57,7 +57,9 @@ class IssueListPage extends React.Component {
     var project = this.state;
     console.log('[componentDidMount] state '+JSON.stringify(project));
     console.log('[componentDidMount] projects'+JSON.stringify(this.props.projects));
+    console.log('[componentDidMount] latest_project '+JSON.stringify(this.props.latest_project));
     console.log('[componentDidMount] selectedProject'+JSON.stringify(this.props.selectedProject));
+    console.log(' [componentDidMount] localStorage ')
     if(this.props.selectedProject){ 
       p_id = this.props.selectedProject.project._id;
       console.log('[componentDidMount] selectedProject p_id '+p_id);
