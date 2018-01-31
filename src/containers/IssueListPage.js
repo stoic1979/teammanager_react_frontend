@@ -49,8 +49,12 @@ class IssueListPage extends React.Component {
 
   componentDidMount() {
 
-    var p_id ;
     const {dispatch} = this.props;
+    dispatch(projectActions.getSelectedProject());
+    dispatch(projectActions.getAll());
+
+    var p_id ;
+    
     console.log('[componentDidMount] projects'+JSON.stringify(this.props.projects));
     console.log('[componentDidMount] selectedProject'+JSON.stringify(this.props.selectedProject));
     if(this.props.selectedProject){ 
@@ -170,7 +174,7 @@ class IssueListPage extends React.Component {
 
 function mapStateToProps(state) {
   const {alert} = state;
-  console.log(`---> IssueListPage got state: ${  JSON.stringify(state.selectedProject)}` );
+  // console.log(`---> IssueListPage got state: ${  JSON.stringify(state.selectedProject)}` );
   return {
     alert,
     projects: state.projects.projects,

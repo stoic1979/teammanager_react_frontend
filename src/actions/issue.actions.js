@@ -76,7 +76,7 @@ function getAll(selectedProject) {
     return {type: issueConstants.GETALL_REQUEST};
   }
   function success(issues) {
-    console.log("********* action got issues: " + JSON.stringify(issues) );
+    // console.log("********* action got issues: " + JSON.stringify(issues) );
     return {type: issueConstants.GETALL_SUCCESS, issues};
   }
   function failure(error) {

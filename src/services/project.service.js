@@ -190,6 +190,6 @@ function edit(id) {
       console.log(`++++++++ project-service edit updatedProject: ${  JSON.stringify(updatedProject)}` );
 
       return updatedProject;
-    });
+    }); 
 }// edit
 

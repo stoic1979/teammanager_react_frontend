@@ -81,7 +81,7 @@ function getAll(selectedProject) {
           return response.json();
         })
     .then((issues) => {
-      console.log(`++++++++ issue-service getAll issue_resp: ${  JSON.stringify(issues)}` );
+      // console.log(`++++++++ issue-service getAll issue_resp: ${  JSON.stringify(issues)}` );
 
       return issues;
     });
@@ -108,7 +108,7 @@ function edit(id) {
           return response.json();
         })
     .then((updatedIssue) => {
-      console.log(`++++++++ issue-service edit updatedIssue: ${  JSON.stringify(updatedIssue)}` );
+      // console.log(`++++++++ issue-service edit updatedIssue: ${  JSON.stringify(updatedIssue)}` );
 
       return updatedIssue;
     });

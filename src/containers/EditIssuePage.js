@@ -156,6 +156,7 @@ class EditIssuePage extends React.Component {
   }
   
 render() {
+  // console.log('selectedIssue '+this.props.selectedIssue.issue);
   var item=[];
     if (this.props.projects) {
       for (var i = 0; i < this.props.projects.length; i++) {
@@ -297,7 +298,7 @@ render() {
 
 function mapStateToProps(state) {
   const {alert} = state;
-  console.log("create issue got state" + JSON.stringify(state));
+  console.log("create issue got state" + JSON.stringify(state.selectedIssue));
   return {
     alert,
     projects: state.projects.projects,
