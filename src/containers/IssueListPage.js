@@ -37,24 +37,25 @@ class IssueListPage extends React.Component {
 
   constructor(props){
     super(props)
-
-    
+      this.state = {     
+      project:''
+    }
+    console.log('[constructor]' +JSON.stringify(this.state));
+   
   }
-
-  // componentWillMount(){
-  //   const {dispatch} = this.props;
-  //   dispatch(projectActions.getSelectedProject());
-  //   dispatch(projectActions.getAll());
-  // }
+  componentWillMount(){
+    const {dispatch} = this.props;
+    dispatch(projectActions.getAll());
+  }
 
   componentDidMount() {
 
     const {dispatch} = this.props;
-    dispatch(projectActions.getSelectedProject());
     dispatch(projectActions.getAll());
 
     var p_id ;
-    
+    var project = this.state;
+    console.log('[componentDidMount] state '+JSON.stringify(project));
     console.log('[componentDidMount] projects'+JSON.stringify(this.props.projects));
     console.log('[componentDidMount] selectedProject'+JSON.stringify(this.props.selectedProject));
     if(this.props.selectedProject){ 
@@ -63,7 +64,7 @@ class IssueListPage extends React.Component {
     }
     else if (localStorage.getItem('project_id')){
       p_id = localStorage.getItem('project_id');
-      console.log('[componentDidMount] latest_project p_id '+p_id);
+      console.log('[componentDidMount] localStorage p_id '+p_id);
     }
     else if (this.props.latest_project){
       p_id = this.props.latest_project._id;
@@ -79,10 +80,11 @@ class IssueListPage extends React.Component {
 
 
   componentWillReceiveProps(nextProps) {
+    var p_id;
 
     if(nextProps.latest_project){
 
-      var p_id = JSON.stringify(nextProps.latest_project._id);
+      var p_id = nextProps.latest_project._id;
       console.log('[componentWillReceiveProps] latest_project  '+JSON.stringify(nextProps.latest_project._id));
     }
   }
@@ -111,11 +113,25 @@ class IssueListPage extends React.Component {
         this.props.history.push('/editIssue');
       }
     }
-  console.log('cell clicked of row '+row +" and column "+column);
+    else {
+      for (var i = 0; i < this.props.issues.length; i++) {
+        console.log(`[handleCellClick] :${  JSON.stringify(this.props.issues[i])}`);
+
+        if( i == row) {
+          var issue = this.props.issues[i];
+          issue = issue._id;
+        }
+
+        dispatch(issueActions.selectedIssue(issue));
+        console.log('[handleCellClick] issue_id '+issue);
+        localStorage.setItem('issue_id',issue);
+      }
+    }
+    console.log('cell clicked of row '+row +" and column "+column);
   }
 
   render() {
-     const {project} =this.props;
+    const {project} =this.props;
    console.log('project '+project);
     // console.log(`---> render got projects: ${  JSON.stringify(this.props.projects)}`);
     if(this.props.latest_project){

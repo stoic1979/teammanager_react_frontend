@@ -8,7 +8,6 @@ export const projectActions = {
   getById,
   create,
   selectedProject,
-  getSelectedProject,
   edit
 };
 
@@ -113,67 +112,6 @@ function getById(key){
   }
 }// getById
 
-function selectedProject(selectedProject){
-   console.log('[project-action] create()');
-
-  return (dispatch) => {
-    dispatch(request({selectedProject}));
-
-    projectService.selectedProject(selectedProject)
-            .then(
-                (selectedProject) => {
-                  dispatch(success(selectedProject));
-                  console.log('action:create project: push /');
-                  // browserHistory.push('/familyList');
-                },
-                (error) => {
-                  dispatch(failure(error));
-                  // dispatch(alertActions.error(error));
-                }
-            );
-  };
-
-  function request(selectedProject) {
-    return {type: projectConstants.SELECTED_PROJECT_REQUEST};
-  }
-  function success(selectedProject) {
-    return {type: projectConstants.SELECTED_PROJECT_SUCCESS, selectedProject};
-  }
-  function failure(error) {
-    return {type: projectConstants.SELECTED_PROJECT_FAILURE, error};
-  }
-}// selectedProject
-
-function getSelectedProject() {
-
-  console.log("====== getSelectedProject ======");
-
-  return (dispatch) => {
-    dispatch(request());
-
-    projectService.getSelectedProject()
-            .then(
-                (selectedProject) => dispatch(success(selectedProject)),
-                (error) => {
-                  dispatch(failure(error));
-                  // dispatch(alertActions.error(error));
-                }
-            );
-  };
-
-  function request() {
-    return {type: projectConstants.SELECTED_PROJECT_GET_REQUEST};
-  }
-  function success(selectedProject) {
-    // console.log("********* action got selectedProject: " + JSON.stringify(selectedProject) );
-    return {type: projectConstants.SELECTED_PROJECT_GET_SUCCESS, selectedProject};
-  }
-  function failure(error) {
-    // console.log("********* action got selectedProject failure: " +error );
-    return {type: projectConstants.SELECTED_PROJECT_GET_FAILURE, error};
-  }
-}// getSelectedProject
-
 function edit(id) {
 
   console.log("====== project edit ======");
@@ -203,3 +141,12 @@ function edit(id) {
     return {type: projectConstants.UPDATE_FAILURE, error};
   }
 }// edit
+
+
+function selectedProject(key){
+    console.log("++++ project actions, selectedProject() key: ", key);
+    return {
+        type: projectConstants.PROJECT_SELECTED,
+        payload: key
+    }
+}

@@ -80,9 +80,8 @@ class EditIssuePage extends React.Component {
   componentDidMount() {
 
     const {dispatch} = this.props;
-      dispatch(projectActions.getAll());
-      dispatch(userActions.getAll());
-      dispatch(issueActions.getSelectedIssue());
+    dispatch(projectActions.getAll());
+    dispatch(userActions.getAll());
   }
 
   // ------------------------------------------------------------
@@ -157,6 +156,14 @@ class EditIssuePage extends React.Component {
   
 render() {
   // console.log('selectedIssue '+this.props.selectedIssue.issue);
+  if (this.props.selectedProject) {
+      for (var i = 0; i < this.props.selectedProject.length; i++) {
+        // console.log(`selectedProject ${  i + 1  }:${  JSON.stringify(this.props.selectedProject[i])}`);
+        var pro = this.props.selectedProject[i];
+        console.log('id++ '+JSON.stringify(pro.project._id));
+       
+       }
+    }
   var item=[];
     if (this.props.projects) {
       for (var i = 0; i < this.props.projects.length; i++) {
@@ -298,7 +305,7 @@ render() {
 
 function mapStateToProps(state) {
   const {alert} = state;
-  console.log("create issue got state" + JSON.stringify(state.selectedIssue));
+  console.log("edit issue got state" + JSON.stringify(state.selectedIssue));
   return {
     alert,
     projects: state.projects.projects,

@@ -1,6 +1,6 @@
 import {settings} from "../config"
 
-export const issueService = { getAll, create, edit, selectedIssue, getSelectedIssue };
+export const issueService = { getAll, create, edit};
 
 function _getToken() {
   var user = JSON.parse(localStorage.getItem('user'));
@@ -114,60 +114,3 @@ function edit(id) {
     });
 }// edit
 
-// -----------------------------------------------------------------------------
-//     SELECTED PROJECT
-// -----------------------------------------------------------------------------
-function selectedIssue(selectedIssue) {
-  var body = `&issue=${ selectedIssue}`;
-  body += '&__v=0';
-  
-  console.log(`[issue-service] sending req, body: \n${  body}`);
-
-  const requestOptions = {
-    method: 'POST',
-    headers: {'x-access-token': _getToken(),'Content-Type': 'application/x-www-form-urlencoded'},
-    body: body,
-  };
-  const url = `${settings.API_ROOT}/issues/selectedIssue`
-  return fetch(url, requestOptions)
-        .then((response) => {
-          if (!response.ok) {
-            return Promise.reject(response.statusText);
-          }
-
-          return response.json();
-        })
-    .then((selectedIssue_resp) => {
-      // console.log(`issue-service create project resp: ${  JSON.stringify(selectedIssue_resp)}` );
-
-      return selectedIssue_resp;
-    })
-    .catch( (error) => {
-          console.log("==================> error: " + error);
-          return error;
-
-    });
-}// selectedProject
-
-
-function getSelectedIssue() {
-
-  console.log("====== issue-service getSelectedProject ======");
-  
-  const requestOptions = {
-        method: 'GET',
-        headers: {'x-access-token': _getToken()},
-    };
-    const url = `${settings.API_ROOT}/issues/selectedIssue`
-    return fetch(url, requestOptions)
-    .then((response) => {
-      // console.log("+++++++ resp: " + response);
-      if (!response.ok) {
-        return Promise.reject(response.statusText);
-      }
-      return response.json();
-    })
-    .then((selectedIssue) => {
-      return selectedIssue;
-    });
-}// getSelectedProject

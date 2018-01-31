@@ -13,6 +13,10 @@ export function issues(state = {}, action) {
       return {
         error: action.error,
       };
+    case issueConstants.SELECTED_PROJECT:
+      return {
+        selectedIssue: action.payload,
+      };
     default:
       return state;
   }

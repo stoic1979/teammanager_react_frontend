@@ -1,6 +1,6 @@
 import {settings} from "../config"
 
-export const projectService = { getAll, getById, create , selectedProject, getSelectedProject};
+export const projectService = { getAll, getById, create };
 
 function _getToken() {
   var user = JSON.parse(localStorage.getItem('user'));
@@ -54,63 +54,6 @@ function create(project_data) {
     });
 }// create
 
-// -----------------------------------------------------------------------------
-//     SELECTED PROJECT
-// -----------------------------------------------------------------------------
-function selectedProject(selectedProject) {
-  var body = `&project=${ selectedProject}`;
-  body += '&__v=0';
-  
-  console.log(`[project-service] sending req, body: \n${  body}`);
-
-  const requestOptions = {
-    method: 'POST',
-    headers: {'x-access-token': _getToken(),'Content-Type': 'application/x-www-form-urlencoded'},
-    body: body,
-  };
-  const url = `${settings.API_ROOT}/projects/selectedProject`
-  return fetch(url, requestOptions)
-        .then((response) => {
-          if (!response.ok) {
-            return Promise.reject(response.statusText);
-          }
-
-          return response.json();
-        })
-    .then((selectedProject_resp) => {
-      // console.log(`project-service create project resp: ${  JSON.stringify(project_resp)}` );
-
-      return selectedProject_resp;
-    })
-    .catch( (error) => {
-          console.log("==================> error: " + error);
-          return error;
-
-    });
-}// selectedProject
-
-
-function getSelectedProject() {
-
-  console.log("====== project-service getSelectedProject ======");
-  
-  const requestOptions = {
-        method: 'GET',
-        headers: {'x-access-token': _getToken()},
-    };
-    const url = `${settings.API_ROOT}/projects/selectedProject`
-    return fetch(url, requestOptions)
-    .then((response) => {
-      // console.log("+++++++ resp: " + response);
-      if (!response.ok) {
-        return Promise.reject(response.statusText);
-      }
-      return response.json();
-    })
-    .then((selectedProject) => {
-      return selectedProject;
-    });
-}// getSelectedProject
 
 function getAll() {
 

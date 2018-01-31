@@ -60,7 +60,6 @@ class EditProjectPage extends React.Component {
 
     const {dispatch} = this.props;
     dispatch(userActions.getAll());
-    dispatch(projectActions.getSelectedProject());
   }
 
   // ----------------------------------------------

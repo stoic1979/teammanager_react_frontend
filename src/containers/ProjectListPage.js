@@ -41,19 +41,22 @@ class ProjectListPage extends React.Component {
 
     const {dispatch} = this.props;
     var project = '';
+    var project_title = '';
 
     if(column == 6){
       for (var i = 0; i < this.props.projects.length; i++) {
         console.log(`[handleCellClick] :${  JSON.stringify(this.props.projects[i])}`);
 
         if( i == row) {
-          var project = this.props.projects[i];
-          project=project._id;
+          var pro = this.props.projects[i];
+          project=pro._id;
+          project_title = pro.title;
         }
 
         dispatch(projectActions.selectedProject(project));
-        console.log('[handleCellClick] project_id '+project);
+        console.log('[handleCellClick] project_id '+project + " and project_title "+project_title);
         localStorage.setItem('project_id',project);
+        localStorage.setItem('project_title',project_title);
         this.props.history.push('/editProject');
       }
     }
@@ -63,14 +66,15 @@ class ProjectListPage extends React.Component {
       for (var i = 0; i < this.props.projects.length; i++) {
         console.log(`[handleCellClick] :${  JSON.stringify(this.props.projects[i])}`);
         if( i == row) {
-          var project = this.props.projects[i];
-          project=project._id;
-
+          var pro = this.props.projects[i];
+          project=pro._id;
+          project_title = pro.title;
         }
 
         dispatch(projectActions.selectedProject(project));
-        console.log('[handleCellClick] project_id '+project);
+        console.log('[handleCellClick] project_id '+project + " and project_title "+project_title);
         localStorage.setItem('project_id',project);
+        localStorage.setItem('project_title',project_title);
         this.props.history.push('/issueList');
       }
     }

@@ -51,8 +51,8 @@ class CreateIssuePage extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = {     
-      project:'',
+    this.state = {  
+      project:'',   
       assignee:'',
       summary:'',
       description:'',
@@ -80,9 +80,8 @@ class CreateIssuePage extends React.Component {
   componentDidMount() {
 
     const {dispatch} = this.props;
-      dispatch(projectActions.getAll());
-      dispatch(projectActions.getSelectedProject());
-      dispatch(userActions.getAll());
+    dispatch(projectActions.getAll());
+    dispatch(userActions.getAll());
   }
 
   // ------------------------------------------------------------
@@ -134,14 +133,26 @@ class CreateIssuePage extends React.Component {
   // ------------------------------------------------
 
   handleSubmit(e) {
-     
+    
+    if (this.props.selectedProject) {
+     var project = this.props.selectedProject._id;
+      console.log('[handleSubmit] selectedProject id++ '+project);
+    }
+    else if (localStorage.getItem('project_id')){
+      var project = localStorage.getItem('project_id');
+      console.log('[handleSubmit] localStorage  id++ '+project);
+    }
+    else if(this.props.latest_project){
+      var project = this.props.latest_project._id;
+      console.log('[handleSubmit] latest_project id++ '+project);
+    }
     e.preventDefault();
     console.log("submit state---------------" +JSON.stringify(this.state));
     console.log('-- create issue handleSubmit --');
 
     this.setState({submitted: true});
     console.log(this.state);
-    const {assignee, project, summary, description, type, priority, status, estimated_hours, start_date, end_date, created_at, updated_at } = this.state;
+    const {assignee, summary, description, type, priority, status, estimated_hours, start_date, end_date, created_at, updated_at } = this.state;
     var  issue_data={assignee, project, summary, description, type, priority,  status, estimated_hours, start_date, end_date, created_at, updated_at};
     const {dispatch} = this.props;
     console.log("issue_data" +JSON.stringify(issue_data));
@@ -156,26 +167,26 @@ class CreateIssuePage extends React.Component {
   }
   
 render() {
-  var current_project;
-  // var project;
-  if(this.props.selectedProject){
-    current_project = JSON.stringify(this.props.selectedProject.project);
-    // project = JSON.stringify(this.props.selectedProject.project._id);
-    console.log('[Create Issue] selectedProject+ '+current_project);
+  
+  var current_project_title;
+  if (this.props.selectedProject) {
+    console.log(' [render] selectedProject '+this.props.selectedProject.title);
+    current_project_title = this.props.selectedProject.title;   
+  }
+  else if(localStorage.getItem('project_title')){
+    console.log(' [render] localStorage project '+localStorage.getItem('project_title'));
+    current_project_title = localStorage.getItem('project_title');
   }
   else if(this.props.latest_project){
-      current_project = JSON.stringify(this.props.latest_project.title);
-      // project = JSON.stringify(this.props.latest_project._id);
-      console.log('[Create Issue] latest_project+ '+current_project);
+    console.log(' [render] latest_project '+this.props.latest_project.title);
+    current_project_title = this.props.latest_project.title;
   }
-
+  
   var item=[];
     if (this.props.projects) {
       for (var i = 0; i < this.props.projects.length; i++) {
-
-        console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
+        // console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
         var pro = this.props.projects[i];
-
         item.push(
           <MenuItem value={pro._id} primaryText={pro.title} />
           );
@@ -189,9 +200,9 @@ render() {
         var user=this.props.users[i];
         Items.push(
           <MenuItem value={user._id} primaryText={user.first_name +" "+ user.last_name} />
-          );
-        }
+        );
       }
+    }
   const {assignee, project, summary, description, type, priority, status, estimated_hours, start_date, end_date, created_at, updated_at} = this.state;
   return (
     <div>
@@ -199,19 +210,10 @@ render() {
         {this.props.alert.message}
         <form name="form" onSubmit={this.handleSubmit}> 
           <div style={styles.Container}>
-            <h3>Add Issue </h3>
+            <h3>Add Issue to {current_project_title }</h3>
             <Container>
               <Row>
                 <Col sm={6}>
-                  <SelectField
-                    floatingLabelText="Project "
-                    name="project"
-                    value={this.state.project}
-                    onChange={this.handleProject}
-                    style={styles.customWidth}
-                  >
-                    {item}
-                  </SelectField>
                   <TextField
                     hintText="Summary"
                     floatingLabelText="Summary"
@@ -237,12 +239,25 @@ render() {
                     <MenuItem value={"BUG"} primaryText="Bug " />
                     <MenuItem value={"ENHANCEMENT"} primaryText="Enhancement" />
                   </SelectField>
-                  <DatePicker
+                   <DatePicker
                     floatingLabelText="Start Date"
                     hintText="Start Date"
                     value={this.state.start_date}
                     onChange={this.handleStartDate}
                   />
+                   <SelectField
+                    floatingLabelText="Status "
+                    name="status"
+                    value={this.state.status}
+                    onChange={this.handleStatus}
+                    style={styles.customWidth}
+                  >
+                    <MenuItem value={"NOT-STARTED"} primaryText="Not-Started" />
+                    <MenuItem value={"WORKING"} primaryText="Working " />
+                    <MenuItem value={"TESTING"} primaryText="Testing" />
+                    <MenuItem value={"CLOSED"} primaryText="Closed " />
+                    <MenuItem value={"REOPENED"} primaryText="Reopened" />
+                  </SelectField>
                 </Col>
                 <Col sm={6}>
                   <SelectField
@@ -263,19 +278,6 @@ render() {
                     multiLine={true}
                     rows={2}
                   />
-                  <SelectField
-                    floatingLabelText="Status "
-                    name="status"
-                    value={this.state.status}
-                    onChange={this.handleStatus}
-                    style={styles.customWidth}
-                  >
-                    <MenuItem value={"NOT-STARTED"} primaryText="Not-Started" />
-                    <MenuItem value={"WORKING"} primaryText="Working " />
-                    <MenuItem value={"TESTING"} primaryText="Testing" />
-                    <MenuItem value={"CLOSED"} primaryText="Closed " />
-                    <MenuItem value={"REOPENED"} primaryText="Reopened" />
-                  </SelectField>
                   <SelectField
                     floatingLabelText="Priority "
                     name="priority"

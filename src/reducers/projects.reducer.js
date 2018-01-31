@@ -24,10 +24,10 @@ export function projects(state = {}, action) {
       return {
         error: action.error,
       };
-    // case projectConstants.SELECTED_PROJECT:
-    //   return {
-    //     selectedProject: action.payload,
-    //   };
+    case projectConstants.SELECTED_PROJECT:
+      return {
+        selectedProject: action.payload,
+      };
     default:
       return state;
   }
