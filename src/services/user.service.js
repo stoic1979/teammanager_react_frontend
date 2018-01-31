@@ -17,6 +17,11 @@ function _getToken() {
 }
 
 function login(history,email, password) {
+    localStorage.removeItem('user');
+    localStorage.removeItem('project_id');
+    localStorage.removeItem('issue_id');
+    localStorage.removeItem('project_title');
+    
     var body = `email=${email  }&password=${  password}`;
 
     const requestOptions = {
@@ -72,7 +77,8 @@ function logout(history) {
     // remove user from local storage to log user out
     localStorage.removeItem('user');
     localStorage.removeItem('project_id');
-    localStorage.removeItem('API');
+    localStorage.removeItem('issue_id');
+    localStorage.removeItem('project_title');
     history.push("/login");
 }
 
