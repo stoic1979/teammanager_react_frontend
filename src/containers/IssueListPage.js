@@ -83,14 +83,31 @@ class IssueListPage extends React.Component {
     }
   }
 
-  // --------------------------------
-  // handleRowSelection
-  // --------------------------------
+   // -----------------------------
+  // handleCellClick
+  // -----------------------------
 
   handleCellClick(row,column,event){
+
+    const {dispatch} = this.props;
+    var issue = '';
+
     if(column == 6){
-      this.props.history.push('/editIssue');
-    } 
+      for (var i = 0; i < this.props.issues.length; i++) {
+        console.log(`[handleCellClick] :${  JSON.stringify(this.props.issues[i])}`);
+
+        if( i == row) {
+          var issue = this.props.issues[i];
+          issue = issue._id;
+        }
+
+        dispatch(issueActions.selectedIssue(issue));
+        console.log('[handleCellClick] issue_id '+issue);
+        localStorage.setItem('issue_id',issue);
+        this.props.history.push('/editIssue');
+      }
+    }
+  console.log('cell clicked of row '+row +" and column "+column);
   }
 
   render() {

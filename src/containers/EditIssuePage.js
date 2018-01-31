@@ -82,6 +82,7 @@ class EditIssuePage extends React.Component {
     const {dispatch} = this.props;
       dispatch(projectActions.getAll());
       dispatch(userActions.getAll());
+      dispatch(issueActions.getSelectedIssue());
   }
 
   // ------------------------------------------------------------
@@ -158,8 +159,7 @@ render() {
   var item=[];
     if (this.props.projects) {
       for (var i = 0; i < this.props.projects.length; i++) {
-
-        console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
+        // console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
         var pro = this.props.projects[i];
 
         item.push(
@@ -297,12 +297,13 @@ render() {
 
 function mapStateToProps(state) {
   const {alert} = state;
-  // console.log("create issue got state" + JSON.stringify(state));
+  console.log("create issue got state" + JSON.stringify(state));
   return {
     alert,
     projects: state.projects.projects,
     latest_project: state.projects.latest_project,
     selectedProject: state.selectedProject,
+    selectedIssue: state.selectedIssue,
     users: state.users
   };
 }

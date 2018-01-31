@@ -106,13 +106,13 @@ function selectedIssue(selectedIssue){
   };
 
   function request(selectedIssue) {
-    return {type: issueConstants.SELECTED_PROJECT_REQUEST};
+    return {type: issueConstants.SELECTED_ISSUE_REQUEST};
   }
   function success(selectedIssue) {
-    return {type: issueConstants.SELECTED_PROJECT_SUCCESS, selectedIssue};
+    return {type: issueConstants.SELECTED_ISSUE_SUCCESS, selectedIssue};
   }
   function failure(error) {
-    return {type: issueConstants.SELECTED_PROJECT_FAILURE, error};
+    return {type: issueConstants.SELECTED_ISSUE_FAILURE, error};
   }
 }// selectedIssue
 

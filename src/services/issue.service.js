@@ -1,6 +1,6 @@
 import {settings} from "../config"
 
-export const issueService = { getAll, create, edit, selectedIssue, getSelectedissue };
+export const issueService = { getAll, create, edit, selectedIssue, getSelectedIssue };
 
 function _getToken() {
   var user = JSON.parse(localStorage.getItem('user'));
@@ -150,7 +150,7 @@ function selectedIssue(selectedIssue) {
 }// selectedProject
 
 
-function getSelectedissue() {
+function getSelectedIssue() {
 
   console.log("====== issue-service getSelectedProject ======");
   
@@ -158,7 +158,7 @@ function getSelectedissue() {
         method: 'GET',
         headers: {'x-access-token': _getToken()},
     };
-    const url = `${settings.API_ROOT}/projects/selectedIssue`
+    const url = `${settings.API_ROOT}/issues/selectedIssue`
     return fetch(url, requestOptions)
     .then((response) => {
       // console.log("+++++++ resp: " + response);
