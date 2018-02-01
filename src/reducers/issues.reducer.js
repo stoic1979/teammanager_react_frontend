@@ -22,7 +22,7 @@ export function issues(state = {}, action) {
       return {
         error: action.error,
       };
-    case issueConstants.SELECTED_PROJECT:
+    case issueConstants.ISSUE_SELECTED:
       return {
         selectedIssue: action.payload,
       };
