@@ -107,7 +107,7 @@ function getById(id) {
       // console.log(`++++++++ project-service getAll project_resp: ${  JSON.stringify(projects)}` );
     return project;
     });
-}// getAll
+}// getById
 
 function edit(project_data) {
 
