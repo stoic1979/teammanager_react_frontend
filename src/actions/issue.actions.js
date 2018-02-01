@@ -7,6 +7,7 @@ export const issueActions = {
   
   getAll,
   create,
+  getById,
   selectedIssue,
   edit
   
@@ -85,12 +86,43 @@ function getAll(selectedProject) {
   }
 }
 
+//-----------  Request the project of particular id-----------
+
+function getById(key){
+  console.log("====== getById ======");
+
+  return (dispatch) => {
+    dispatch(request());
+
+    issueService.getById(key)
+            .then(
+                (issue) => dispatch(success(issue)),
+                (error) => {
+                  dispatch(failure(error));
+                  // dispatch(alertActions.error(error));
+                }
+            );
+  };
+
+  function request() {
+    return {type: issueConstants.GET_BY_ID_REQUEST};
+  }
+  function success(issue) {
+    console.log("********* action got issues: " + JSON.stringify(issue) );
+    return {type: issueConstants.GET_BY_ID_SUCCESS, issue};
+  }
+  function failure(error) {
+        console.log("********* action got issues failure: " +error );
+
+    return {type: issueConstants.GET_BY_ID_FAILURE, error};
+  }
+}// getById
 
 // --------------- edit issue------------------------
 
 function edit(id) {
 
-  console.log("====== project edit ======");
+  console.log("====== issue edit ======");
 
   return (dispatch) => {
     dispatch(request());

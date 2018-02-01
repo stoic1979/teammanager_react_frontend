@@ -13,6 +13,15 @@ export function issues(state = {}, action) {
       return {
         error: action.error,
       };
+    case issueConstants.GET_BY_ID_SUCCESS:
+      console.log("issue reducer got response" + action.issue);
+      return  {
+        issue:action.issue 
+      };
+    case issueConstants.GET_BY_ID_FAILURE:
+      return {
+        error: action.error,
+      };
     case issueConstants.SELECTED_PROJECT:
       return {
         selectedIssue: action.payload,

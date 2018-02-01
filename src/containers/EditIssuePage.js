@@ -78,8 +78,14 @@ class EditIssuePage extends React.Component {
   }
 
   componentDidMount() {
-    
+
+    if(localStorage.getItem('issue_id')){
+      var issue_id = localStorage.getItem('issue_id');
+      console.log(' [componentDidMount] issue_id '+issue_id);
+    }  
+
     const {dispatch} = this.props;
+    dispatch(issueActions.getById(issue_id));
     dispatch(projectActions.getAll());
     dispatch(userActions.getAll());
   }
