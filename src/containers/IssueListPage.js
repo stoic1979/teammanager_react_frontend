@@ -55,13 +55,14 @@ class IssueListPage extends React.Component {
 
     var p_id ;
     var project = this.state;
+
     console.log('[componentDidMount] state '+JSON.stringify(project));
     console.log('[componentDidMount] projects'+JSON.stringify(this.props.projects));
     console.log('[componentDidMount] latest_project '+JSON.stringify(this.props.latest_project));
     console.log('[componentDidMount] selectedProject'+JSON.stringify(this.props.selectedProject));
-    console.log(' [componentDidMount] localStorage ')
+
     if(this.props.selectedProject){ 
-      p_id = this.props.selectedProject.project._id;
+      p_id = this.props.selectedProject;
       console.log('[componentDidMount] selectedProject p_id '+p_id);
     }
     else if (localStorage.getItem('project_id')){
@@ -192,12 +193,12 @@ class IssueListPage extends React.Component {
 
 function mapStateToProps(state) {
   const {alert} = state;
-  // console.log(`---> IssueListPage got state: ${  JSON.stringify(state.selectedProject)}` );
+  // console.log(`---> IssueListPage got state: ${  JSON.stringify(state.projects.selectedProject)}` );
   return {
     alert,
     projects: state.projects.projects,
     latest_project: state.projects.latest_project,
-    selectedProject: state.selectedProject,
+    selectedProject: state.projects.selectedProject,
     issues:state.issues
   };
 }

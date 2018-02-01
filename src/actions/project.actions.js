@@ -83,12 +83,12 @@ function getAll() {
 }// getAll
 
 function getById(key){
-  console.log("====== getAll ======");
+  console.log("====== getById ======");
 
   return (dispatch) => {
     dispatch(request());
 
-    projectService.getById()
+    projectService.getById(key)
             .then(
                 (project) => dispatch(success(project)),
                 (error) => {
@@ -112,14 +112,14 @@ function getById(key){
   }
 }// getById
 
-function edit(id) {
+function edit(project_data) {
 
   console.log("====== project edit ======");
 
   return (dispatch) => {
     dispatch(request());
 
-    projectService.edit()
+    projectService.edit(project_data)
             .then(
                 (updatedProject) => dispatch(success(updatedProject)),
                 (error) => {

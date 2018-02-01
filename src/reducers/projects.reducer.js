@@ -19,12 +19,14 @@ export function projects(state = {}, action) {
       };
     case projectConstants.GET_BY_ID_SUCCESS:
     console.log("project reducer got response" + action.project);
-      return  action.project ;
+      return  {
+        project:action.project 
+      };
     case projectConstants.GET_BY_ID_FAILURE:
       return {
         error: action.error,
       };
-    case projectConstants.SELECTED_PROJECT:
+    case projectConstants.PROJECT_SELECTED:
       return {
         selectedProject: action.payload,
       };

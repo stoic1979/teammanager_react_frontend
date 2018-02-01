@@ -1,6 +1,6 @@
 import {settings} from "../config"
 
-export const projectService = { getAll, getById, create };
+export const projectService = { getAll, getById, create, edit };
 
 function _getToken() {
   var user = JSON.parse(localStorage.getItem('user'));
@@ -109,13 +109,22 @@ function getById(id) {
     });
 }// getAll
 
-function edit(id) {
+function edit(project_data) {
 
-  console.log("====== project-service edit ======");
-
+  var id = `${  project_data.id}`;
+  console.log("====== project-service edit ======" +JSON.stringify(project_data));
+  var body = `&title=${  project_data.title}`;
+  body += `&description=${  project_data.description}`;
+  body += `&assignee=${  project_data.assignee}`;
+  body += `&estimated_hours=${  project_data.estimated_hours}`;
+  body += `&start_date=${  project_data.start_date}`;
+  body += `&end_date=${  project_data.end_date}`;
+  
+  console.log(' edit project service sending the body '+body);
     const requestOptions = {
         method: 'PUT',
         headers: {'x-access-token': _getToken()},
+        body: body,
     };
     const url = `${settings.API_ROOT}/projects/edit/${id}`
     return fetch(url, requestOptions)

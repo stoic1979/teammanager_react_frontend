@@ -78,7 +78,7 @@ class EditIssuePage extends React.Component {
   }
 
   componentDidMount() {
-
+    
     const {dispatch} = this.props;
     dispatch(projectActions.getAll());
     dispatch(userActions.getAll());
