@@ -120,14 +120,14 @@ function getById(key){
 
 // --------------- edit issue------------------------
 
-function edit(id) {
+function edit(issue_data) {
 
   console.log("====== issue edit ======");
 
   return (dispatch) => {
     dispatch(request());
 
-    issueService.edit()
+    issueService.edit(issue_data)
             .then(
                 (updatedIssue) => dispatch(success(updatedIssue)),
                 (error) => {

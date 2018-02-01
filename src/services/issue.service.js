@@ -110,13 +110,27 @@ function getById(id) {
 }// getById
 
 
-function edit(id) {
+function edit(issue_data) {
 
   console.log("====== issue-service edit ======");
-
+  var id = `${  issue_data.id}`;
+  console.log("====== project-service edit ======" +JSON.stringify(issue_data));
+  var body = `&summary=${  issue_data.summary}`;
+  body += `&description=${  issue_data.description}`;
+  body += `&assignee=${  issue_data.assignee}`;
+  body += `&project=${  issue_data.project}`;
+  body += `&type=${  issue_data.type}`;
+  body += `&status=${  issue_data.status}`;
+  body += `&priority=${  issue_data.priority}`;
+  body += `&estimated_hours=${  issue_data.estimated_hours}`;
+  body += `&start_date=${  issue_data.start_date}`;
+  body += `&end_date=${  issue_data.end_date}`;
+  
+  console.log(' edit project service sending the body '+body);
     const requestOptions = {
         method: 'PUT',
         headers: {'x-access-token': _getToken()},
+        body: body,
     };
     const url = `${settings.API_ROOT}/issues/edit/${id}`
     return fetch(url, requestOptions)

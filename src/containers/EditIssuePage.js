@@ -51,7 +51,8 @@ class EditIssuePage extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = {     
+    this.state = {    
+      id :'', 
       project:'',
       assignee:'',
       summary:'',
@@ -90,6 +91,25 @@ class EditIssuePage extends React.Component {
     dispatch(userActions.getAll());
   }
 
+   componentWillReceiveProps(nextProps) {
+    
+    if(nextProps.selectedIssue_data){
+      var iss_id = nextProps.selectedIssue_data._id;
+      var iss_summ = nextProps.selectedIssue_data.summary;
+      var iss_desc = nextProps.selectedIssue_data.description;
+      var iss_pro = nextProps.selectedIssue_data.project;
+      var iss_ass = nextProps.selectedIssue_data.assignee;
+      var est_hours = nextProps.selectedIssue_data.estimated_hours;
+      var iss_type = nextProps.selectedIssue_data.type;
+      var iss_stts = nextProps.selectedIssue_data.status;
+      var iss_prio = nextProps.selectedIssue_data.priority;
+      var s_date = nextProps.selectedIssue_data.start_date;
+      var e_date = nextProps.selectedIssue_data.end_date;
+      this.setState({id: iss_id, summary:iss_summ, description:iss_desc, project:iss_pro, assignee:iss_ass, estimated_hours:est_hours, type:iss_type, status:iss_stts, priority:iss_prio, start_date: s_date, end_date:e_date});
+      // console.log('[ componentWillReceiveProps] '+JSON.stringify(nextProps.selectedProject_data));
+      // console.log('[ componentWillReceiveProps date] '+JSON.stringify(s_date));
+    }
+  }
   // ------------------------------------------------------------
   // handle select field value
   // -------------------------------------------------------------
@@ -146,17 +166,17 @@ class EditIssuePage extends React.Component {
 
     this.setState({submitted: true});
     console.log(this.state);
-    const {assignee, project, summary, description, type, priority, status, estimated_hours, start_date, end_date, created_at, updated_at } = this.state;
-    var  issue_data={assignee, project, summary, description, type, priority,  status, estimated_hours, start_date, end_date, created_at, updated_at};
+    const {id,assignee, project, summary, description, type, priority, status, estimated_hours, start_date, end_date, created_at, updated_at } = this.state;
+    var  issue_data={id, assignee, project, summary, description, type, priority,  status, estimated_hours, start_date, end_date, created_at, updated_at};
     const {dispatch} = this.props;
     console.log("issue_data" +JSON.stringify(issue_data));
 
-    if (  summary && description && type && priority && status && estimated_hours && start_date && end_date  ) {
+    if (summary && description && type && priority && status && estimated_hours && start_date && end_date  ) {
       console.log('dispatching -> create issue');
       // var history = this.props.history;
-      dispatch(issueActions.create( issue_data));
+      dispatch(issueActions.edit( issue_data));
 
-      this.props.history.push('/issueList');
+      // this.props.history.push('/issueList');
     }
   }
   
@@ -311,13 +331,14 @@ render() {
 
 function mapStateToProps(state) {
   const {alert} = state;
-  console.log("edit issue got state" + JSON.stringify(state.selectedIssue));
+  console.log("edit issue got state" + JSON.stringify(state.issues.issue));
   return {
     alert,
     projects: state.projects.projects,
     latest_project: state.projects.latest_project,
     selectedProject: state.selectedProject,
     selectedIssue: state.selectedIssue,
+    selectedIssue_data: state.issues.issue,
     users: state.users
   };
 }
