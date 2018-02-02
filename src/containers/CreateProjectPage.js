@@ -117,7 +117,7 @@ class CreateProjectPage extends React.Component {
       // var history = this.props.history;
       dispatch(projectActions.create( project_data));
 
-      this.props.history.push('/projectList');
+      // this.props.history.push('/projectList');
     }
   }
 

@@ -129,9 +129,10 @@ function edit(issue_data) {
   console.log(' edit project service sending the body '+body);
     const requestOptions = {
         method: 'PUT',
-        headers: {'x-access-token': _getToken()},
+        headers: {'x-access-token': _getToken(), 'Content-Type': 'application/x-www-form-urlencoded'},
         body: body,
     };
+  console.log(' edit project service sending the requestOptions '+requestOptions);
     const url = `${settings.API_ROOT}/issues/edit/${id}`
     return fetch(url, requestOptions)
     .then((response) => {

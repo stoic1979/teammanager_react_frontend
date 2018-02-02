@@ -33,6 +33,8 @@ function create(project_data) {
     headers: {'x-access-token': _getToken(),'Content-Type': 'application/x-www-form-urlencoded'},
     body: body,
   };
+  // console.log(' create project service sending the requestOptions '+JSON.stringify(requestOptions));
+
   const url = `${settings.API_ROOT}/projects/add`
   return fetch(url, requestOptions)
         .then((response) => {
@@ -119,13 +121,17 @@ function edit(project_data) {
   body += `&estimated_hours=${  project_data.estimated_hours}`;
   body += `&start_date=${  project_data.start_date}`;
   body += `&end_date=${  project_data.end_date}`;
+
   
   console.log(' edit project service sending the body '+body);
     const requestOptions = {
         method: 'PUT',
-        headers: {'x-access-token': _getToken()},
+        headers: {'x-access-token': _getToken(), 'Content-Type': 'application/x-www-form-urlencoded'},
         body: body,
     };
+
+    console.log(' edit project service sending the requestOptions '+JSON.stringify(requestOptions));
+
     const url = `${settings.API_ROOT}/projects/edit/${id}`
     return fetch(url, requestOptions)
     .then((response) => {
