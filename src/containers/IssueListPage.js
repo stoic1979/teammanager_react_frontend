@@ -37,7 +37,8 @@ class IssueListPage extends React.Component {
 
   constructor(props){
     super(props)
-      this.state = {     
+      this.state = { 
+      id:'',    
       project:''
     }
     console.log('[constructor]' +JSON.stringify(this.state));
@@ -90,6 +91,8 @@ class IssueListPage extends React.Component {
       var p_id = nextProps.latest_project._id;
       console.log('[componentWillReceiveProps] latest_project  '+JSON.stringify(nextProps.latest_project._id));
     }
+
+    this.setState({id: p_id});
   }
 
    // -----------------------------
