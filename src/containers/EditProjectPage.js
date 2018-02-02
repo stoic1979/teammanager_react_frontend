@@ -78,8 +78,10 @@ class EditProjectPage extends React.Component {
       var pro_assignee = nextProps.selectedProject_data.assignee;
       var est_hours = nextProps.selectedProject_data.estimated_hours;
       var s_date = nextProps.selectedProject_data.start_date;
+      var st_date = new Date(s_date);
       var e_date = nextProps.selectedProject_data.end_date;
-      this.setState({id: pro_id, title:pro_title, description:pro_desc, assignee:pro_assignee, estimated_hours:est_hours, start_date: s_date, end_date:e_date});
+      var ed_date = new Date(e_date)
+      this.setState({id: pro_id, title:pro_title, description:pro_desc, assignee:pro_assignee, estimated_hours:est_hours, start_date: st_date, end_date:ed_date});
       console.log('[ componentWillReceiveProps] '+JSON.stringify(nextProps.selectedProject_data));
       console.log('[ componentWillReceiveProps date] '+JSON.stringify(s_date));
     }
@@ -119,7 +121,6 @@ class EditProjectPage extends React.Component {
       end_date: date,
     });
   };
-
 
   // ------------------------------------------------
   // handleSubmit

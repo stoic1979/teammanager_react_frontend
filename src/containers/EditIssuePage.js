@@ -105,7 +105,10 @@ class EditIssuePage extends React.Component {
       var iss_prio = nextProps.selectedIssue_data.priority;
       var s_date = nextProps.selectedIssue_data.start_date;
       var e_date = nextProps.selectedIssue_data.end_date;
-      this.setState({id: iss_id, summary:iss_summ, description:iss_desc, project:iss_pro, assignee:iss_ass, estimated_hours:est_hours, type:iss_type, status:iss_stts, priority:iss_prio, start_date: s_date, end_date:e_date});
+
+      var st_date = new Date(s_date);
+      var ed_date = new Date(e_date)
+      this.setState({id: iss_id, summary:iss_summ, description:iss_desc, project:iss_pro, assignee:iss_ass, estimated_hours:est_hours, type:iss_type, status:iss_stts, priority:iss_prio, start_date: st_date, end_date:ed_date});
       // console.log('[ componentWillReceiveProps] '+JSON.stringify(nextProps.selectedProject_data));
       // console.log('[ componentWillReceiveProps date] '+JSON.stringify(s_date));
     }
