@@ -8,6 +8,9 @@ import Edit from 'material-ui/svg-icons/editor/mode-edit';
 import { connect } from 'react-redux';
 import {projectActions} from '../actions';
 
+import { Link } from 'react-router-dom';
+
+
 const styles={
  flatBtn: {
     fill: grey500,
@@ -30,7 +33,7 @@ class ProjectListPage extends React.Component {
     const {dispatch} = this.props;
     var resp = dispatch(projectActions.getAll());
 
-    this.handleCellClick = this.handleCellClick.bind(this); 
+    this.handleCellClick = this.handleCellClick.bind(this);
   }
 
   // -----------------------------
@@ -79,10 +82,10 @@ class ProjectListPage extends React.Component {
       }
     }
 
-    
+
     console.log('cell clicked of row '+row +" and column "+column);
   }
-  
+
   render() {
 
     // console.log(`---> render got projects: ${  JSON.stringify(this.props.projects)}`);
@@ -113,7 +116,7 @@ class ProjectListPage extends React.Component {
             <FlatButton
                 label="New Project"
                 style={styles.flatBtn}
-                href="/createProject"
+                containerElement={<Link to="/createProject" />}
             />
             <h2>Projects</h2>
             <Table onCellClick = {this.handleCellClick}  >

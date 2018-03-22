@@ -17,14 +17,33 @@ import DropDown from 'material-ui/svg-icons/navigation/arrow-drop-down';
 import Issue from 'material-ui/svg-icons/alert/error';
 import GroupAdd from 'material-ui/svg-icons/social/group-add';
 import {projectActions} from './actions';
-import {Routes} from './routes'
+
 import {issueActions} from './actions';
 
 import {connect} from 'react-redux';
 import {literals} from "./config"
 
+
+import { BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import {HomePage} from "./containers/HomePage"
+import {AboutUsPage} from "./containers/AboutUsPage"
+import {ContactUsPage} from "./containers/ContactUsPage"
+import {LoginPage} from "./containers/LoginPage"
+import {LogoutPage} from "./containers/LogoutPage"
+import {RegisterPage} from "./containers/RegisterPage"
+import {NotFoundPage} from "./containers/NotFoundPage"
+import {ProjectListPage} from "./containers/ProjectListPage"
+import {IssueListPage} from "./containers/IssueListPage"
+import {CreateProjectPage} from "./containers/CreateProjectPage"
+import {CreateIssuePage} from "./containers/CreateIssuePage"
+import {EditIssuePage} from "./containers/EditIssuePage"
+import {EditProjectPage} from "./containers/EditProjectPage"
+import {CreateTeamMemberPage} from "./containers/CreateTeamMemberPage"
+import {TeamMemberListPage} from "./containers/TeamMemberListPage"
+import {PricingPage} from "./containers/PricingPage"
+
 // --------------------------css style--------------------------------------
-const styles = {  
+const styles = {
     txt: {
       marginLeft: 15
      }
@@ -32,7 +51,7 @@ const styles = {
 // -----------------------------------------------------------------------
 //
 //            APP
-// 
+//
 // -----------------------------------------------------------------------
 class App extends Component {
 
@@ -53,7 +72,7 @@ class App extends Component {
   handleToggle = () => this.setState({open: !this.state.open});
 
   handle = () =>console.log("Sorry ! You don't have a access to sidebar");
-  
+
   handleOpenMenu = () => {
     this.setState({
       openMenu: true,
@@ -68,11 +87,11 @@ class App extends Component {
 
   handleChange = (event, value) => {
     console.log("project id in app--------->"+value);
-    
+
     var project_id =value;
     const {dispatch} = this.props;
     var issues = dispatch(issueActions.getAll(project_id));
-    
+
   };
 
     // ------------------------------------------------
@@ -85,20 +104,20 @@ class App extends Component {
           for (var i = 0; i < this.props.projects.length; i++) {
             // console.log(`projects ${  i + 1  }:${  JSON.stringify(this.props.projects[i])}`);
             var pro = this.props.projects[i];
-            
+
             item.push(
               <MenuItem value={pro._id}   primaryText={pro.title} />
               );
           }
         }
-     
+
       const contentStyle = {  transition: 'margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)' };
       const {loggedIn} = this.props;
       var {user}      = this.props;
       if(user){
         var role=user.role;
       }
-      
+
       console.log('user logged in ' +JSON.stringify(loggedIn));
       console.log('user in App '+JSON.stringify(user));
       console.log('role in app '+role);
@@ -106,13 +125,15 @@ class App extends Component {
         contentStyle.marginLeft = 245;
       }
       return (
+        <Router>
+
          <div style={contentStyle}>
           <MuiThemeProvider>
-            <Header 
+            <Header
             onClick={role=="MANAGER" ? this.handleToggle : this.handle}
 
             />
-            <Drawer width={245} open={this.state.open}>  
+            <Drawer width={245} open={this.state.open}>
               <AppBar title="TEAM  MANAGER" showMenuIconButton={false}/>
               <MenuItem   leftIcon={<RemoveRedEye />}>
                 <FlatButton onClick={this.handleOpenMenu} label="Projects" />
@@ -125,17 +146,34 @@ class App extends Component {
                   {item}
                 </IconMenu>
               </MenuItem>
-             
+
               <MenuItem href="/issueList" leftIcon={<Issue />} ><div style={styles.txt}>ISSUES</div></MenuItem>
               <MenuItem href="/teamMemberList" leftIcon={<GroupAdd />} ><div style={styles.txt}>TEAM</div></MenuItem>
-              
+
             </Drawer>
             <hr />
-            <Routes/>
+            <Switch>
+                <Route exact path='/'                 component={HomePage} />
+                <Route exact path='/aboutUs'          component={AboutUsPage} />
+                <Route exact path='/contactUs'        component={ContactUsPage} />
+                <Route exact path='/login'            component={LoginPage} />
+                <Route exact path='/logout'           component={LogoutPage} />
+                <Route exact path='/register'         component={RegisterPage} />
+                <Route exact path='/projectList'      component={ProjectListPage} />
+                <Route exact path='/issueList'         component={IssueListPage} />
+                <Route exact path='/createProject'    component={CreateProjectPage} />
+                <Route exact path='/editProject'      component={EditProjectPage} />
+                <Route exact path='/createIssue'      component={CreateIssuePage} />
+                <Route exact path='/editIssue'        component={EditIssuePage} />
+                <Route exact path='/createTeamMember' component={CreateTeamMemberPage} />
+                <Route exact path='/teamMemberList'   component={TeamMemberListPage} />
+                <Route exact path='/pricing'          component={PricingPage} />
+                <Route path='*'                       component={NotFoundPage} />
+            </Switch>
             <Footer />
           </MuiThemeProvider>
         </div>
-
+          </Router>
       );//return
 
     }//render

@@ -6,6 +6,7 @@ import {Table,TableBody,TableHeader,TableHeaderColumn,TableRow,TableRowColumn} f
 
 import { connect } from 'react-redux';
 import {teamMemberActions} from '../actions';
+import { Link } from 'react-router-dom';
 
 
 const styles={
@@ -53,7 +54,7 @@ class TeamMemberListPage extends React.Component {
           <FlatButton
               label="Invite Team Member"
               style={styles.flatBtn}
-              href="/createTeamMember"
+              containerElement={<Link to="/createTeamMember" />}
           />
           <h2>Team</h2>
           <Table onRowSelection={this.handleRowSelection} >
@@ -83,6 +84,6 @@ function mapStateToProps(state) {
     teamMember: state.teamMember
  };
 }
- 
+
 const connectedTeamMemberListPage = connect(mapStateToProps)(TeamMemberListPage);
 export { connectedTeamMemberListPage as TeamMemberListPage };

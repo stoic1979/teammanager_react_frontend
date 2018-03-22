@@ -10,6 +10,9 @@ import { connect } from 'react-redux';
 import {projectActions} from '../actions';
 import {issueActions} from '../actions';
 
+import { Link } from 'react-router-dom';
+
+
 const styles={
  flatBtn: {
     fill: grey500,
@@ -37,12 +40,12 @@ class IssueListPage extends React.Component {
 
   constructor(props){
     super(props)
-      this.state = { 
-      id:'',    
+      this.state = {
+      id:'',
       project:''
     }
     console.log('[constructor]' +JSON.stringify(this.state));
-   
+
   }
   componentWillMount(){
     const {dispatch} = this.props;
@@ -62,7 +65,7 @@ class IssueListPage extends React.Component {
     console.log('[componentDidMount] latest_project '+JSON.stringify(this.props.latest_project));
     console.log('[componentDidMount] selectedProject'+JSON.stringify(this.props.selectedProject));
 
-    if(this.props.selectedProject){ 
+    if(this.props.selectedProject){
       p_id = this.props.selectedProject;
       console.log('[componentDidMount] selectedProject p_id '+p_id);
     }
@@ -79,7 +82,7 @@ class IssueListPage extends React.Component {
     }
 
     var issues = dispatch(issueActions.getAll(p_id));
-    this.handleCellClick = this.handleCellClick.bind(this); 
+    this.handleCellClick = this.handleCellClick.bind(this);
   }
 
 
@@ -169,7 +172,7 @@ class IssueListPage extends React.Component {
             <FlatButton
                 label="New Issue"
                 style={styles.flatBtn}
-                href="/createIssue"
+                containerElement={<Link to="/createIssue" />}
             />
             <h2>Issues</h2>
             <Table onCellClick = {this.handleCellClick} >
