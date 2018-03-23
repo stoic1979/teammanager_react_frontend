@@ -10,6 +10,7 @@ import {projectActions} from '../actions';
 
 import { Link } from 'react-router-dom';
 
+import dateOnlyStr from '../helpers/utils';
 
 const styles={
  flatBtn: {
@@ -101,8 +102,8 @@ class ProjectListPage extends React.Component {
             <TableRowColumn>{project.title}</TableRowColumn>
             <TableRowColumn>{project.description}</TableRowColumn>
             <TableRowColumn>{project.manager.first_name} {project.manager.last_name}</TableRowColumn>
-            <TableRowColumn>{project.start_date}</TableRowColumn>
-            <TableRowColumn>{project.end_date}</TableRowColumn>
+            <TableRowColumn>{ dateOnlyStr(project.start_date) }</TableRowColumn>
+            <TableRowColumn>{ dateOnlyStr(project.end_date) }</TableRowColumn>
             <TableRowColumn><Edit/></TableRowColumn>
           </TableRow>
           );
