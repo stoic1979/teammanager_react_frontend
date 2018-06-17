@@ -99,7 +99,7 @@ class ProjectListPage extends React.Component {
         tableBody.push(
           <TableRow key={i+1} >
             <TableRowColumn style={{width: '5px'}}>{i+1}</TableRowColumn>
-            <TableRowColumn>{project.title}</TableRowColumn>
+            <TableRowColumn><b>{project.title}</b></TableRowColumn>
             <TableRowColumn>{project.description}</TableRowColumn>
             <TableRowColumn>{project.manager.first_name} {project.manager.last_name}</TableRowColumn>
             <TableRowColumn>{ dateOnlyStr(project.start_date) }</TableRowColumn>

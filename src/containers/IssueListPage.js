@@ -154,7 +154,7 @@ class IssueListPage extends React.Component {
         tableBody.push(
           <TableRow key={i+1} >
             <TableRowColumn style={{width: '5px'}}>{i+1}</TableRowColumn>
-            <TableRowColumn>{issue.summary}</TableRowColumn>
+            <TableRowColumn><b>{issue.summary}</b></TableRowColumn>
             <TableRowColumn>{issue.assignee.first_name} {issue.assignee.last_name}</TableRowColumn>
             <TableRowColumn>{issue.type} </TableRowColumn>
             <TableRowColumn>{issue.status}</TableRowColumn>
