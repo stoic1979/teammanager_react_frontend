@@ -6,7 +6,7 @@ import TextField from 'material-ui/TextField';
 import {connect} from 'react-redux';
 import {userActions} from '../actions';
 
-const styles = {  
+const styles = {
   Container: {
       minWidth: 320,
       maxWidth: 400,
@@ -34,25 +34,20 @@ class LoginPage extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = {     
+    this.state = {
       email:'',
       password: '',
-     
       submitted: false
     }
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-   
-    // this.handleLogout = this.handleLogout.bind(this);
   }
 
   // ------------------------------------------------
   // handleChange
   // ------------------------------------------------
   handleChange(e) {
-    console.log(`-- handleChange, target: ${e.target.name}`);
-
     const {name, value} = e.target;
     this.setState({[name]: value});
   }
@@ -63,15 +58,12 @@ class LoginPage extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
 
-    console.log('-- handleSubmit --');
-
     this.setState({submitted: true});
     const {email, password} = this.state;
     const {dispatch} = this.props;
     var history = this.props.history;
     if(email && password){
-      console.log("dispatching user action");
-      dispatch(userActions.login(history,email,password));
+      dispatch( userActions.login(history, email, password) );
    }
  }
 
@@ -80,14 +72,14 @@ return (
   <div>
     <MuiThemeProvider>
       <center>{this.props.alert.message}</center>
-      <form name="form" onSubmit={this.handleSubmit}> 
+      <form name="form" onSubmit={this.handleSubmit}>
         <div style={styles.Container}>
           <h3>Log In</h3>
           <TextField
             hintText="Enter your Email"
             floatingLabelText="Email"
             name="email"
-            onChange={this.handleChange} 
+            onChange={this.handleChange}
           />
           <br/>
           <TextField
@@ -95,7 +87,7 @@ return (
             hintText="Enter your Password"
             floatingLabelText="Password"
             name="password"
-            onChange={this.handleChange} 
+            onChange={this.handleChange}
           />
           <br/><br/>
           <RaisedButton label="Login" style={styles.sbt} primary={true} type="submit"/>

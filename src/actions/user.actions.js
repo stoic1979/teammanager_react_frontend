@@ -2,7 +2,6 @@ import {userConstants} from '../constants';
 import {userService} from '../services';
 import {alertActions} from './';
 
-
 export const userActions = {
   login,
   logout,
@@ -12,23 +11,19 @@ export const userActions = {
   delete: _delete,
 };
 
-
-// 
-//------------------- Login -----------------
-//
+//----------------------------------------------------------------------------------
+// Login
+//----------------------------------------------------------------------------------
 function login(history, email, password) {
   return (dispatch) => {
     dispatch(request({email}));
 
-    userService.login(history,email, password)
+    userService.login(history, email, password)
             .then(
                 (user) => {
+                  // navi says after login we will show project list page
+                  history.push('/projectList');
                   dispatch(success(user));
-
-                  console.log("++++++++++++++++ success response: " + JSON.stringify(user) );
-
-                  console.log('FIXME :: action:login: push / ???');
-                  
                 },
                 (error) => {
                   dispatch(failure(error));
@@ -36,8 +31,6 @@ function login(history, email, password) {
                 }
             );
   };
-
-
 
   function request(user) {
     return {type: userConstants.LOGIN_REQUEST, user};
@@ -51,28 +44,20 @@ function login(history, email, password) {
   }
 }
 
-
-
-// 
-//------------------- Logout  --------------------
-//
-
+//----------------------------------------------------------------------------------
+// Logout
+//----------------------------------------------------------------------------------
 function logout(history) {
   console.log('[user-action] logout');
 
   userService.logout(history);
-  
 
-  console.log('FIXME :: action:login: push /login ???');
- 
   return {type: userConstants.LOGOUT};
 }
 
-
-// 
-//------------------- Register --------------------
-//
-
+//----------------------------------------------------------------------------------
+// Register
+//----------------------------------------------------------------------------------
 function register(history, user) {
   return (dispatch) => {
     dispatch(request(user));
@@ -81,8 +66,7 @@ function register(history, user) {
             .then(
                 (user) => {
                   dispatch(success());
-                  console.log('FIXME :: action:login: push /login ???');
-                  history.push('/');
+                  history.push('/projectList');
                   dispatch(alertActions.success('Registration successful'));
                 },
                 (error) => {
@@ -103,12 +87,9 @@ function register(history, user) {
   }
 }
 
-
-
-// 
-//------------------- Request API --------------------
-//
-
+//----------------------------------------------------------------------------------
+// Request API
+//----------------------------------------------------------------------------------
 function getApi(history,token) {
   return (dispatch) => {
     dispatch(requestApi());
@@ -134,12 +115,9 @@ function getApi(history,token) {
   }
 }
 
-
-// 
-//-------------------Request  list of users --------------------
-//
-
-
+//----------------------------------------------------------------------------------
+//  Request  list of users
+//----------------------------------------------------------------------------------
 function getAll() {
   return (dispatch) => {
     dispatch(request());
@@ -154,8 +132,6 @@ function getAll() {
             );
   };
 
-  
-
   function request() {
     return {type: userConstants.GETALL_REQUEST};
   }
@@ -167,14 +143,12 @@ function getAll() {
   }
 }
 
-
-
-// 
-//-------------------Delete  user --------------------
+//----------------------------------------------------------------------------------
+// Delete User
 //
-
-// prefixed function name with underscore because delete is a reserved word in javascript
-
+// prefixed function name with underscore because delete is
+// a reserved word in javascript
+//----------------------------------------------------------------------------------
 
 function _delete(id) {
   return (dispatch) => {
