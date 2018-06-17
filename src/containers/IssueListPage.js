@@ -169,6 +169,11 @@ class IssueListPage extends React.Component {
         <MuiThemeProvider>
           <center>{this.props.alert.message}</center>
           <div style={styles.main}>
+           <FlatButton
+              label="All Projects"
+              style={styles.flatBtn}
+              containerElement={<Link to="/projectList" />}
+           />
             <FlatButton
                 label="New Issue"
                 style={styles.flatBtn}
